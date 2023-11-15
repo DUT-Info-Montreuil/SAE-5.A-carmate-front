@@ -1,0 +1,22 @@
+<main class="main">
+  <h1>Connexion</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <div [class.with-error]="(email && email.invalid && email.touched)">
+      <label class="label-login-input" for="email-input">Courriel</label>
+      <div class="input-container">
+        <fa-icon [icon]="faMale" id="male-icon"></fa-icon>
+        <input type="text" id="email-input" name="email-input" placeholder="Ecrivez votre courriel" formControlName="email">
+      </div>
+      <span class="text-error" *ngIf="(email && email.invalid && email.touched)">L'adresse email est invalide</span>
+    </div>
+    <div [class.with-error]="(password && password.invalid && password.touched)">
+      <label class="label-login-input" for="password-input">Mot de passe</label>
+      <div class="input-container">
+        <fa-icon [icon]="faLock" id="lock-icon"></fa-icon>
+        <input type="password" id="password-input" name="password-input" placeholder="Ecrivez votre mot-de-passe" formControlName="password">
+      </div>
+      <span class="text-error" *ngIf="(password && password.invalid && password.touched)">Le mot de passe n'est pas valide</span>
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid || needsToChangeAField">Se connecter</button>
+  </form>
+</main>
