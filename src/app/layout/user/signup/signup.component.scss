@@ -1,0 +1,74 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+  
+    h1 {
+      font-size: 36px;
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+  
+      button {
+        max-width: 250px;
+        padding: 2px 40px;
+        font-size: 24px;
+        font-weight: 400;
+        border-radius: 12px;
+      }
+  
+      .with-error {
+        .input-container {
+          border-bottom-color: red;
+  
+          .ng-fa-icon {
+            color: red;
+          }
+        }
+        .text-error {
+          color: red;
+        }
+      }
+  
+      & > div {
+        .label-login-input {
+          font-size: 24px;
+          font-weight: 400;
+        }
+  
+        .input-container {
+          border-color: gray;
+          border-bottom-width: 1px;
+          border-bottom-style: solid;
+          display: flex;
+          align-items: flex-end;
+          padding: 5px 5px 15px 5px;
+  
+          .ng-fa-icon {
+            margin-right: 5px;
+          }
+  
+          #male-icon {
+            font-size: 35px;
+          }
+  
+          #lock-icon {
+            font-size: 24px;
+          }
+  
+          input {
+            font-size: 18px;
+            width: 500px;
+          }
+        }
+      }
+    }
+  }
+  
