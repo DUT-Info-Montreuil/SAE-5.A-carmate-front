@@ -14,6 +14,7 @@ import {RootComponent} from "./layout/root/root.component";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import { RegisterComponent } from './layout/user/register/register.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -61,6 +62,7 @@ const customNotifierOptions: NotifierOptions = {
     LoginComponent,
     RootComponent,
     NavBarComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
