@@ -1,0 +1,81 @@
+  <main class="main">
+    <h1>Inscription</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="submit()">
+      <div [class.with-error]="(firstName && firstName.invalid && firstName.touched)">
+        <label class="label-login-input" for="first-name-input">Prénom</label>
+        <div class="input-container">
+          <fa-icon [icon]="faUser" id="user-icon"></fa-icon>
+          <input type="text" id="first-name-input" name="first-name-input" placeholder="Entrez votre prénom" formControlName="firstName">
+        </div>
+        <span class="text-error" *ngIf="(firstName && firstName.invalid && firstName.touched)">Le prénom est requis</span>
+      </div>
+
+      <div [class.with-error]="(lastName && lastName.invalid && lastName.touched)">
+        <label class="label-login-input" for="last-name-input">Nom</label>
+        <div class="input-container">
+          <fa-icon [icon]="faUser" id="user-icon"></fa-icon>
+          <input type="text" id="last-name-input" name="last-name-input" placeholder="Entrez votre nom" formControlName="lastName">
+        </div>
+        <span class="text-error" *ngIf="(lastName && lastName.invalid && lastName.touched)">Le nom est requis</span>
+      </div>
+
+      <div [class.with-error]="(email && email.invalid && email.touched)">
+        <label class="label-login-input" for="email-input">Courriel</label>
+        <div class="input-container">
+          <fa-icon [icon]="faEnvelope" id="envelope-icon"></fa-icon>
+          <input type="text" id="email-input" name="email-input" placeholder="Ecrivez votre courriel" formControlName="email">
+        </div>
+        <span class="text-error" *ngIf="(email && email.invalid && email.touched)">L'adresse email est invalide</span>
+      </div>
+
+      <div>
+        <label class="label-login-input" for="accountType">Type de compte</label>
+        <div class="input-container">
+          <select id="accountType" name="accountType" formControlName="accountType">
+            <option value="student">Étudiant</option>
+            <option value="teacher">Enseignant</option>
+          </select>
+        </div>
+      </div>
+    
+      <div *ngIf="registerForm.get('accountType')?.value === 'student'" class="is-student">
+        <div class="year-inputs">
+          <label for="academicYearStart"> Année académique début : </label><br>
+          <input type="text" id="academicYearStart" name="academicYearStart" placeholder="Début de l'année académique">
+        </div>
+        <br><br>
+        <div class="year-inputs">
+          <label for="academicYearEnd"> Année académique fin : </label> <br>
+          <input type="text" id="academicYearEnd" name="academicYearEnd" placeholder="Fin de l'année académique">
+        </div>
+      </div>
+
+      <div *ngIf="registerForm.get('document')">
+        <label class="label-login-input" for="document-input">Justificatif</label>
+        <div class="input-container">
+          <input type="file" id="document-input" name="document-input" formControlName="document">
+        </div>
+        <span class="text-error" *ngIf="(registerForm.get('document')?.invalid && registerForm.get('document')?.touched)">Veuillez fournir un justificatif valide</span>
+      </div>
+      
+      <div [class.with-error]="(password && password.invalid && password.touched)">
+        <label class="label-login-input" for="password-input">Mot de passe</label>
+        <div class="input-container">
+          <fa-icon [icon]="faLock" id="lock-icon"></fa-icon>
+          <input type="password" id="password-input" name="password-input" placeholder="Entrez votre mot de passe" formControlName="password">
+        </div>
+        <span class="text-error" *ngIf="(password && password.invalid && password.touched)">Le mot de passe est invalide</span>
+      </div>
+
+      <div [class.with-error]="(confirmPassword && confirmPassword.invalid && confirmPassword.touched)">
+        <label class="label-login-input" for="confirm-password-input">Confirmez le mot de passe</label>
+        <div class="input-container">
+          <fa-icon [icon]="faLock" id="lock-icon"></fa-icon>
+          <input type="password" id="confirm-password-input" name="confirm-password-input" placeholder="Répétez votre mot de passe" formControlName="confirmPassword">
+        </div>
+        <span class="text-error" *ngIf="(confirmPassword && confirmPassword.invalid && confirmPassword.touched)">Les mots de passe ne correspondent pas</span>
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid || needsToChangeAField" (click)="submit()" >S'inscrire</button>
+    </form>
+  </main>
