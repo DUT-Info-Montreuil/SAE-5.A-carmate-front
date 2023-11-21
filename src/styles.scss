@@ -1,4 +1,7 @@
 @import "node_modules/angular-notifier/styles";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 input, input:focus-visible {
   all:unset;
