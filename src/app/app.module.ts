@@ -11,8 +11,9 @@ import {AngularNotifierService} from "./service/other/notifier/AngularNotifierSe
 import {AUTHENTICATION_SERVICE_TOKEN} from "./interface/user";
 import {MockAuthenticationService} from "./service/user/authentication/authentication.service.mock";
 import {RootComponent} from "./layout/root/root.component";
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {MatButtonModule} from '@angular/material/button';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -59,6 +60,7 @@ const customNotifierOptions: NotifierOptions = {
   declarations: [
     LoginComponent,
     RootComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,7 @@ const customNotifierOptions: NotifierOptions = {
     ReactiveFormsModule,
     NotifierModule.withConfig(customNotifierOptions),
     BrowserAnimationsModule,
+    MatButtonModule,
 
   ],
   providers: [
