@@ -17,12 +17,12 @@ export class AuthenticationService extends AbstractService implements Authentica
   }
 
 
-  login(email: string, password: string): Observable<any> {
+  login(email_address: string, password: string): Observable<any> {
     const payload = {
-      email,
+      email_address,
       password
     };
-    return this.http.post<Token>(`${environment.path}/login`, payload).pipe(
+    return this.http.post<Token>(`${environment.path}/auth/login`, payload).pipe(
       tap((token: Token) => {
         this._isLoggedIn$.next(true);
         localStorage.setItem('auth_token', token.token);

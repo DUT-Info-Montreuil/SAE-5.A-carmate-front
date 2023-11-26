@@ -59,6 +59,8 @@ export class LoginComponent {
           this.needsToChangeAField = true;
         } else if (error.status === 403) {
           this.notifier.error("Ce compte est banni.");
+        } else {
+          this.notifier.error("Erreur interne.");
         }
       }
     });
