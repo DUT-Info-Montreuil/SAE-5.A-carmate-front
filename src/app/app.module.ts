@@ -11,6 +11,7 @@ import {AngularNotifierService} from "./service/other/notifier/AngularNotifierSe
 import {AUTHENTICATION_SERVICE_TOKEN} from "./interface/user";
 import {MockAuthenticationService} from "./service/user/authentication/authentication.service.mock";
 import {RootComponent} from "./layout/root/root.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -67,6 +68,7 @@ const customNotifierOptions: NotifierOptions = {
     HttpClientModule,
     ReactiveFormsModule,
     NotifierModule.withConfig(customNotifierOptions),
+    BrowserAnimationsModule,
 
   ],
   providers: [
