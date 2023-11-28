@@ -28,7 +28,7 @@ describe('RegisterComponent', () => {
     lastName: 'Doe',
     email: 'test@example.com',
     password: 'Test12+-',
-    accountType: 'student',
+    accountType: 'Student',
     document: new File(['dummy content'], 'document.txt', { type: 'text/plain' })
   };
 
