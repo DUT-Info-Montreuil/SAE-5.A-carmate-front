@@ -21,7 +21,7 @@ export class RegisterComponent {
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     accountType: new FormControl('', [Validators.required]),
-    document: new FormControl(null, [Validators.required]),
+    document: new FormControl<File | null>(null, [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), this.createPasswordStrengthValidator()]),
     confirmPassword: new FormControl('', [Validators.required])
   });
@@ -60,7 +60,42 @@ export class RegisterComponent {
       return;
     }
   
-    this.registerUser();
+    const accountType = this.registerForm.get('accountType')?.value;
+    
+    if (accountType && this.document?.value) {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(this.document.value);
+      reader.onload = () => {
+        const result: string | ArrayBuffer | null = reader.result;
+        if (result !== null && this.document?.value) {
+          const blob = new Blob([result], { type: this.document.value.type });
+          this.authService.register(
+            this.registerForm,
+            blob,
+            this.document.value.name
+          ).subscribe({
+            next: () => {
+              this.redirect();
+            },
+            error: (error: HttpErrorResponse) => {
+              this.handleRegistrationError(error);
+            }
+          })
+        }
+      };
+    } else {
+      if (!accountType) {
+        this.notifier.error("Le type de compte est manquant.");
+      } else if (!document) {
+        this.notifier.error("Le document est manquant.");
+      } else {
+        console.error("accountType ou document est null ou undefined");
+      }
+    }
+  }
+
+  onFileSelected(event: any): void {
+    this.document?.setValue(event.target.files[0])
   }
 
   private createPasswordStrengthValidator(): ValidatorFn {
@@ -73,48 +108,15 @@ export class RegisterComponent {
         const hasUpperCase = /[A-Z]+/.test(value);
         const hasLowerCase = /[a-z]+/.test(value);
         const hasNumeric = /[0-9]+/.test(value);
-        const passwordValid = hasUpperCase && hasLowerCase && hasNumeric;
+        const hasSpecialChars = /[^A-Za-z0-9\s]+/.test(value);
+        const passwordValid = hasUpperCase && hasLowerCase && hasNumeric && hasSpecialChars;
 
         return !passwordValid ? {passwordStrength:true}: null;
     }
-}
+  }
   
   private arePasswordsMatching(): boolean {
     return this.password?.value === this.confirmPassword?.value;
-  }
-  
-  private registerUser() {
-    const accountType = this.registerForm.get('accountType')?.value;
-    const document = this.registerForm.get('document')?.value;
-
-    if (
-      accountType !== null && accountType !== undefined &&
-      document !== null && document !== undefined
-    ) {
-      this.authService.register(
-        this.firstName?.getRawValue(),
-        this.lastName?.getRawValue(),
-        this.email?.getRawValue(),
-        this.password?.getRawValue(),
-        accountType,
-        document as File
-      ).subscribe({
-        next: () => {
-          this.redirect();
-        },
-        error: (error: HttpErrorResponse) => {
-          this.handleRegistrationError(error);
-        }
-      });
-    } else {
-      if (accountType === null || accountType === undefined) {
-        this.notifier.error("Le type de compte est manquant.");
-      } else if (document === null || document === undefined) {
-        this.notifier.error("Le document est manquant.");
-      } else {
-        console.error("accountType ou document est null ou undefined");
-      }
-    }
   }
 
   private handleRegistrationError(error: HttpErrorResponse) {
@@ -159,5 +161,9 @@ export class RegisterComponent {
 
   get confirmPassword() {
     return this.registerForm.get('confirmPassword');
+  }
+
+  get document() {
+    return this.registerForm.get('document')
   }
 }

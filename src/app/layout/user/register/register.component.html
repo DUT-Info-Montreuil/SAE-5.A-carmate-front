@@ -41,7 +41,7 @@
       <div *ngIf="registerForm.get('document')">
         <label class="label-login-input" for="document-input">Justificatif</label>
         <div class="input-container">
-          <input type="file" id="document-input" name="document-input" formControlName="document">
+          <input type="file" id="document-input" name="document-input" formControlName="document" (change)="onFileSelected($event)">
         </div>
         <span class="text-error" *ngIf="(registerForm.get('document')?.invalid && registerForm.get('document')?.touched)">Veuillez fournir un justificatif valide</span>
       </div>
@@ -64,6 +64,6 @@
         <span class="text-error" *ngIf="(confirmPassword && confirmPassword.invalid && confirmPassword.touched)">Les mots de passe ne correspondent pas</span>
       </div>
 
-      <button type="submit" [disabled]="registerForm.invalid || needsToChangeAField" (click)="submit()" >S'inscrire</button>
+      <button type="submit" [disabled]="registerForm.invalid || needsToChangeAField">S'inscrire</button>
     </form>
   </main>

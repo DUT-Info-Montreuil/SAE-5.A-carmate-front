@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { AuthenticationServiceInterface } from "../../../interface/user";
 import { HttpErrorResponse } from "@angular/common/http";
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -48,14 +49,9 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
   }
 
   register(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    accountType: string,
-    document: File,
-    academicYearStart?: string,
-    academicYearEnd?: string 
+    form: FormGroup,
+    document: Blob,
+    filename: string
   ): Observable<any> {
     // Check if the provided data is valid before proceeding with registration
     if (
