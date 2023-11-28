@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { faMale, faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from '../../../interface/other';
@@ -22,7 +22,7 @@ export class RegisterComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     accountType: new FormControl('', [Validators.required]),
     document: new FormControl(null, [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8), this.createPasswordStrengthValidator()]),
     confirmPassword: new FormControl('', [Validators.required])
   });
   private redirection: string | undefined;
@@ -50,7 +50,6 @@ export class RegisterComponent {
   }
 
   submit() {
-    console.log('ici')
     if (!this.arePasswordsMatching()) {
       this.notifier.error("Les mots de passe ne correspondent pas.");
       return;
@@ -63,6 +62,22 @@ export class RegisterComponent {
   
     this.registerUser();
   }
+
+  private createPasswordStrengthValidator(): ValidatorFn {
+    return (control:AbstractControl) : ValidationErrors | null => {
+        const value = control.value;
+        if (!value) {
+            return null;
+        }
+
+        const hasUpperCase = /[A-Z]+/.test(value);
+        const hasLowerCase = /[a-z]+/.test(value);
+        const hasNumeric = /[0-9]+/.test(value);
+        const passwordValid = hasUpperCase && hasLowerCase && hasNumeric;
+
+        return !passwordValid ? {passwordStrength:true}: null;
+    }
+}
   
   private arePasswordsMatching(): boolean {
     return this.password?.value === this.confirmPassword?.value;
