@@ -39,7 +39,8 @@ export class LoginComponent {
       this.notifier.warning("Vous êtes déjà connecté.");
       this.redirect();
     }
-
+    
+    // Reset api error for the IHM on input change
     this.email?.valueChanges.subscribe(() => {
       this.needsToChangeAField = false;
     });

@@ -4,7 +4,7 @@
     <div [class.with-error]="(email && email.invalid && email.touched)">
       <label class="label-login-input" for="email-input">Courriel</label>
       <div class="input-container">
-        <fa-icon [icon]="faEnvelope" id="envelope-icon"></fa-icon>
+        <fa-icon [icon]="faMale" id="male-icon"></fa-icon>
         <input type="text" id="email-input" name="email-input" placeholder="Ecrivez votre courriel" formControlName="email">
       </div>
       <span class="text-error" *ngIf="(email && email.invalid && email.touched)">L'adresse email est invalide</span>

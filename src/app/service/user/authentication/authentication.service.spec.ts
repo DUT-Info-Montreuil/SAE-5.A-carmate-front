@@ -111,9 +111,7 @@ describe('AuthenticationService', () => {
         testUser.email,
         testUser.password,
         testUser.accountType,
-        testUser.document,
-        testUser.academicYearStart,
-        testUser.academicYearEnd
+        testUser.document
       ).subscribe({
         next: () => {
           fail('Should not register user');
@@ -145,9 +143,7 @@ describe('AuthenticationService', () => {
         testUser.email,
         testUser.password,
         testUser.accountType,
-        testUser.document,
-        testUser.academicYearStart,
-        testUser.academicYearEnd
+        testUser.document
       ).subscribe({
         next: () => {
           done();
