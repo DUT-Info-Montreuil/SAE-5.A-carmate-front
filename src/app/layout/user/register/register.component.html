@@ -37,18 +37,6 @@
           </select>
         </div>
       </div>
-    
-      <div *ngIf="registerForm.get('accountType')?.value === 'student'" class="is-student">
-        <div class="year-inputs">
-          <label for="academicYearStart"> Année académique début : </label><br>
-          <input type="text" id="academicYearStart" name="academicYearStart" placeholder="Début de l'année académique">
-        </div>
-        <br><br>
-        <div class="year-inputs">
-          <label for="academicYearEnd"> Année académique fin : </label> <br>
-          <input type="text" id="academicYearEnd" name="academicYearEnd" placeholder="Fin de l'année académique">
-        </div>
-      </div>
 
       <div *ngIf="registerForm.get('document')">
         <label class="label-login-input" for="document-input">Justificatif</label>

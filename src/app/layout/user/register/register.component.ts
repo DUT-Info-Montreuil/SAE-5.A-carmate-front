@@ -21,9 +21,7 @@ export class RegisterComponent {
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     accountType: new FormControl('', [Validators.required]),
-    academicYearStart: new FormControl('', [Validators.required]),
-    academicYearEnd: new FormControl('', [Validators.required]),
-    document: new FormControl(null),
+    document: new FormControl(null, [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     confirmPassword: new FormControl('', [Validators.required])
   });
@@ -73,13 +71,10 @@ export class RegisterComponent {
   private registerUser() {
     const accountType = this.registerForm.get('accountType')?.value;
     const document = this.registerForm.get('document')?.value;
-    const academicYearStart = this.registerForm.get('academicYearStart')?.value;
-    const academicYearEnd = this.registerForm.get('academicYearEnd')?.value;
 
     if (
       accountType !== null && accountType !== undefined &&
-      document !== null && document !== undefined &&
-      academicYearStart !== null && academicYearEnd !== null
+      document !== null && document !== undefined
     ) {
       this.authService.register(
         this.firstName?.getRawValue(),
@@ -87,9 +82,7 @@ export class RegisterComponent {
         this.email?.getRawValue(),
         this.password?.getRawValue(),
         accountType,
-        document as File,
-        academicYearStart,
-        academicYearEnd
+        document as File
       ).subscribe({
         next: () => {
           this.redirect();
@@ -105,9 +98,6 @@ export class RegisterComponent {
         this.notifier.error("Le document est manquant.");
       } else {
         console.error("accountType ou document est null ou undefined");
-      }
-      if (academicYearStart === null || academicYearEnd === null) {
-        this.notifier.error("L'année académique est manquante.");
       }
     }
   }
@@ -134,15 +124,6 @@ export class RegisterComponent {
 
   private redirect() {
     this.router.navigate([this.redirection || '/']);
-  }
-
-  
-  get academicYearStart() {
-    return this.registerForm.get('academicYearStart');
-  }
-
-  get academicYearEnd() {
-    return this.registerForm.get('academicYearEnd');
   }
   
   get firstName() {

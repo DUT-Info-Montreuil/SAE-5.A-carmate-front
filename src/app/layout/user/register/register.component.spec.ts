@@ -29,9 +29,7 @@ describe('RegisterComponent', () => {
     email: 'test@example.com',
     password: 'Test12+-',
     accountType: 'student',
-    document: new File(['dummy content'], 'document.txt', { type: 'text/plain' }),
-    academicYearStart: '2023',
-    academicYearEnd: '2024' 
+    document: new File(['dummy content'], 'document.txt', { type: 'text/plain' })
   };
 
   beforeEach(async () => {
@@ -77,9 +75,7 @@ describe('RegisterComponent', () => {
       validUser.email,
       validUser.password,
       validUser.accountType,
-      validUser.document,
-      validUser.academicYearStart,
-      validUser.academicYearEnd 
+      validUser.document
     ]);
   });
 });

@@ -1,4 +1,3 @@
-// authentification.service.mock.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { AuthenticationServiceInterface } from "../../../interface/user";
@@ -27,9 +26,9 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
 
       return of(null);
     } else if (!foundUser || foundUser.password !== password) {
-      return throwError(() => new HttpErrorResponse({ error: 'Email or password invalid', status: 401 }));
+      return throwError(() => new HttpErrorResponse({error: 'Email or password invalid', status: 401}));
     } else {
-      return throwError(() => new HttpErrorResponse({ error: 'User is banned', status: 403 }));
+      return throwError(() => new HttpErrorResponse({error: 'User is banned', status: 403}));
     }
   }
 
