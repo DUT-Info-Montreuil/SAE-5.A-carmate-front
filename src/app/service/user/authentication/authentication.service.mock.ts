@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { AuthenticationServiceInterface } from "../../../interface/user";
 import { HttpErrorResponse } from "@angular/common/http";
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
 
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private userDb: [{ 
-    email: string, password: string, token?: string, isBanned: boolean, firstName?:string, lastName?:string, accountType?:string, document?:File,academicYearStart?: string, academicYearEnd?: string}] = [
+    email: string, password: string, token?: string, isBanned: boolean, firstName?:string, lastName?:string, accountType?:string, document?:File}] = [
     { email: "test@test.fr", password: "Test12+-", isBanned: false }
   ]
 
@@ -31,47 +32,10 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
   }
 
   register(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    accountType: string,
-    document: File,
-    academicYearStart?: string,
-    academicYearEnd?: string 
+    form: FormGroup,
+    document: Blob,
+    filename: string
   ): Observable<any> {
-    // Check if the provided data is valid before proceeding with registration
-    if (
-      !this.isValidEmail(email) ||
-      !this.isValidPassword(password) ||
-      !this.isValidDocument(document)
-    ) {
-      // Return an error if the data is invalid
-      return throwError(() => new HttpErrorResponse({ error: 'Invalid data', status: 415 }));
-    }
-  
-    // Check if the user already exists based on the provided email
-    const foundUser = this.userDb.find((user) => user.email === email);
-    if (foundUser) {
-      // Return an error if the email is already registered
-      return throwError(() => new HttpErrorResponse({ error: 'Email already exists', status: 409 }));
-    }
-  
-    // Add the new user to the database
-    this.userDb.push({
-      email,
-      password,
-      firstName,
-      lastName,
-      accountType,
-      document,
-      academicYearStart,
-      academicYearEnd,
-      isBanned: false,
-      token: 'testtoken'
-    });
-  
-    // Registration successful
     return of(null);
   }
   

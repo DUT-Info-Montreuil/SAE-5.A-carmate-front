@@ -4,13 +4,13 @@ import {BehaviorSubject, catchError, Observable, tap} from "rxjs";
 import {AbstractService} from "../../abstractService";
 import {AuthenticationServiceInterface, Token} from "../../../interface/user";
 import {HttpClient} from "@angular/common/http";
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService extends AbstractService implements AuthenticationServiceInterface {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-
   constructor(
     http: HttpClient,
   ) {
@@ -32,22 +32,19 @@ export class AuthenticationService extends AbstractService implements Authentica
   }
 
   register(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    accountType: string,
-    document: File,
+    form: FormGroup,
+    document: Blob,
+    filename: string
   ): Observable<any> {
-    const payload = {
-      firstName,
-      lastName,
-      email,
-      password,
-      accountType,
-      document,
-    };
-    return this.http.post<Token>(`${environment.path}/auth/register`, payload).pipe(
+    const formData: FormData = new FormData();
+    formData.append('first_name', form.value.firstName);
+    formData.append('last_name', form.value.lastName);
+    formData.append('email_address', form.value.email);
+    formData.append('password', form.value.password);
+    formData.append('type', form.value.accountType);
+    formData.append('document', document, filename);
+
+    return this.http.post<Token>(`${environment.path}/auth/register`, formData).pipe(
       tap((token: Token) => {
         this._isLoggedIn$.next(true);
         localStorage.setItem('auth_token', token.token);

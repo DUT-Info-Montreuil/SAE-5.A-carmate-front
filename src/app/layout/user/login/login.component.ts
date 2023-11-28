@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {faMale, faLock, faEnvelope} from "@fortawesome/free-solid-svg-icons";
+import {faMale, faLock} from "@fortawesome/free-solid-svg-icons";
 import {ActivatedRoute, Router} from '@angular/router';
 import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../interface/other";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -14,7 +14,6 @@ import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../.
 export class LoginComponent {
   protected readonly faMale = faMale;
   protected readonly faLock = faLock;
-  protected readonly faEnvelope = faEnvelope;
 
   protected loginForm = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
@@ -39,7 +38,7 @@ export class LoginComponent {
       this.notifier.warning("Vous êtes déjà connecté.");
       this.redirect();
     }
-    
+
     // Reset api error for the IHM on input change
     this.email?.valueChanges.subscribe(() => {
       this.needsToChangeAField = false;
