@@ -71,6 +71,12 @@ import { PublishedCarpoolingDialogComponent } from './layout/trips-page/publishe
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {BecomeDriverComponent} from "./layout/become-driver/become-driver.component";
+import { ValidationComponent } from './layout/admin/validation/list/validation_list.component';
+import { VALIDATION_SERVICE_TOKEN } from './interface/admin';
+import { ValidationDocComponent } from './layout/admin/validation/document/validation_doc.component';
+import { ValidationServiceMock } from './service/admin/validation/validation.service.mock';
+import { ValidationService } from './service/admin/validation/validation.service';
+import { SideBarComponent } from './layout/admin/side-bar/side-bar.component';
 import { CarpoolingDialogComponent } from './layout/carpooling-dialog/carpooling-dialog.component';
 
 registerLocaleData(localeFr);
@@ -126,10 +132,13 @@ const customNotifierOptions: NotifierOptions = {
     PassengerProfilesComponent,
     DriverProfileComponent,
     PublishCarpoolComponent,
+    ValidationComponent,
+    ValidationDocComponent,
     SearchBarComponent,
     ResultCarpoolComponent,
     CarpoolingComponent,
     MapComponent,
+    SideBarComponent,
     CreateSubscriptionComponent,
     ScoreboardPageComponent,
     BecomeDriverComponent,
@@ -189,6 +198,10 @@ const customNotifierOptions: NotifierOptions = {
     {
       provide: USER_SERVICE_TOKEN,
       useClass: environment.production ? UserService : MockUserService,
+    },
+    {
+    provide: VALIDATION_SERVICE_TOKEN,
+    useClass:  environment.production ? ValidationService : ValidationServiceMock,
     },
     {
       provide: MAT_DATE_LOCALE, useValue: 'fr-FR'

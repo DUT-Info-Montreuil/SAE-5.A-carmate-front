@@ -1,0 +1,79 @@
+:host {
+  width: 100%;
+}
+.main {
+  display: flex;
+  width: 100%;
+  h1 {
+    font-size: 36px;
+    margin-left: 10%;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin-left: 15px;
+  }
+
+  .fa-id-arrow-icon {
+    margin-left: 10px;
+    font-size: 30px
+  }
+
+  .verify {
+    max-width: 55px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 2px;
+    background-color: #4caf50;
+    margin-left: 300px;
+  }
+
+  .paging {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .paging-number {
+    display: inline-block;
+    font-size: 30px;
+    margin: 0 15px 0 15px;
+  }
+
+  .bold-class {
+    font-weight: bold;
+  }
+
+  .next-prev {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 30px;
+  }
+
+  p {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+  }
+
+  td {
+    font-size: 18px;
+    text-align: center;
+    width: 20%;
+    padding: 5px 5px 10px 10px;
+  }
+  .list_ {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .verif-document-main {
+    width: 80%;
+    font-size: 14px;
+    font-weight: 400;
+    display: inline-block;
+    margin-top: 20px;
+  }
+}
