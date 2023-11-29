@@ -14,6 +14,7 @@ import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../.
 export class LoginComponent {
   protected readonly faMale = faMale;
   protected readonly faLock = faLock;
+
   protected loginForm = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required, Validators.minLength(8)]),

@@ -12,7 +12,7 @@ import {AUTHENTICATION_SERVICE_TOKEN} from "./interface/user";
 import {MockAuthenticationService} from "./service/user/authentication/authentication.service.mock";
 import {RootComponent} from "./layout/root/root.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RegisterComponent } from './layout/user/register/register.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -59,6 +59,7 @@ const customNotifierOptions: NotifierOptions = {
   declarations: [
     LoginComponent,
     RootComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
