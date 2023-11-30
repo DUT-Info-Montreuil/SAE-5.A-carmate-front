@@ -11,13 +11,21 @@ import {AngularNotifierService} from "./service/other/notifier/AngularNotifierSe
 import {AUTHENTICATION_SERVICE_TOKEN} from "./interface/user";
 import {MockAuthenticationService} from "./service/user/authentication/authentication.service.mock";
 import {RootComponent} from "./layout/root/root.component";
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { RegisterComponent } from './layout/user/register/register.component';
 import {environment} from "./environement/environement";
 import {AuthenticationService} from "./service/user/authentication/authentication.service";
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { HomePageComponent } from './layout/home-page/home-page.component';
+import { PublishCarpoolComponent } from './layout/publish-carpool/publish-carpool.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -66,6 +74,8 @@ const customNotifierOptions: NotifierOptions = {
     RootComponent,
     NavBarComponent,
     RegisterComponent,
+    HomePageComponent,
+    PublishCarpoolComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +87,14 @@ const customNotifierOptions: NotifierOptions = {
     NotifierModule.withConfig(customNotifierOptions),
     BrowserAnimationsModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatAutocompleteModule,
 
   ],
   providers: [

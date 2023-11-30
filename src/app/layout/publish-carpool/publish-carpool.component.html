@@ -1,0 +1,60 @@
+<div class="flex flex-col items-center justify-center w-screen h-screen">
+    <form [formGroup]="publishForm" (ngSubmit)="submit()" class="justify-center p-5 rounded-md shadow-md flex flex-col items-center gap-6 w-96">
+
+        <h1 class="text-3xl" >Publier un trajet</h1>
+        <mat-form-field subscriptSizing="dynamic" class="w-full	">
+            <mat-label>Départ</mat-label>
+            <input  matInput required formControlName="starting_point" [matAutocomplete]="starting_pointAutocomplete" class="w-full">
+            <fa-icon [icon]="faLocationdot" matSuffix class="pr-3"></fa-icon>
+            <mat-error>Veuillez renseigner une adresse valide.</mat-error>
+
+            <mat-autocomplete autoActiveFirstOption #starting_pointAutocomplete="matAutocomplete" (optionSelected)="starting_pointOptionSelectedHandler($event)">
+                <mat-option *ngFor="let address of obsDisplayedAddressesStart | async" [value]="address">
+                  {{ address }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field subscriptSizing="dynamic" class="w-full">
+            <mat-label>Destination</mat-label>
+            <input matInput required formControlName="destination" [matAutocomplete]="destinationAutocomplete">
+            <fa-icon [icon]="faLocationdot" matSuffix class="pr-3"></fa-icon>
+            <mat-error>Veuillez renseigner une adresse valide.</mat-error>
+
+            <mat-autocomplete autoActiveFirstOption #destinationAutocomplete="matAutocomplete" (optionSelected)="destinationOptionSelectedHandler($event)">
+                <mat-option *ngFor="let address of obsDisplayedAddressesDest | async" [value]="address">
+                  {{ address }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field subscriptSizing="dynamic" class="w-full">
+            <input matInput required formControlName="max_passengers" type="number" placeholder="Nombre de passagers" min="1" value="1">
+            <fa-icon [icon]="faUser" matSuffix class="pr-3"></fa-icon>
+            <mat-error>Veuillez renseigner entre 1 et 4 passagers.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field subscriptSizing="dynamic" class="w-full">
+            <input matInput required formControlName="price" type="number" placeholder="Prix" min="1">
+            <fa-icon [icon]="faEuro" matSuffix class="pr-3"></fa-icon>
+            <mat-error *ngIf="publishForm.get('price')!.hasError('required')">Veuillez renseigner un prix.</mat-error>
+            <mat-error *ngIf="publishForm.get('price')!.hasError('min')">Le prix doit être supérieur à 0.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field subscriptSizing="dynamic" class="w-full">
+            <input matInput required formControlName="departure_date" [matDatepicker]="picker" placeholder="Date du départ" id="dateDeparture"  [matDatepickerFilter]="dateFilter">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-error>Veuillez renseigner une date de départ.</mat-error>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field> 
+
+        <mat-form-field subscriptSizing="dynamic" class="w-full">
+            <input matInput required formControlName="departure_time" type="time">
+            <fa-icon [icon]="faClock" matSuffix class="pr-3"></fa-icon>
+            <mat-error>Veuillez renseigner une heure de départ.</mat-error>
+        </mat-form-field>
+        
+        <button mat-raised-button class="ml-2 h-fit text-lg"  type="submit" [disabled]="!publishForm.valid">Publier</button>
+
+    </form>
+</div>

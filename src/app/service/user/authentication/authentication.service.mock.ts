@@ -22,6 +22,7 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
     const foundUser = this.userDb.find(user => user.email === email);
     if (foundUser && foundUser.password === password && !foundUser.isBanned) {
       this._isLoggedIn$.next(true);
+      this._isDriver$.next(true);
       localStorage.setItem('auth_token', "validToken");
       foundUser.token = "validToken";
 
