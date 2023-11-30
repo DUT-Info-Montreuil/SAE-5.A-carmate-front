@@ -2,8 +2,8 @@ import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { faUser as faUserSolid, faCog, faSignOut, faPlus, faPencil, faCar, faMessage, faScrewdriverWrench} from '@fortawesome/free-solid-svg-icons';
 import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
-import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface, Token} from "../interface/user";
-import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../interface/other";
+import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface, Token} from "../../interface/user";
+import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../interface/other";
 
 @Component({
   selector: 'app-nav-bar',

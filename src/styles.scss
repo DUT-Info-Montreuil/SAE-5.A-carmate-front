@@ -5,7 +5,7 @@
 @import '_variables.scss';
 
 input, input:focus-visible {
-  all:unset;
+  all:unset !important;
 }
 
 html, body { height: 100%; }
