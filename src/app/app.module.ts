@@ -13,6 +13,8 @@ import {MockAuthenticationService} from "./service/user/authentication/authentic
 import {RootComponent} from "./layout/root/root.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './layout/user/register/register.component';
+import {environment} from "./environement/environement";
+import {AuthenticationService} from "./service/user/authentication/authentication.service";
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -78,7 +80,7 @@ const customNotifierOptions: NotifierOptions = {
       useClass: AngularNotifierService,
     }, {
       provide: AUTHENTICATION_SERVICE_TOKEN,
-      useClass: MockAuthenticationService,
+      useClass: environment.production ? AuthenticationService : MockAuthenticationService,
     }
   ],
   bootstrap: [RootComponent]
