@@ -15,6 +15,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { RegisterComponent } from './layout/user/register/register.component';
+import {environment} from "./environement/environement";
+import {AuthenticationService} from "./service/user/authentication/authentication.service";
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -82,8 +85,12 @@ const customNotifierOptions: NotifierOptions = {
       useClass: AngularNotifierService,
     }, {
       provide: AUTHENTICATION_SERVICE_TOKEN,
-      useClass: MockAuthenticationService,
-    }
+      useClass: environment.production ? AuthenticationService : MockAuthenticationService,
+    },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: "fr-FR"
+    },
   ],
   bootstrap: [RootComponent]
 })
