@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 cat > ./src/app/environement/environement.ts <<EOF
 export const environment = {
@@ -7,4 +7,4 @@ export const environment = {
 };
 EOF
 
-ng serve --host 0.0.0.0 --port "$PORT"
+ng serve --host 0.0.0.0 --port $PORT
