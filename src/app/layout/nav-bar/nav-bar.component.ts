@@ -1,9 +1,9 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { faUser as faUserSolid, faCog, faSignOut, faPlus, faPencil, faCar, faMessage, faScrewdriverWrench} from '@fortawesome/free-solid-svg-icons';
 import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
 import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface, Token} from "../../interface/user";
-import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../interface/other";
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,10 +26,9 @@ export class NavBarComponent {
   protected readonly faScrewdriverWrench = faScrewdriverWrench;
   
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
+    private route: ActivatedRoute,
     @Inject(AUTHENTICATION_SERVICE_TOKEN) public authService: AuthenticationServiceInterface,
-    @Inject(NOTIFIER_SERVICE_TOKEN) private notifier: NotifierServiceInterface,
   ) {}
 
   menuProfileSwitchVisibility(): void {
@@ -56,15 +55,15 @@ export class NavBarComponent {
     this.router.navigate(["/login"]);
   }
 
-  get IsLogged(){
+  IsLogged(){
     return this.authService.isLogged();
   }
 
-  get IsAdmin(){
+  IsAdmin(){
     return this.authService.isAdmin();
   }
 
-  get IsDriver(){
+  IsDriver(){
     return this.authService.isDriver();
   }
 }
