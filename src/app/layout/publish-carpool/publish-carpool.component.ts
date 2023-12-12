@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faLocationDot, faUser, faEuro, faClock } from '@fortawesome/free-solid-svg-icons';
 import { Observable, of } from 'rxjs';
 import { switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
@@ -34,7 +35,12 @@ export class PublishCarpoolComponent {
     departure_time: new FormControl("", [Validators.required]),  //Setup valid format time XX:XX
   });
   
-  constructor(private addressService: AddressService, private carpoolService: CarpoolService) {}
+  constructor(
+    private addressService: AddressService,
+    private carpoolService: CarpoolService,
+    private router: Router,
+    @Inject(NOTIFIER_SERVICE_TOKEN) private notifier: NotifierServiceInterface,
+    ) {}
 
   ngOnInit() {
     this.setupAutocomplete();

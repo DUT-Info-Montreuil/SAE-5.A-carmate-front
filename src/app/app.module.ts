@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './layout/user/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import {NotifierModule, NotifierOptions} from "angular-notifier";
 import {NOTIFIER_SERVICE_TOKEN} from "./interface/other";
 import {AngularNotifierService} from "./service/other/notifier/AngularNotifierService";
@@ -95,13 +95,13 @@ const customNotifierOptions: NotifierOptions = {
     MatDividerModule,
     MatButtonModule,
     MatAutocompleteModule,
-
   ],
   providers: [
     {
       provide: NOTIFIER_SERVICE_TOKEN,
       useClass: AngularNotifierService,
-    }, {
+    },
+    {
       provide: AUTHENTICATION_SERVICE_TOKEN,
       useClass: MockAuthenticationService,
     }
