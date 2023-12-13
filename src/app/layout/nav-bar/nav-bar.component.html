@@ -47,19 +47,19 @@
                 <fa-icon [icon]="faCog" class="mr-2"></fa-icon> Paramètres
               </button>
 
-              <button *ngIf="IsLogged" routerLink="/admin" class="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">
+              <button *ngIf="IsAdmin()" routerLink="/admin" class="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">
                 <fa-icon [icon]="faScrewdriverWrench" class="mr-2"></fa-icon> Administration
               </button>
             
-              <button *ngIf="IsLogged" (click)="logOut()" class=" w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2">
+              <button *ngIf="IsLogged()" (click)="logOut()" class=" w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2">
                 <fa-icon [icon]="faSignOut" class="mr-2"></fa-icon> Se déconnecter
               </button>
 
-              <button *ngIf="!IsLogged" routerLink="/login" class=" w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2">
+              <button *ngIf="!IsLogged()" routerLink="/login" class=" w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2">
                 <fa-icon [icon]="faUserRegular" class="mr-2"></fa-icon> Se connecter
               </button>
               
-              <button *ngIf="!IsLogged" routerLink="/register" class=" w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2">
+              <button *ngIf="!IsLogged()" routerLink="/register" class=" w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2">
                 <fa-icon [icon]="faPencil" class="mr-2"></fa-icon> S'inscrire
               </button>
             </div>
