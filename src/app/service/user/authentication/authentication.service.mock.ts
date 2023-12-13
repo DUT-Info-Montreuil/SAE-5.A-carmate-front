@@ -14,8 +14,8 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
   private _isAdmin$ = new BehaviorSubject<boolean>(false);
   private _isDriver$ = new BehaviorSubject<boolean>(false);
   private userDb: [{ 
-    email: string, password: string, token?: string, isBanned: boolean, isDriver: boolean, isAdmin: boolean firstName?:string, lastName?:string, accountType?:string, document?:File}] = [
-    { email: "test@test.fr", password: "Test12+-", isBanned: false, isDriver: true, isAdmin: false }
+    email: string, password: string, token?: string, isBanned: boolean, firstName?:string, lastName?:string, accountType?:string, document?:File}] = [
+    { email: "test@test.fr", password: "Test12+-", isBanned: false }
   ]
 
   login(email: string, password: string): Observable<any> {

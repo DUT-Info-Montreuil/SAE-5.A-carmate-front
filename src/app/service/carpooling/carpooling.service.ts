@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Carpool, CarpoolServiceInterface } from 'src/app/interface/carpool';
+import { Carpooling, CarpoolingServiceInterface } from 'src/app/interface/carpooling';
 import { environment } from "../../environement/environement";
 import { HttpClient } from "@angular/common/http";
 import { AbstractService } from "../abstractService";
 import { Observable } from "rxjs";
-import { FormGroup } from '@angular/forms';
 
 
 @Injectable({
   providedIn: 'root',
 })
 
-export class CarpoolService extends AbstractService implements CarpoolServiceInterface{
+export class CarpoolingService extends AbstractService implements CarpoolingServiceInterface{
 
   constructor(
     http: HttpClient,
@@ -19,8 +18,8 @@ export class CarpoolService extends AbstractService implements CarpoolServiceInt
     super(http);
   }
 
-  publish(carpool: Carpool): Observable<any> {
-    return this.http.post<FormGroup>(`${environment.path}/publish-carpool`, carpool)
+  publish(carpooling: Carpooling): Observable<any> {
+    return this.http.post<Carpooling>(`${environment.path}/carpooling/create`, carpooling)
   }
 
 }

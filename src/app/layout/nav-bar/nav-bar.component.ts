@@ -1,8 +1,8 @@
-import { Component, HostListener, Inject, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { faUser as faUserSolid, faCog, faSignOut, faPlus, faPencil, faCar, faMessage, faScrewdriverWrench} from '@fortawesome/free-solid-svg-icons';
+import { Component, HostListener, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
-import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface, Token} from "../../interface/user";
+import { faCar, faCog, faMessage, faPencil, faPlus, faScrewdriverWrench, faSignOut, faUser as faUserSolid } from '@fortawesome/free-solid-svg-icons';
+import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from "../../interface/user";
 
 
 @Component({
@@ -27,7 +27,6 @@ export class NavBarComponent {
   
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     @Inject(AUTHENTICATION_SERVICE_TOKEN) public authService: AuthenticationServiceInterface,
   ) {}
 
@@ -52,7 +51,7 @@ export class NavBarComponent {
 
   logOut() {
     this.authService.logOut();
-    this.router.navigate(["/login"]);
+    this.router.navigate(["/home"]);
   }
 
   IsLogged(){

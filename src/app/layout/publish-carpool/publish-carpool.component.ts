@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faLocationDot, faUser, faEuro, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faEuro, faLocationDot, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Observable, of } from 'rxjs';
-import { switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
-import { AddressService } from '../../service/address/address.service';
-import { CarpoolService } from '../../service/carpool/carpool.service';
-import { Carpool } from '../../interface/carpool';
-
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface, NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other';
+import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface } from '../../interface/carpooling';
 
 @Component({
   selector: 'app-publish-carpool',
@@ -36,8 +34,8 @@ export class PublishCarpoolComponent {
   });
   
   constructor(
-    private addressService: AddressService,
-    private carpoolService: CarpoolService,
+    @Inject(ADDRESS_SERVICE_TOKEN) private addressService: AddressServiceInterface,
+    @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
     private router: Router,
     @Inject(NOTIFIER_SERVICE_TOKEN) private notifier: NotifierServiceInterface,
     ) {}
@@ -55,15 +53,12 @@ export class PublishCarpoolComponent {
 
     addressList.forEach((element => {
 
-      let obsDisplayedAddresses = null;
-
       this.publishForm.get(element)!.valueChanges.pipe(
         distinctUntilChanged(),
         debounceTime(300),
         switchMap((value) => this.addressService.search(value!)),
       ).subscribe((addresses) => {
         if (Array.isArray(addresses) && addresses.length > 0) {
-          console.log(addresses);
           
           let displayResults: string[] = [];
   
@@ -79,7 +74,6 @@ export class PublishCarpoolComponent {
             );
           }
                   
-          console.log(displayResults);
           this.displayedAddresses = displayResults;
           this.objDisplayedAddresses = addresses;
 
@@ -100,17 +94,13 @@ export class PublishCarpoolComponent {
   starting_pointOptionSelectedHandler(event: any) {
     let lat = this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lat;
     let lon =  this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lon;
-    this.starting_coords = `${lat};${lon}`;
-    console.log(this.starting_coords);
-    
+    this.starting_coords = `${lat};${lon}`;    
   }
 
   destinationOptionSelectedHandler(event: any) {
     let lat = this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lat;
     let lon =  this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lon;
-    this.destination_coords = `${lat};${lon}`;
-    console.log(this.destination_coords);
-    
+    this.destination_coords = `${lat};${lon}`;    
   }
 
   dateFilter: (date: Date | null) => boolean =
@@ -169,7 +159,7 @@ export class PublishCarpoolComponent {
     let formatedDate: string =`${dateStart.getFullYear()}-${(dateStart.getMonth() + 1).toString().padStart(2, '0')}-${dateStart.getDate().toString().padStart(2, '0')}`;
 
     
-    let payload: Carpool = {
+    let payload: Carpooling = {
       starting_point: `${this.starting_coords}`,
       destination: `${this.destination_coords}`,
       max_passengers: this.publishForm.get('max_passengers')!.value!,
@@ -177,8 +167,8 @@ export class PublishCarpoolComponent {
       departure_date_time: `${formatedDate} ${this.publishForm.get('departure_time')!.value!}`
     };
   
-    this.carpoolService.publish(payload);
-    console.log(payload);
-    
+    this.carpoolingService.publish(payload);
+    this.router.navigate(['/home']);
+    this.notifier.success("Le trajet a été publié.")    
   }
 }
