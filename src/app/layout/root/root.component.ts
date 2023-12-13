@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import {Component} from '@angular/core';
   styleUrls: ['./root.component.scss']
 })
 export class RootComponent {
+  constructor(
+    private router: Router,
+  ) {}
 
+  ngOnInit() {
+    if (this.router.url === '/') {
+      this.router.navigate(["/home"]);
+    } 
+  }
 }

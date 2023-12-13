@@ -15,8 +15,11 @@ export interface User {
 }
 
 export interface AuthenticationServiceInterface {
-  login: (email: string, password: string) => Observable<any>;
+  login: (email:string, password:string) => Observable<any>;
+  logOut: () => Observable<any>;
   isLogged: () => boolean;
+  isAdmin: () => boolean;
+  isDriver: () => boolean;
   register: (form: FormGroup, blob: Blob, filename: string) => Observable<any>;
 }
 

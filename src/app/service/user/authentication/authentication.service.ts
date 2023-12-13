@@ -11,6 +11,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class AuthenticationService extends AbstractService implements AuthenticationServiceInterface {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  private _isAdmin$ = new BehaviorSubject<boolean>(false);
+  private _isDriver$ = new BehaviorSubject<boolean>(false);
+  
   constructor(
     http: HttpClient,
   ) {
@@ -30,6 +33,13 @@ export class AuthenticationService extends AbstractService implements Authentica
       catchError(this.passErrorToComponent)
     );
   }
+
+  logOut(): Observable<any> {
+    this._isLoggedIn$.next(false);
+    localStorage.removeItem('auth-token');
+    //TO-DO need to mplemente the route
+    return this.http.post<any>(`${environment.path}/auth/logout`,{token: localStorage.getItem('auth_token')});
+  } 
 
   register(
     form: FormGroup,
@@ -55,5 +65,13 @@ export class AuthenticationService extends AbstractService implements Authentica
 
   isLogged(): boolean {
     return this._isLoggedIn$.getValue();
+  }
+  
+    isAdmin(): boolean {
+    return this._isAdmin$.getValue();
+  }
+
+  isDriver(): boolean {
+    return this._isDriver$.getValue();
   }
 }
