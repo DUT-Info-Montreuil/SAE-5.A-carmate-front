@@ -8,7 +8,7 @@ import { HttpClientModule, HttpClient } from "@angular/common/http";
 import {NotifierModule, NotifierOptions} from "angular-notifier";
 import {NOTIFIER_SERVICE_TOKEN} from "./interface/other";
 import {AngularNotifierService} from "./service/other/notifier/AngularNotifierService";
-import {AUTHENTICATION_SERVICE_TOKEN} from "./interface/user";
+import {AUTHENTICATION_SERVICE_TOKEN, USER_SERVICE_TOKEN} from "./interface/user";
 import {MockAuthenticationService} from "./service/user/authentication/authentication.service.mock";
 import {RootComponent} from "./layout/root/root.component";
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
@@ -26,6 +26,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { RegisterComponent } from './layout/user/register/register.component';
+import {environment} from "./environement/environement";
+import {AuthenticationService} from "./service/user/authentication/authentication.service";
+import { PassengerProfilesComponent } from './layout/user/passenger-profile/passenger-profiles.component';
+import { PROFILE_SERVICE_TOKEN } from './interface/profiles';
+import { ProfilesService } from './service/user/profiles/profiles.service';
+import { MockProfilesService } from './service/user/profiles/profiles.service.mock';
+import { DriverProfileComponent } from './layout/user/driver-profile/driver-profile.component';
+import { UserService } from './service/user/user.service';
+import { MockUserService } from './service/user/user.service.mock';
+
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -76,6 +87,9 @@ const customNotifierOptions: NotifierOptions = {
     RegisterComponent,
     HomePageComponent,
     PublishCarpoolComponent,
+    RegisterComponent,
+    PassengerProfilesComponent,
+    DriverProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +117,13 @@ const customNotifierOptions: NotifierOptions = {
     },
     {
       provide: AUTHENTICATION_SERVICE_TOKEN,
-      useClass: MockAuthenticationService,
+      useClass: environment.production ? AuthenticationService : MockAuthenticationService,
+    }, {
+      provide: PROFILE_SERVICE_TOKEN,
+      useClass: environment.production ? ProfilesService : MockProfilesService,
+    }, {
+      provide: USER_SERVICE_TOKEN,
+      useClass: environment.production ? UserService : MockUserService,
     }
   ],
   bootstrap: [RootComponent]
