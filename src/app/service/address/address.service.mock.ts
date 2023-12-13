@@ -22,7 +22,6 @@ export class MockAddressService implements AddressServiceInterface {
     {
       address: {
         house_number: '1',
-        building: 'A',
         city: 'Marseille',
         road: 'Rue de la République',
         postcode: '13001',
@@ -31,7 +30,6 @@ export class MockAddressService implements AddressServiceInterface {
     {
       address: {
         house_number: '4',
-        building: 'B',
         city: 'Nantes',
         road: 'Avenue des Fleurs',
         postcode: '44000',
@@ -40,9 +38,7 @@ export class MockAddressService implements AddressServiceInterface {
     {
       address: {
         house_number: '7',
-        town: 'Ville-du-Nord',
         city: 'Lille',
-        village: '',
         road: 'Rue du Commerce',
         postcode: '59000',
       },
