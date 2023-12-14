@@ -36,7 +36,7 @@ import { MockUserService } from './service/user/user.service.mock';
 import { CARPOOLING_SERVICE_TOKEN } from './interface/carpooling';
 import { CarpoolingService } from './service/carpooling/carpooling.service';
 import { AddressService } from './service/address/address.service';
-
+import { MockAddressService } from './service/address/address.service.mock';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -136,7 +136,7 @@ const customNotifierOptions: NotifierOptions = {
     },
     {
       provide: ADDRESS_SERVICE_TOKEN,
-      useClass: AddressService
+      useClass: environment.production ? AddressService : MockAddressService,
     }
   ],
   bootstrap: [RootComponent]
