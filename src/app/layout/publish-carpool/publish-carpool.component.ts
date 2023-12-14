@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface, NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other';
 import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface } from '../../interface/carpooling';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-publish-carpool',
@@ -167,8 +168,26 @@ export class PublishCarpoolComponent {
       departure_date_time: `${formatedDate} ${this.publishForm.get('departure_time')!.value!}`
     };
   
-    this.carpoolingService.publish(payload);
-    this.router.navigate(['/home']);
-    this.notifier.success("Le trajet a été publié.")    
+    this.carpoolingService.publish(payload).subscribe({
+      next: () => {
+        this.notifier.success("Le trajet a été publié.");
+        this.router.navigate(['/home']);
+      },
+      error: (error: HttpErrorResponse) => {
+        switch (error.status) {
+          case 400:
+            this.notifier.error("Un ou plusieurs champs sont invalides.");
+            break;
+          case 401:
+            this.notifier.error("Vous n'avez pas accès à ce contenu.");
+            break;
+          case 403:
+            this.notifier.error("Le rôle de conducteur n'est pas encore validé.");
+            break;
+          default:
+            this.notifier.error("Erreur interne.");
+            break;
+        }
+    }});   
   }
 }
