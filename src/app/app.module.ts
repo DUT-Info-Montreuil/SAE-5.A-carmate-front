@@ -37,6 +37,7 @@ import { CARPOOLING_SERVICE_TOKEN } from './interface/carpooling';
 import { CarpoolingService } from './service/carpooling/carpooling.service';
 import { AddressService } from './service/address/address.service';
 import { MockAddressService } from './service/address/address.service.mock';
+import { MockCarpoolingService } from './service/carpooling/carpooling.service.mock';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -132,7 +133,7 @@ const customNotifierOptions: NotifierOptions = {
     },
     {
       provide: CARPOOLING_SERVICE_TOKEN,
-      useClass: CarpoolingService
+      useClass: environment.production ? CarpoolingService : MockCarpoolingService,
     },
     {
       provide: ADDRESS_SERVICE_TOKEN,
