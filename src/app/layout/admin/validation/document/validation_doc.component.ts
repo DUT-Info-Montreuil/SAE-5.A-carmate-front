@@ -5,7 +5,6 @@ import {
   NextDocument,
   VALIDATION_SERVICE_TOKEN, ValidationServiceInterface
 } from "../../../../interface/admin";
-import {faIdCard} from '@fortawesome/free-solid-svg-icons';
 import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../../interface/other";
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -18,9 +17,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class ValidationDocComponent {
   public doc: Document | null = null;
-  protected readonly faIdCard = faIdCard;
-
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -44,8 +40,6 @@ export class ValidationDocComponent {
           this.router.navigate(['admin/license/to-validate']);
           return value;
         }
-        console.log(value)
-        console.log(value.next_id_document);
         this.recharge_page(value.next_id_document);
       },
       error: (error: HttpErrorResponse) => {
@@ -93,11 +87,8 @@ export class ValidationDocComponent {
           this.notifier.error("Erreur Interne.");
         } else if (error.status == 503 ) {
           this.notifier.error("Service momentanément indisponible.");
-        } 
+        }
       }
     });
-  }
-  goHome(){
-    this.router.navigate(['/admin/license/to-validate']);
   }
 }

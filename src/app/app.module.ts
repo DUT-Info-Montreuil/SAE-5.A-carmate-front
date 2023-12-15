@@ -50,6 +50,7 @@ import {VALIDATION_SERVICE_TOKEN} from './interface/admin';
 import { ValidationDocComponent } from './layout/admin/validation/document/validation_doc.component';
 import { ValidationServiceMock } from './service/admin/validation/validation.service.mock';
 import { ValidationService } from './service/admin/validation/validation.service';
+import { SideBarComponent } from './layout/admin/side-bar/side-bar.component';
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -110,6 +111,7 @@ const customNotifierOptions: NotifierOptions = {
     ResultCarpoolComponent,
     CarpoolingComponent,
     MapComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,

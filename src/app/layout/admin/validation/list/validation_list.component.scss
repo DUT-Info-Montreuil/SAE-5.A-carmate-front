@@ -1,114 +1,82 @@
+:host {
+  width: 100%;
+}
 .main {
-  width: 100vw;
-  height: 100vh;
   display: flex;
-
+  width: 100%;
   h1 {
     font-size: 36px;
     margin-left: 10%;
   }
-  
+
   h2 {
     font-size: 18px;
     margin-left: 15px;
   }
 
-
-  #verif-document-text{
-    margin-left: 50%;
-    font-size: 18px;
-    display: inline-block;
-      text-align: right;
-  }
-
-  #fa-id-card-icon{
-    margin-left: 10px;
-    font-size: 30px;
-  }
-  
-  .fa-id-arrow-icon{
+  .fa-id-arrow-icon {
     margin-left: 10px;
     font-size: 30px
-  }   
+  }
 
-    .verify {
-      max-width: 55px;
-      font-size: 16px;
-      font-weight: 400;
-      border-radius: 2px;
-      background-color:  #4caf50;
-      margin-left: 300px;
-    }
-    .paging{
-      width: 40%;
-      position: absolute;bottom:0;
-      margin-left: 40%;
-      margin-right: 20%;
-      display: flex;
-      margin-bottom: 20px;
-    }
-    .paging-number{
-      display: inline-block;
-      font-size: 30px;
-      margin: 0 15px 0 15px;
-      }
-      .bold-class {
-        font-weight: bold;
-      }
-      
+  .verify {
+    max-width: 55px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 2px;
+    background-color: #4caf50;
+    margin-left: 300px;
+  }
 
-    .next-prev{
-      display: inline-block;
-      margin-left: 20px;
-      margin-right: 20px;
-      font-size: 30px;
-    }
+  .paging {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .paging-number {
+    display: inline-block;
+    font-size: 30px;
+    margin: 0 15px 0 15px;
+  }
+
+  .bold-class {
+    font-weight: bold;
+  }
 
 
-    p{
-        display: inline-block;
-        padding-left: 40px;
-    }
-
-    td{
-      font-size: 18px;
-      text-align: center;
-      width: 20%;
-      padding: 5px 5px 10px 10px;
-    }
+  .next-prev {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 30px;
+  }
 
 
+  p {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    // padding-left: 40px;
+  }
 
-    .verif-document-left-menu {
-      height: 100%;
-      color: white;
-      font-size: 14px;
-      font-weight: 400;
-      display: inline-block;
-      width: 20%;
-      padding-top: 20px;
-      background-color: #343434
-    }
-    .administration-item {
-      height: 10%;
-      width: 90%;
-      margin-left:5%;
-      margin-right:5%;
-      padding-top: 10px;
-      background-color: #ccc;
-      transition: background-color 0.5s, color 0.5s; 
-      border-radius: 4px;
-    }
-    .administration-item:hover{
-      background-color: #555;
-    }
-  
-
-      .verif-document-main {
-        width: 80%;
-        font-size: 14px;
-        font-weight: 400;
-        display: inline-block;
-        margin-top: 20px;
-      }
-    }
+  td {
+    font-size: 18px;
+    text-align: center;
+    width: 20%;
+    padding: 5px 5px 10px 10px;
+  }
+  .list_ {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .verif-document-main {
+    width: 80%;
+    font-size: 14px;
+    font-weight: 400;
+    display: inline-block;
+    margin-top: 20px;
+  }
+}

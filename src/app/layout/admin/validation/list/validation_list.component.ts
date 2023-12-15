@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from "@angular/common/http";
-import {faAnglesLeft, faAnglesRight, faIdCard} from '@fortawesome/free-solid-svg-icons';
+import {faAnglesLeft, faAnglesRight} from '@fortawesome/free-solid-svg-icons';
 import {
   DocumentMetaDatas,
   VALIDATION_SERVICE_TOKEN,
@@ -11,7 +11,7 @@ import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../../inte
 
 
 @Component({
-  selector: 'app-verif-document-left-menu',
+  selector: 'app-validation-list',
   templateUrl: './validation_list.component.html',
   styleUrls: ['./validation_list.component.scss']
 })
@@ -19,7 +19,6 @@ import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../../inte
 export class ValidationComponent {
   protected readonly faAnglesLeft = faAnglesLeft;
   protected readonly faAnglesRight = faAnglesRight;
-  protected readonly faIdCard = faIdCard;
   public user_list: DocumentMetaDatas[] = [];
   protected page: number = 1;
   private nb_page: number = 0;
@@ -119,8 +118,5 @@ export class ValidationComponent {
     })
     const encodedPage = encodeURIComponent(String(this.page));
     this.router.navigateByUrl(`/admin/license/to-validate?page=${encodedPage}`);
-  }
-  goHome(){
-    this.router.navigate(['/admin/license/to-validate']);
   }
 }

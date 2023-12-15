@@ -1,11 +1,4 @@
 <main class="main">
-  <div class="verif-document-left-menu">
-      <h2>Administration</h2>
-      <button class="administration-item" (click)="goHome()">
-        <fa-icon [icon]="faIdCard" id="fa-id-card-icon"></fa-icon>
-        <p id="verif-document-text">Verification <br> document</p>
-    </button>
-  </div>
   <div class="see-doc">
     <div *ngIf="doc" id="">
       <p>Prénom : {{ doc.first_name }}</p>
@@ -13,7 +6,7 @@
       <!-- <p>Type de compte : {{ doc.account_type }}</p> -->
       <p>Type de document: {{ doc.document_type }}</p>
       <img id="document_image" [src]="'data:image/png;base64,'+doc.document">
-      <button id ="validate"class="validated-refused" (click)="send_validation('Approved', doc.document_id)">Valider</button>
+      <button id ="validate" class="validated-refused" (click)="send_validation('Approved', doc.document_id)">Valider</button>
       <button id="refused" class="validated-refused" (click)="send_validation('Rejected',  doc.document_id)">Refuser</button>
     </div>
     <div *ngIf="!doc">
