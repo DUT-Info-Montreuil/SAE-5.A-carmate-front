@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from '../../../interface/other';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from '../../../interface/user';
+import { MaxSizeValidator } from '@angular-material-components/file-input';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-register',
@@ -12,21 +14,29 @@ import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from '..
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  // Icons
   protected readonly faUser = faUser;
   protected readonly faMale = faMale;
   protected readonly faLock = faLock;
   protected readonly faEnvelope = faEnvelope;
+
+  private redirection: string | undefined;
+
+  // File Input properties
+  private readonly maxSize: number = 8;
+  protected readonly multiple: boolean = false;
+  protected readonly accept: string = '.png, .jpg, .jpeg';
+  protected readonly color: ThemePalette = 'primary';
+
   protected registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    accountType: new FormControl('', [Validators.required]),
-    document: new FormControl<File | null>(null, [Validators.required]),
+    document: new FormControl<File>(new File([], 'Placez votre fichier ici'), [Validators.required, MaxSizeValidator(this.maxSize * Math.pow(10,6))]),
     password: new FormControl('', [Validators.required, Validators.minLength(8), this.createPasswordStrengthValidator()]),
-    confirmPassword: new FormControl('', [Validators.required])
+    confirmPassword: new FormControl('', [Validators.required]),
+    accountType: new FormControl('Student', [])
   });
-  private redirection: string | undefined;
-  protected needsToChangeAField = false;  
 
   constructor(
     private route: ActivatedRoute,
@@ -40,12 +50,12 @@ export class RegisterComponent {
       this.redirection = params.redirect;
     });
 
-    this.email?.valueChanges.subscribe(() => {
-      this.needsToChangeAField = false;
-    });
-
-    this.password?.valueChanges.subscribe(() => {
-      this.needsToChangeAField = false;
+    this.document.valueChanges.subscribe((files: any) => {
+      if (!Array.isArray(files)) {
+        this.document.setValue(files);
+      } else {
+        this.document.setValue(files[0]);
+      }
     });
   }
 
@@ -54,14 +64,13 @@ export class RegisterComponent {
       this.notifier.error("Les mots de passe ne correspondent pas.");
       return;
     }
-  
+
     if (this.registerForm.invalid) {
       this.notifier.error("Veuillez remplir tous les champs correctement.");
       return;
     }
-  
-    const accountType = this.registerForm.get('accountType')?.value;
-    
+
+    const accountType = "Student";
     if (accountType && this.document?.value) {
       const reader = new FileReader();
       reader.readAsArrayBuffer(this.document.value);
@@ -94,10 +103,6 @@ export class RegisterComponent {
     }
   }
 
-  onFileSelected(event: any): void {
-    this.document?.setValue(event.target.files[0])
-  }
-
   private createPasswordStrengthValidator(): ValidatorFn {
     return (control:AbstractControl) : ValidationErrors | null => {
         const value = control.value;
@@ -114,7 +119,7 @@ export class RegisterComponent {
         return !passwordValid ? {passwordStrength:true}: null;
     }
   }
-  
+
   private arePasswordsMatching(): boolean {
     return this.password?.value === this.confirmPassword?.value;
   }
@@ -142,7 +147,7 @@ export class RegisterComponent {
   private redirect() {
     this.router.navigate([this.redirection || '/']);
   }
-  
+
   get firstName() {
     return this.registerForm.get('firstName');
   }
@@ -163,7 +168,7 @@ export class RegisterComponent {
     return this.registerForm.get('confirmPassword');
   }
 
-  get document() {
-    return this.registerForm.get('document')
+  get document(): FormControl<File> {
+    return this.registerForm.get('document') as FormControl<File>;
   }
 }
