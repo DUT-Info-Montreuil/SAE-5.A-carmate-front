@@ -10,6 +10,9 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {By} from "@angular/platform-browser";
 import {HttpErrorResponse} from "@angular/common/http";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -32,13 +35,18 @@ describe('LoginComponent', () => {
     queryParams = new BehaviorSubject({});
     spyRouterService = jasmine.createSpyObj('Router', ['navigate']);
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [
+        LoginComponent
+      ],
       imports: [
         ReactiveFormsModule,
         FormsModule,
         RouterTestingModule.withRoutes([]),
         HttpClientTestingModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule
       ],
       providers: [
         {provide: Router, useValue: spyRouterService},
@@ -53,7 +61,6 @@ describe('LoginComponent', () => {
       .compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-
   });
 
   it('should create', () => {
@@ -212,6 +219,4 @@ describe('LoginComponent', () => {
 
     expect(spyRouterService.navigate).not.toHaveBeenCalled();
   });
-
-
 });
