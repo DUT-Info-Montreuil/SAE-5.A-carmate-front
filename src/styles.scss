@@ -3,6 +3,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import '_variables.scss';
+@import 'ol/ol.css';
 
 input, input:focus-visible {
   all:unset !important;

@@ -39,6 +39,12 @@ import { AddressService } from './service/address/address.service';
 import { MockAddressService } from './service/address/address.service.mock';
 import { MockCarpoolingService } from './service/carpooling/carpooling.service.mock';
 import { SearchBarComponent } from './layout/search-bar/search-bar.component';
+import { ResultCarpoolComponent } from './layout/result-carpool/result-carpool.component';
+import { MatCardModule } from '@angular/material/card';
+import { CarpoolingComponent } from './layout/carpooling/carpooling.component';
+import { MapComponent } from './layout/map/map.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -92,7 +98,10 @@ const customNotifierOptions: NotifierOptions = {
     PassengerProfilesComponent,
     DriverProfileComponent,
     PublishCarpoolComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ResultCarpoolComponent,
+    CarpoolingComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +121,9 @@ const customNotifierOptions: NotifierOptions = {
     MatDividerModule,
     MatButtonModule,
     MatAutocompleteModule,
+    MatCardModule,
+    MatTabsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

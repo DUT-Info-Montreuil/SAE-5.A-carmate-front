@@ -1,4 +1,4 @@
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import { InjectionToken } from "@angular/core";
 
 export type Carpooling = {
@@ -29,8 +29,9 @@ export type Search = {
 }
 
 export interface CarpoolingServiceInterface {
+    $searchedCarpoolings: BehaviorSubject<Carpooling[]>;
     publish: (carpool: CreateCarpoolPayload) => Observable<number>;
-    search: (search: Search) => Observable<Carpooling[]>;
+    search: (search: Search) => void;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');
