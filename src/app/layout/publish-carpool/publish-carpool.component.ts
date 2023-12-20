@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faClock, faEuro, faLocationDot, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface, NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other';
 import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface } from '../../interface/carpooling';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-publish-carpool',
@@ -29,11 +30,13 @@ export class PublishCarpoolComponent {
     starting_point: new FormControl("", [Validators.required, this.starting_pointValidator()]),
     destination: new FormControl("", [Validators.required,  this.destinationtValidator()]),
     max_passengers: new FormControl("", [Validators.required, this.max_passengersValidator()]),
-    price: new FormControl("", [Validators.required, this.priceValidator(), Validators.min(1)]),// Setup minimal price calclated by the lenght trajet
-    departure_date: new FormControl("", [Validators.required]), //Setup minimaldate after today
-    departure_time: new FormControl("", [Validators.required]),  //Setup valid format time XX:XX
+    price: new FormControl("", [Validators.required, this.priceValidator(), Validators.min(1)]),
+    departure_date: new FormControl("", [Validators.required]),
+    departure_time: new FormControl("", [Validators.required]), 
   });
-
+  @ViewChild(MatAutocompleteTrigger) destinationTrigger!: MatAutocompleteTrigger;
+  @ViewChild(MatAutocompleteTrigger) departureTrigger!: MatAutocompleteTrigger;
+  
   constructor(
     @Inject(ADDRESS_SERVICE_TOKEN) private addressService: AddressServiceInterface,
     @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
@@ -47,13 +50,7 @@ export class PublishCarpoolComponent {
 
   private setupAutocomplete(): void {
 
-    const addressList: string[] = [
-      'starting_point',
-      'destination'
-    ];
-
-    addressList.forEach((element => {
-
+  ['starting_point', 'destination'].forEach((element => {
       this.publishForm.get(element)!.valueChanges.pipe(
         distinctUntilChanged(),
         debounceTime(300),

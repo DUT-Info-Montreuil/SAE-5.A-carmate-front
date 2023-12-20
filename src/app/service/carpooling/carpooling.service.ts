@@ -20,7 +20,7 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
     super(http);
   }
 
-  publish(carpooling: CreateCarpoolPayload): Observable<number> {
+  publish(carpooling: CreateCarpoolPayload): Observable<any> {
     return this.http.post<number>(`${environment.path}/carpooling`, carpooling, {
       headers: {
         "authorization": `Bearer ${localStorage.getItem("auth_token")}`
