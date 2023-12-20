@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './layout/user/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import {NotifierModule, NotifierOptions} from "angular-notifier";
 import {ADDRESS_SERVICE_TOKEN, NOTIFIER_SERVICE_TOKEN} from "./interface/other";
 import {AngularNotifierService} from "./service/other/notifier/AngularNotifierService";
@@ -38,6 +38,7 @@ import { CarpoolingService } from './service/carpooling/carpooling.service';
 import { AddressService } from './service/address/address.service';
 import { MockAddressService } from './service/address/address.service.mock';
 import { MockCarpoolingService } from './service/carpooling/carpooling.service.mock';
+import { SearchBarComponent } from './layout/search-bar/search-bar.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -90,7 +91,8 @@ const customNotifierOptions: NotifierOptions = {
     RegisterComponent,
     PassengerProfilesComponent,
     DriverProfileComponent,
-    PublishCarpoolComponent
+    PublishCarpoolComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

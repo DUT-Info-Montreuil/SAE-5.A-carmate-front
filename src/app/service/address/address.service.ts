@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AddressService {
 
   private nominatimApiPreUrl = 'https://nominatim.openstreetmap.org/search.php?q=';
-  private nominatimApiPostUrl = '&countrycodes=fr&limit=5&format=jsonv2&addressdetails=1&layer=address'
+  private nominatimApiPostUrl = '&countrycodes=fr&limit=5&format=jsonv2&addressdetails=1&layer=address&viewbox=49.0487,2.7521,48.7598,2.1121'
 
   constructor(private http: HttpClient) {}
 

@@ -3,14 +3,13 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {RootComponent} from './root.component';
 import {NotifierModule} from "angular-notifier";
 import {NavBarComponent} from "../nav-bar/nav-bar.component";
-import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../interface/other";
-import {AUTHENTICATION_SERVICE_TOKEN} from "../../interface/user";
+import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 describe('RootComponent', () => {
   let component: RootComponent;
   let fixture: ComponentFixture<RootComponent>;
-  let spyAuthenticationService: jasmine.SpyObj<NotifierServiceInterface>;
+  let spyAuthenticationService: jasmine.SpyObj<AuthenticationServiceInterface>;
 
   beforeEach(async () => {
     spyAuthenticationService = jasmine.createSpyObj('AuthenticationServiceInterface', ['login', 'logOut', 'isLogged', 'isAdmin', 'isDriver', 'register']);

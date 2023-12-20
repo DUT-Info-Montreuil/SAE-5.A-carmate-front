@@ -23,8 +23,8 @@ export class PublishCarpoolComponent {
   obsDisplayedAddressesDest: Observable<string[]> = of([]);
   private displayedAddresses: string[] = [];
   private objDisplayedAddresses: any[] = [];
-  private starting_coords: string = '';
-  private destination_coords: string = '';
+  private starting_coords: number[] = [];
+  private destination_coords: number[] = [];
   protected publishForm = new FormGroup({
     starting_point: new FormControl("", [Validators.required, this.starting_pointValidator()]),
     destination: new FormControl("", [Validators.required,  this.destinationtValidator()]),
@@ -95,13 +95,13 @@ export class PublishCarpoolComponent {
   starting_pointOptionSelectedHandler(event: any) {
     let lat = this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lat;
     let lon =  this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lon;
-    this.starting_coords = `${lat};${lon}`;    
+    this.starting_coords = [lat, lon];    
   }
 
   destinationOptionSelectedHandler(event: any) {
     let lat = this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lat;
     let lon =  this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lon;
-    this.destination_coords = `${lat};${lon}`;    
+    this.destination_coords = [lat, lon];    
   }
 
   dateFilter: (date: Date | null) => boolean =
@@ -161,10 +161,10 @@ export class PublishCarpoolComponent {
 
     
     let payload: Carpooling = {
-      starting_point: `${this.starting_coords}`,
-      destination: `${this.destination_coords}`,
-      max_passengers: this.publishForm.get('max_passengers')!.value!,
-      price: this.publishForm.get('price')!.value!,
+      starting_point: this.starting_coords,
+      destination: this.destination_coords,
+      max_passengers: Number(this.publishForm.get('max_passengers')!.value!),
+      price: Number(this.publishForm.get('price')!.value!),
       departure_date_time: `${formatedDate} ${this.publishForm.get('departure_time')!.value!}`
     };
   

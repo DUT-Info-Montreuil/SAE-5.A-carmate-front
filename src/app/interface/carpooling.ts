@@ -1,18 +1,28 @@
 import {Observable} from "rxjs";
 import { InjectionToken } from "@angular/core";
 
-export interface Carpooling {
-    starting_point: string;
-    destination: string;
-    max_passengers: string;
-    price: string,
+export type Carpooling = {
+    starting_point: number[];
+    destination: number[];
+    max_passengers: number;
+    price: number;
     departure_date_time: string;
     is_canceled?: boolean;
-    driver_id?: string
+    driver_id?: number;
+    seats_taken?: number;
+}
+
+export type Search = {
+    start_lat: number;
+    start_lon: number;
+    end_lat: number;
+    end_lon: number;
+    departure_date_time: string;
 }
 
 export interface CarpoolingServiceInterface {
-    publish: (carpool: Carpooling) => Observable<any>; 
+    publish: (carpool: Carpooling) => Observable<undefined>; 
+    search: (search: Search) => Observable<Carpooling[]>;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');
