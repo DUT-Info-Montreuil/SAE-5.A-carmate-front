@@ -12,6 +12,14 @@ export type Carpooling = {
     seats_taken?: number;
 }
 
+export type CreateCarpoolPayload = {
+    starting_point: number[];
+    destination: number[];
+    max_passengers: number;
+    price: number;
+    departure_date_time: number;
+}
+
 export type Search = {
     start_lat: number;
     start_lon: number;
@@ -21,7 +29,7 @@ export type Search = {
 }
 
 export interface CarpoolingServiceInterface {
-    publish: (carpool: Carpooling) => Observable<undefined>; 
+    publish: (carpool: CreateCarpoolPayload) => Observable<number>;
     search: (search: Search) => Observable<Carpooling[]>;
 }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Carpooling, CarpoolingServiceInterface, Search } from 'src/app/interface/carpooling';
+import {Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, Search} from 'src/app/interface/carpooling';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -111,8 +111,14 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
 
   constructor() { }
 
-  publish(carpool: Carpooling): Observable<any> {
-    this.carpoolDb.push(carpool);
+  publish(carpool: CreateCarpoolPayload): Observable<any> {
+    this.carpoolDb.push({
+      starting_point: carpool.starting_point,
+      destination: carpool.destination,
+      max_passengers: carpool.max_passengers,
+      price: carpool.price,
+      departure_date_time: new Date(carpool.departure_date_time).toLocaleDateString(),
+    });
     return of('');
   }
 
