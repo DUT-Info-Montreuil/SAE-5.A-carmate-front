@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import { Carpooling, CarpoolingServiceInterface, Search } from 'src/app/interface/carpooling';
+import {Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, Search} from 'src/app/interface/carpooling';
 import { environment } from "../../environement/environement";
 import { AbstractService } from "../abstractService";
 
@@ -17,8 +17,12 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
     super(http);
   }
 
-  publish(carpooling: Carpooling): Observable<any> {
-    return this.http.post<Carpooling>(`${environment.path}/carpooling/create`, carpooling);
+  publish(carpooling: CreateCarpoolPayload): Observable<number> {
+    return this.http.post<number>(`${environment.path}/carpooling`, carpooling, {
+      headers: {
+        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+      },
+    });
   }
 
   search(search: Search): Observable<Carpooling[]> {

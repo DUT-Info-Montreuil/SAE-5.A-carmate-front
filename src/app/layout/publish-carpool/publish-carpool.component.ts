@@ -33,7 +33,7 @@ export class PublishCarpoolComponent {
     departure_date: new FormControl("", [Validators.required]), //Setup minimaldate after today
     departure_time: new FormControl("", [Validators.required]),  //Setup valid format time XX:XX
   });
-  
+
   constructor(
     @Inject(ADDRESS_SERVICE_TOKEN) private addressService: AddressServiceInterface,
     @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
@@ -49,7 +49,7 @@ export class PublishCarpoolComponent {
 
     const addressList: string[] = [
       'starting_point',
-      'destination' 
+      'destination'
     ];
 
     addressList.forEach((element => {
@@ -60,21 +60,21 @@ export class PublishCarpoolComponent {
         switchMap((value) => this.addressService.search(value!)),
       ).subscribe((addresses) => {
         if (Array.isArray(addresses) && addresses.length > 0) {
-          
+
           let displayResults: string[] = [];
-  
+
           for (let index = 0; index < addresses.length; index++) {
             let house_number = addresses[index].address.house_number || '';
             let building = addresses[index].address.building || '';
             let town = addresses[index].address.town || '';
             let city = addresses[index].address.city || '';
             let village = addresses[index].address.village || '';
-          
+
             displayResults.push(
             `${building || house_number} ${addresses[index].address.road}, ${city || village || town}, ${addresses[index].address.postcode}`
             );
           }
-                  
+
           this.displayedAddresses = displayResults;
           this.objDisplayedAddresses = addresses;
 
@@ -82,33 +82,33 @@ export class PublishCarpoolComponent {
             case 'starting_point':
               this.obsDisplayedAddressesStart = of(displayResults);
               break;
-    
+
             case 'destination':
               this.obsDisplayedAddressesDest = of(displayResults);
               break;
           }
-        } 
+        }
       });
-    }));    
+    }));
   }
 
   starting_pointOptionSelectedHandler(event: any) {
     let lat = this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lat;
     let lon =  this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lon;
-    this.starting_coords = [lat, lon];    
+    this.starting_coords = [lat, lon];
   }
 
   destinationOptionSelectedHandler(event: any) {
     let lat = this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lat;
     let lon =  this.objDisplayedAddresses[this.displayedAddresses.indexOf(event.option.value)].lon;
-    this.destination_coords = [lat, lon];    
+    this.destination_coords = [lat, lon];
   }
 
   dateFilter: (date: Date | null) => boolean =
   (date: Date | null) => {
     if (date != null){
       const day = date.getDay();
-      if(date > new Date()){         
+      if(date > new Date()){
         return day !== 0 && day !== 6;
       }
     }
@@ -116,11 +116,11 @@ export class PublishCarpoolComponent {
   }
 
   private starting_pointValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {      
+    return (control: AbstractControl): ValidationErrors | null => {
       if (this.displayedAddresses.includes(control.value)) {
-        return null;  
+        return null;
       } else {
-        return {'Invalid address input': true };  
+        return {'Invalid address input': true };
       }
     };
   }
@@ -128,9 +128,9 @@ export class PublishCarpoolComponent {
   private destinationtValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (this.displayedAddresses.includes(control.value)) {
-        return null;  
+        return null;
       } else {
-        return { 'Invalid address input': true };  
+        return { 'Invalid address input': true };
       }
     };
   }
@@ -138,9 +138,9 @@ export class PublishCarpoolComponent {
   private max_passengersValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.value >= 1 && control.value <= 4) {
-        return null;  
+        return null;
       } else {
-        return { 'Invalid max_passengers input': true };  
+        return { 'Invalid max_passengers input': true };
       }
     };
   }
@@ -148,26 +148,30 @@ export class PublishCarpoolComponent {
   private priceValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.value > 0) {
-        return null;  
+        return null;
       } else {
-        return { 'Invalid price input': true };  
+        return { 'Invalid price input': true };
       }
     };
   }
 
   submit(): void {
-    let dateStart: Date = new Date(this.publishForm.get('departure_date')!.value!)
-    let formatedDate: string =`${dateStart.getFullYear()}-${(dateStart.getMonth() + 1).toString().padStart(2, '0')}-${dateStart.getDate().toString().padStart(2, '0')}`;
+    let dateStart: Date = new Date(this.publishForm.get('departure_date')!.value!);
+    let timeString: string = this.publishForm.get('departure_time')!.value!;
+    let timeParts = timeString.split(":");
 
-    
-    let payload: Carpooling = {
+    dateStart.setHours(parseInt(timeParts[0], 10), parseInt(timeParts[1], 10));
+
+    let departureDateTimeUnix = dateStart.getTime() / 1000;
+
+    let payload = {
       starting_point: this.starting_coords,
       destination: this.destination_coords,
       max_passengers: Number(this.publishForm.get('max_passengers')!.value!),
       price: Number(this.publishForm.get('price')!.value!),
-      departure_date_time: `${formatedDate} ${this.publishForm.get('departure_time')!.value!}`
+      departure_date_time: departureDateTimeUnix
     };
-  
+
     this.carpoolingService.publish(payload).subscribe({
       next: () => {
         this.notifier.success("Le trajet a été publié.");
@@ -188,6 +192,6 @@ export class PublishCarpoolComponent {
             this.notifier.error("Erreur interne.");
             break;
         }
-    }});   
+    }});
   }
 }
