@@ -7,6 +7,7 @@ import { BehaviorSubject, of } from "rxjs";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -15,23 +16,6 @@ describe('RegisterComponent', () => {
   let spyRouterService: jasmine.SpyObj<Router>;
   let spyNotifierService: jasmine.SpyObj<NotifierServiceInterface>;
   let queryParams: BehaviorSubject<any>;
-  const returnToken: Token = { token: 'someToken' };
-  
-  const setRegisterFormData = (user: any) => {
-    component['registerForm'].controls.firstName.setValue(user.firstName);
-    component['registerForm'].controls.lastName.setValue(user.lastName);
-    component['registerForm'].controls.email.setValue(user.email);
-    component['registerForm'].controls.password.setValue(user.password);
-  };
-
-  const validUser = {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'test@example.com',
-    password: 'Test12+-',
-    accountType: 'Student',
-    document: new File(['dummy content'], 'document.txt', { type: 'text/plain' })
-  };
 
   beforeEach(async () => {
     spyAuthService = jasmine.createSpyObj('AuthenticationServiceInterface', ['register']);
@@ -39,11 +23,14 @@ describe('RegisterComponent', () => {
     queryParams = new BehaviorSubject({});
     spyRouterService = jasmine.createSpyObj('Router', ['navigate']);
     await TestBed.configureTestingModule({
-      declarations: [RegisterComponent],
+      declarations: [
+        RegisterComponent
+      ],
       imports: [
         ReactiveFormsModule,
         HttpClientTestingModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        MatFormFieldModule
       ],
       providers: [
         {provide: Router, useValue: spyRouterService},
