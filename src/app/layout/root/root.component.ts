@@ -16,4 +16,8 @@ export class RootComponent {
       this.router.navigate(["/home"]);
     } 
   }
+
+  refresh(){
+    this.ngOnInit;
+  }
 }
