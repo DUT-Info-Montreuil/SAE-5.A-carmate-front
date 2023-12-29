@@ -1,4 +1,4 @@
-import {Component, Inject, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Inject, Output, ViewChild} from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -31,6 +31,7 @@ export class SearchBarComponent {
   });
   @ViewChild(MatAutocompleteTrigger) destinationTrigger!: MatAutocompleteTrigger;
   @ViewChild(MatAutocompleteTrigger) departureTrigger!: MatAutocompleteTrigger;
+  @Output() searchParamsEmitter = new EventEmitter<Search>();
 
 
   constructor(
@@ -140,30 +141,24 @@ export class SearchBarComponent {
     const [start_lat, start_lon] = this.starting_coords
     const [end_lat, end_lon] = this.destination_coords
 
-    let payload: Search = {
+    let searchParams: Search = {
       start_lat: start_lat,
       start_lon: start_lon,
       end_lat: end_lat,
       end_lon: end_lon,
       departure_date_time: `${Math.floor(dateStart.getTime() / 1000)}`
     };
-
-    this.carpoolingService.search(payload).subscribe({
-      next: (response) => {
-        //TODO Implemente list result
-      },
-      error: (error: HttpErrorResponse) => {
-        switch (error.status) {
-          case 400:
-            this.notifier.error("Un ou plusieurs champs sont invalides.");
-            break;
-          case 503:
-            this.notifier.error("Service momentanément indisponible.");
-            break;
-          default:
-            this.notifier.error("Erreur interne.");
-            break;
-        }
-    }});
+    
+    if(searchParams.departure_date_time !== undefined &&
+      searchParams.start_lat !== undefined &&
+      searchParams.start_lon !== undefined &&
+      searchParams.end_lat !== undefined &&
+      searchParams.end_lon !== undefined)
+    {
+      this.carpoolingService.search(searchParams);
+      this.searchParamsEmitter.emit(searchParams);       
+    } else {
+      this.notifier.error("Un ou plusieurs champs sont invalides.");      
+    }
   }
 }

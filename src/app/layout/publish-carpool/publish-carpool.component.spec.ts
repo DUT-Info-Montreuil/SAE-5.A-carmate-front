@@ -23,7 +23,7 @@ describe('PublishCarpoolComponent', () => {
 
   beforeEach(() => {
     spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search', 'find', 'matchingSchoolDeparture']);
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish'])
     TestBed.configureTestingModule({
       declarations: [PublishCarpoolComponent],
