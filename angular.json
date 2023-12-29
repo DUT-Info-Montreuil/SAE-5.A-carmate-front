@@ -33,7 +33,14 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "color-name",
+              "xml-utils/find-tags-by-name.js",
+              "xml-utils/get-attribute.js",
+              "web-worker",
+              "rbush"
+           ]
           },
           "configurations": {
             "production": {
