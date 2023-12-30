@@ -10,9 +10,9 @@ import { AddressServiceInterface, School } from 'src/app/interface/other';
 
 export class AddressService implements AddressServiceInterface {
 
-  private nominatimApiSearchPreUrl = 'https://nominatim.openstreetmap.org/search.php?q=';
+  private nominatimApiSearchPreUrl = 'http://localhost:8181/search.php?q=';
   private nominatimApiSearchPostUrl = '&countrycodes=fr&limit=5&format=jsonv2&addressdetails=1&layer=address&viewbox=49.0487,2.7521,48.7598,2.1121';
-  private nominatimApiFindPreUrl = 'https://nominatim.openstreetmap.org/reverse?';
+  private nominatimApiFindPreUrl = 'http://localhost:8181/reverse?';
   private nominatimApiFindPostUrl = '&zoom=18&format=jsonv2&addressdetails=1&accept-language=fr&layer=address';
 
   $schoolList: School[] = [
