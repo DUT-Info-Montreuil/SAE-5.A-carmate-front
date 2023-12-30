@@ -11,8 +11,6 @@ export class ResultCarpoolComponent {
   @Input() _searchParams!: Search;
   starting_pointDriverToDisplay!: number[];
   starting_pointUserToDisplay!: number[];
-  carpoolingRegular!: Carpooling[];
-  carpoolingOnetime!: Carpooling[];
   noResults!: boolean;
 
   constructor(
@@ -23,7 +21,7 @@ export class ResultCarpoolComponent {
     this.carpoolingService.$searchedCarpoolings.subscribe((carpoolings) => {
       this._carpoolings = carpoolings;
       this.noResults = carpoolings.length === 0;
-    });
+    }); 
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -45,6 +45,10 @@ import { CarpoolingComponent } from './layout/carpooling/carpooling.component';
 import { MapComponent } from './layout/map/map.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CarpoolingDialogComponent } from './layout/carpooling-dialog/carpooling-dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -102,6 +106,7 @@ const customNotifierOptions: NotifierOptions = {
     ResultCarpoolComponent,
     CarpoolingComponent,
     MapComponent,
+    CarpoolingDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +129,9 @@ const customNotifierOptions: NotifierOptions = {
     MatCardModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatSelectModule,
   ],
   providers: [
     {

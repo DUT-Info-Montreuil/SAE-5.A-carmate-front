@@ -31,26 +31,16 @@ describe('HomePageComponent', () => {
     spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search', 'find', 'matchingSchoolDeparture']);
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish', 'search'])
     spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
-    spyCarpoolingService.$searchedCarpoolings = new BehaviorSubject<Carpooling[]>([
-      {
+    spyCarpoolingService.$searchedCarpoolings = new BehaviorSubject<Carpooling[]>([{
           starting_point: [48.8558516, 2.3588636],
           destination: [48.9757551, 2.559337],
           price: 50,
-          is_canceled: false,
           departure_date_time: "2023-01-01T12:00:00",
           driver_id: 1,
           max_passengers: 1,
-      },
-      {
-          starting_point: [48.8520, 2.3176],
-          destination: [48.8569,2.3817],
-          price: 40,
-          is_canceled: false,
-          departure_date_time: "2023-02-15T08:30:00",
-          driver_id: 2,
-          max_passengers: 2,
-      },
-    ]);
+          seats_taken: 0,
+          id: 1,
+    }]);
     spyAddressService.$schoolList = [
       {lat: 48.9757551, lon: 2.559337, name: 'IUT de Tremblay-en-France'}
     ];
