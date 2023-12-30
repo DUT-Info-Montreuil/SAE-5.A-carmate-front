@@ -11,6 +11,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarpoolingComponent } from '../carpooling/carpooling.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('ResultCarpoolComponent', () => {
   let component: ResultCarpoolComponent;
@@ -20,26 +21,19 @@ describe('ResultCarpoolComponent', () => {
 
   beforeEach(() => {
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish', 'search'])
-    spyCarpoolingService.$carpoolings = new BehaviorSubject<Carpooling[]>([
-      {
-          starting_point: [48.8558516, 2.3588636],
-          destination: [48.9757551, 2.559337],
-          price: 50,
-          is_canceled: false,
-          departure_date_time: "2023-01-01T12:00:00",
-          driver_id: 1,
-          max_passengers: 1,
-      },
-      {
-          starting_point: [48.8520, 2.3176],
-          destination: [48.8569,2.3817],
-          price: 40,
-          is_canceled: false,
-          departure_date_time: "2023-02-15T08:30:00",
-          driver_id: 2,
-          max_passengers: 2,
-      },
-    ]);
+    spyCarpoolingService.$carpoolings = new BehaviorSubject<Carpooling[]>([{
+        starting_point: [48.8558516, 2.3588636],
+        destination: [48.9757551, 2.559337],
+        price: 50,
+        is_canceled: false,
+        departure_date_time: "2023-01-01T12:00:00",
+        driver_id: 1,
+        max_passengers: 1,
+        seats_taken: 0,
+        id: 1,
+        first_name: 'John',
+        last_name: 'Doe'
+    }]);
     spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
       'getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture', 'getFormattedAddress'
     ]);
@@ -56,7 +50,8 @@ describe('ResultCarpoolComponent', () => {
         MatCardModule,
         MatTabsModule,
         MatDividerModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDialogModule
       ],
       providers: [
         {provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService},

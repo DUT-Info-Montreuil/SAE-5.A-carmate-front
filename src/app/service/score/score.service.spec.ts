@@ -64,7 +64,6 @@ describe('ScoreboardService', () => {
         done();
       });
     });
-
     it('should throw an error when API calls return inconsistent data types', (done) => {
       spyOn(spyScoreService, 'getEconomicDriving').and.returnValue(of({
         driver_id: 1,
@@ -97,7 +96,7 @@ describe('ScoreboardService', () => {
           sociability_rating: 3
         }
       ]));
-
+      
       spyScoreService.getScoreUserData().subscribe({
         next: (scoreUserData: ScoreUserData[] |ScoreUserData) => {
           fail('should not return data');

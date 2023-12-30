@@ -67,6 +67,7 @@ describe('SubscriptionComponent', () => {
       label: "Tous les lundi mercredi et vendredi de janvier",
       carpools: [
         {
+          id: 1,
           starting_point: [48.8558516, 2.3588636],
           destination: [48.9757551, 2.559337],
           price: 40,

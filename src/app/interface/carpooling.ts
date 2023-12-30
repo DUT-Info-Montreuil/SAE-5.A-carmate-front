@@ -2,7 +2,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import { InjectionToken } from "@angular/core";
 
 export type Carpooling = {
-    id?: number;
+    id: number;
     starting_point: number[];
     destination: number[];
     max_passengers: number;
@@ -11,6 +11,9 @@ export type Carpooling = {
     is_canceled?: boolean;
     driver_id?: number;
     seats_taken?: number;
+    first_name?: string;
+    last_name?: string;
+    is_scheduled?: boolean;
 }
 
 export type CreateCarpoolPayload = {
@@ -75,6 +78,7 @@ export interface CarpoolingServiceInterface {
     getCode: (carpooling_id: number) => Observable<number>;
     getPublishedCarpoolings: (token: string) => Observable<publishedCarpooling[]>;
     postCode: (passengerCode: number, carpoolingId: number) => Observable<any>;
+    book: (id: number, is_scheduled?: boolean, date?: number) => Observable<any>;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');

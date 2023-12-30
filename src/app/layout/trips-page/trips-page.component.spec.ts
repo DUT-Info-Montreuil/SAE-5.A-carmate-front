@@ -35,6 +35,7 @@ describe('TripsPageComponent', () => {
         label: "",
         carpools: [
           {
+            id: 0,
             starting_point: [0, 0],
             destination: [0, 0],
             max_passengers: 0,
@@ -131,6 +132,7 @@ describe('TripsPageComponent', () => {
         label: "",
         carpools: [
           {
+            id: 0,
             starting_point: [0, 0],
             destination: [0, 0],
             max_passengers: 0,

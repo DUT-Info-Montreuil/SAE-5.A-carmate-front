@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ this._driverScore.first_name }} {{ this._driverScore.last_name }}</mat-card-title> 
+  </mat-card-header>
+
+  <mat-card-content class="mt-5">
+    <br>
+    <img [src]="'data:image/jpeg;base64,' + this._driverScore.profile_picture"
+    alt="Photo de profil du conducteur" class="block mb-5 w-10 h-10">
+    <br>
+    Nombre d'avis : {{ this._driverScore.nb_review }}
+    <br>
+    Note moyenne : {{ ((
+      this._driverScore.economic_driving_rating! + this._driverScore.sociability_rating! + this._driverScore.safe_driving_rating!
+      ) / 3).toFixed(2)}}
+    <br>
+    Nombre de trajets éffectués : {{ this._driverScore.nb_carpooling_done }}
+  </mat-card-content>
+
+  <mat-card-content class="text-sm italic text-gray-500 mt-5">
+    En appuyant sur le bouton ci-dessous, vous vous engagez à être présent au lieu convenu à l'heure convenue pour votre covoiturage. 
+    Votre ponctualité est essentielle pour garantir une expérience fluide et agréable pour tous les participants.
+    Assurez-vous d'être prêt à l'heure et de respecter les règles établies. <br>
+    Merci pour votre collaboration et bon voyage !
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-button (click)="onClose()">Annuler </button>
+    <button mat-button (click)="submit()">Confirmer</button>
+  </mat-card-actions>
+</mat-card>

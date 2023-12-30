@@ -70,6 +70,7 @@ import { PublishedCarpoolingDialogComponent } from './layout/trips-page/publishe
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {BecomeDriverComponent} from "./layout/become-driver/become-driver.component";
+import { CarpoolingDialogComponent } from './layout/carpooling-dialog/carpooling-dialog.component';
 
 registerLocaleData(localeFr);
 const customNotifierOptions: NotifierOptions = {
@@ -136,6 +137,7 @@ const customNotifierOptions: NotifierOptions = {
     SubscriptionDialogComponent,
     PublishedCarpoolingsComponent,
     PublishedCarpoolingDialogComponent,
+    CarpoolingDialogComponent,
   ],
   imports: [
     BrowserModule,

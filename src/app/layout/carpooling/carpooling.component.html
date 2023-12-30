@@ -1,14 +1,20 @@
 <mat-card class="mb-5" *ngIf="!isLoading">
 
     <mat-card-header>
-      <mat-card-title>Trajet Régulier/Ponctuel</mat-card-title>
+      <mat-card-title>{{ _carpooling.first_name}} {{ _carpooling.last_name}}</mat-card-title>
       <mat-card-subtitle>{{ starting_point }} -> {{ destination }}</mat-card-subtitle>
       <mat-card-subtitle>{{ departure_date }} - {{ departure_time }}</mat-card-subtitle>
     </mat-card-header>
 
+    <mat-card-content>
+      Passagers maximum : {{ this._carpooling.max_passengers }}
+      <br>
+      Sièges réservés : {{ this._carpooling.seats_taken }}
+    </mat-card-content>
+
     <mat-card-actions align="end">
       <button mat-button (click)="updateMap()" id="visualize_id">Visualiser</button>
-      <button mat-button>Réserver</button>
+      <button mat-button (click)="openDialog()" id="book_id">Réserver</button>
     </mat-card-actions>
 
 </mat-card>
