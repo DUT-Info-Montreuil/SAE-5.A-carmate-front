@@ -1,7 +1,7 @@
 import { Component, HostListener, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
-import { faCar, faCog, faMessage, faPencil, faPlus, faScrewdriverWrench, faSignOut, faUser as faUserSolid } from '@fortawesome/free-solid-svg-icons';
+import { faCar, faCog, faMessage, faPencil, faPlus, faScrewdriverWrench, faSignOut, faUser as faUserSolid, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from "../../interface/user";
 
 
@@ -24,6 +24,7 @@ export class NavBarComponent {
   protected readonly faCar = faCar;
   protected readonly faMessage = faMessage;
   protected readonly faScrewdriverWrench = faScrewdriverWrench;
+  protected readonly faCaretRight = faCaretRight;
   
   constructor(
     private router: Router,
