@@ -20,6 +20,18 @@ export type CreateCarpoolPayload = {
     departure_date_time: number;
 }
 
+export type WeekDay = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+
+export type CreateSubscriptionPayload = {
+    starting_point: number[];
+    destination: number[];
+    start_date: number;
+    end_date: number;
+    start_hour: string;
+    days: WeekDay[];
+    label: string;
+}
+
 export type Search = {
     start_lat: number;
     start_lon: number;
@@ -32,6 +44,7 @@ export interface CarpoolingServiceInterface {
     $searchedCarpoolings: BehaviorSubject<Carpooling[]>;
     publish: (carpool: CreateCarpoolPayload) => Observable<any>;
     search: (search: Search) => void;
+    createSubscription: (subscription: CreateSubscriptionPayload) => Observable<any>;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');
