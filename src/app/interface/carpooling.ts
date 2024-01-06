@@ -30,7 +30,7 @@ export type Search = {
 
 export interface CarpoolingServiceInterface {
     $searchedCarpoolings: BehaviorSubject<Carpooling[]>;
-    publish: (carpool: CreateCarpoolPayload) => Observable<number>;
+    publish: (carpool: CreateCarpoolPayload) => Observable<any>;
     search: (search: Search) => void;
 }
 

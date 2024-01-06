@@ -4,7 +4,7 @@
         <h1 class="text-3xl" >Publier un trajet</h1>
         <mat-form-field subscriptSizing="dynamic" class="w-full	">
             <mat-label>Départ</mat-label>
-            <input  matInput required formControlName="starting_point" [matAutocomplete]="starting_pointAutocomplete" class="w-full">
+            <input  matInput required formControlName="starting_point" [matAutocomplete]="starting_pointAutocomplete" #departureTrigger="matAutocompleteTrigger" id="starting_point_id">
             <fa-icon [icon]="faLocationdot" matSuffix class="pr-3"></fa-icon>
             <mat-error>Veuillez renseigner une adresse valide.</mat-error>
 
@@ -17,7 +17,7 @@
 
         <mat-form-field subscriptSizing="dynamic" class="w-full">
             <mat-label>Destination</mat-label>
-            <input matInput required formControlName="destination" [matAutocomplete]="destinationAutocomplete">
+            <input matInput required formControlName="destination" [matAutocomplete]="destinationAutocomplete" #destinationTrigger="matAutocompleteTrigger" id="destination_id">
             <fa-icon [icon]="faLocationdot" matSuffix class="pr-3"></fa-icon>
             <mat-error>Veuillez renseigner une adresse valide.</mat-error>
 
@@ -45,7 +45,7 @@
 
         <mat-form-field subscriptSizing="dynamic" class="w-full">
             <mat-label>Date du départ</mat-label>
-            <input matInput required formControlName="departure_date" [matDatepicker]="picker" id="dateDeparture"  [matDatepickerFilter]="dateFilter">
+            <input matInput required formControlName="departure_date" [matDatepicker]="picker" id="date_departure_id"  [matDatepickerFilter]="dateFilter">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-error>Veuillez renseigner une date de départ.</mat-error>
             <mat-datepicker #picker></mat-datepicker>
@@ -57,8 +57,8 @@
             <fa-icon [icon]="faClock" matSuffix class="pr-3"></fa-icon>
             <mat-error>Veuillez renseigner une heure de départ.</mat-error>
         </mat-form-field>
-        
-        <button mat-raised-button class="ml-2 h-fit text-lg" type="submit" [disabled]="!publishForm.valid">Publier</button>
+
+        <button mat-raised-button class="ml-2 h-fit text-lg"  type="submit" [disabled]="!publishForm.valid" id="publish_id">Publier</button>
 
     </form>
 </div>
