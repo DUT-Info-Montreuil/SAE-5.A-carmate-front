@@ -103,4 +103,19 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
         this.notifier.error("Un ou plusieurs champs sont invalides.");
       }
   }
+
+  createSubscription(subscription: any): Observable<any> {
+    if (subscription.starting_point !== undefined &&
+      subscription.destination !== undefined &&
+      subscription.start_date !== undefined &&
+      subscription.end_date !== undefined &&
+      subscription.start_hour !== undefined &&
+      subscription.days !== undefined &&
+      subscription.label !== undefined)
+      {
+        return of('');
+      } else {
+        return throwError(() => new HttpErrorResponse({error: 'Field missing', status: 400}));
+      }
+  }
 }
