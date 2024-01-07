@@ -12,7 +12,7 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
 
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private _isAdmin$ = new BehaviorSubject<boolean>(false);
-  private _isDriver$ = new BehaviorSubject<boolean>(false);
+  private _isDriver$ = new BehaviorSubject<boolean>(true);
   private userDb: [{ 
     email: string, password: string, token?: string, isBanned: boolean, firstName?:string, lastName?:string, accountType?:string, document?:File}] = [
     { email: "test@test.fr", password: "Test12+-", isBanned: false }
