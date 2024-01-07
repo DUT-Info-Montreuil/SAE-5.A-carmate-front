@@ -48,6 +48,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CreateSubscriptionComponent } from './layout/create-subscription/create-subscription.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ScoreboardPageComponent } from './layout/scoreboard-page/scoreboard-page.component';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { frPaginatorIntl } from './utils/french-paginator-intl';
+import { SCORE_SERVICE_TOKEN } from './interface/score';
+import { ScoreService } from './service/score/score.service';
+import { MockScoreService } from './service/score/score.service.mock';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -106,6 +114,7 @@ const customNotifierOptions: NotifierOptions = {
     CarpoolingComponent,
     MapComponent,
     CreateSubscriptionComponent,
+    ScoreboardPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -129,7 +138,10 @@ const customNotifierOptions: NotifierOptions = {
     MatTabsModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
   ],
   providers: [
     {
@@ -158,6 +170,14 @@ const customNotifierOptions: NotifierOptions = {
     {
       provide: ADDRESS_SERVICE_TOKEN,
       useClass: environment.production ? AddressService : MockAddressService,
+    },
+    {
+      provide: SCORE_SERVICE_TOKEN,
+      useClass: environment.production ? ScoreService : MockScoreService,
+    },
+    {
+      provide: MatPaginatorIntl,
+      useClass: frPaginatorIntl 
     }
   ],
   bootstrap: [RootComponent]

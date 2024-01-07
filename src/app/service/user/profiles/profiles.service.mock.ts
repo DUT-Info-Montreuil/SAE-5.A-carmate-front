@@ -15,6 +15,8 @@ export class MockProfilesService implements ProfilesServiceInterface {
     getPassengerProfile(): Observable<PassengerProfile> {
         return of({
             user_id: 1,
+            first_name: "Jane",
+            last_name: "Doe",
             description: "passenger description",
             createdAt: formatDate(new Date(), 'dd/MM/yyyy', 'en'),
             nb_carpools_done: 5,
@@ -26,6 +28,8 @@ export class MockProfilesService implements ProfilesServiceInterface {
         return of({
             user_id: 2,
             driver_id: 1,
+            first_name: "John",
+            last_name: "Doe",
             description: "driver description",
             createdAt: formatDate(new Date(), 'dd/MM/yyyy', 'en'),
             nb_carpools_done: 5,
