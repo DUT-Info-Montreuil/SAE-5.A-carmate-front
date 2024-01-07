@@ -45,6 +45,13 @@ import { CarpoolingComponent } from './layout/carpooling/carpooling.component';
 import { MapComponent } from './layout/map/map.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ValidationComponent } from './layout/admin/validation/list/validation_list.component';
+import {VALIDATION_SERVICE_TOKEN} from './interface/admin';
+import { ValidationDocComponent } from './layout/admin/validation/document/validation_doc.component';
+import { ValidationServiceMock } from './service/admin/validation/validation.service.mock';
+import { ValidationService } from './service/admin/validation/validation.service';
+import { SideBarComponent } from './layout/admin/side-bar/side-bar.component';
+
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -98,10 +105,13 @@ const customNotifierOptions: NotifierOptions = {
     PassengerProfilesComponent,
     DriverProfileComponent,
     PublishCarpoolComponent,
+    ValidationComponent,
+    ValidationDocComponent,
     SearchBarComponent,
     ResultCarpoolComponent,
     CarpoolingComponent,
     MapComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,
@@ -133,14 +143,17 @@ const customNotifierOptions: NotifierOptions = {
     {
       provide: AUTHENTICATION_SERVICE_TOKEN,
       useClass: environment.production ? AuthenticationService : MockAuthenticationService,
-    }, 
+    },
     {
       provide: PROFILE_SERVICE_TOKEN,
       useClass: environment.production ? ProfilesService : MockProfilesService,
-    }, 
+    },
     {
       provide: USER_SERVICE_TOKEN,
       useClass: environment.production ? UserService : MockUserService,
+    },{
+    provide: VALIDATION_SERVICE_TOKEN,
+    useClass:  environment.production ? ValidationService : ValidationServiceMock,
     },
     {
       provide: MAT_DATE_LOCALE, useValue: 'fr-FR'

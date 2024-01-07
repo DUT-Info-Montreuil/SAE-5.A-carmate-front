@@ -11,9 +11,9 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
   constructor() {}
 
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  private _isAdmin$ = new BehaviorSubject<boolean>(false);
+  private _isAdmin$ = new BehaviorSubject<boolean>(true);
   private _isDriver$ = new BehaviorSubject<boolean>(false);
-  private userDb: [{ 
+  private userDb: [{
     email: string, password: string, token?: string, isBanned: boolean, firstName?:string, lastName?:string, accountType?:string, document?:File}] = [
     { email: "test@test.fr", password: "Test12+-", isBanned: false }
   ]
@@ -44,8 +44,8 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
         delete currentUser.token;
         this._isLoggedIn$.next(false);
         localStorage.removeItem('auth-token');
-      } 
-    } 
+      }
+    }
     return of(null);
   }
 
@@ -56,25 +56,25 @@ export class MockAuthenticationService implements AuthenticationServiceInterface
   ): Observable<any> {
     return of(null);
   }
-  
+
   private isValidEmail(email: string): boolean {
     // Regular expression to check if the email is in the correct format
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailRegex.test(email);
   }
-  
+
   private isValidPassword(password: string): boolean {
-    // Regular expression to check if the password has a minimum length of 8 characters 
+    // Regular expression to check if the password has a minimum length of 8 characters
     // and contains at least one uppercase letter and at least one special character
     const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
     return regex.test(password);
   }
-  
+
   private isValidDocument(document: File): boolean {
     // Check if a document is provided and not null or undefined
     return document !== null && document !== undefined;
   }
-  
+
   // Check if the user is logged in
   isLogged(): boolean {
     return this._isLoggedIn$.getValue();

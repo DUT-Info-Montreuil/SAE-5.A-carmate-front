@@ -14,6 +14,6 @@ export class RootComponent {
   ngOnInit() {
     if (this.router.url === '/') {
       this.router.navigate(["/home"]);
-    } 
+    }
   }
 }
