@@ -2,14 +2,14 @@ import {BehaviorSubject, Observable} from "rxjs";
 import { InjectionToken } from "@angular/core";
 
 export type Carpooling = {
+    id: number;
     starting_point: number[];
     destination: number[];
     max_passengers: number;
     price: number;
     departure_date_time: string;
-    is_canceled?: boolean;
-    driver_id?: number;
-    seats_taken?: number;
+    driver_id: number;
+    seats_taken: number;
 }
 
 export type CreateCarpoolPayload = {
@@ -32,6 +32,7 @@ export interface CarpoolingServiceInterface {
     $searchedCarpoolings: BehaviorSubject<Carpooling[]>;
     publish: (carpool: CreateCarpoolPayload) => Observable<any>;
     search: (search: Search) => void;
+    book: (id: number) => Observable<void>;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');
