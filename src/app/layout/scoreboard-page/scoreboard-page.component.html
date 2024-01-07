@@ -1,0 +1,65 @@
+<div class="flex">
+  <mat-card class="w-1/6 mr-5 ml-5 p-5">
+    <img src="https://yourteachingmentor.com/wp-content/uploads/2020/12/istockphoto-1223671392-612x612-1.jpg" 
+    alt="Description de l'image"  class="mx-auto block mb-5 w-32 h-32">
+    <mat-divider></mat-divider>
+    <span class="mt-5"></span>
+    
+    <h1 class="text-2xl text-center">Jean-Luc Mélenchon</h1>
+    <p class="text-gray-500 text-center">Membre depuis 2021</p>
+    <span class="mt-5"></span>
+
+    <p class="text-gray-500">Nombre d'avis conducteur : 666</p>
+    <p class="text-gray-500">Note sociale : 4/5</p>
+    <p class="text-gray-500">Note de conduite écologique : 4.2/5</p>
+    <p class="text-gray-500">Note de conduite sécurisée : 4,93/5</p>
+  </mat-card>
+
+  <mat-divider vertical="true"></mat-divider>
+  
+  <div class="flex-grow mr-5 ml-5">
+    <mat-form-field class="w-full">
+      <mat-label>Filtre</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input id="filter_id">
+    </mat-form-field>
+          
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+        <td mat-cell *matCellDef="let row"> {{row.first_name}} {{row.last_name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nmbr_of_rates">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre d'avis </th>
+        <td mat-cell *matCellDef="let row"> {{row.nmbr_of_rates}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="economic_driving_rating">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Conduite économique </th>
+        <td mat-cell *matCellDef="let row"> {{row.economic_driving_rating}} /5 </td>
+      </ng-container>
+
+      <ng-container matColumnDef="safe_driving_rating">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Conduite sûre </th>
+        <td mat-cell *matCellDef="let row"> {{row.safe_driving_rating}} /5 </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sociability_rating">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sociabilité </th>
+        <td mat-cell *matCellDef="let row"> {{row.sociability_rating}} /5 </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="5">Aucune donnée pour le filtre : "{{input.value}}"</td>
+      </tr>
+      </table>
+            
+      <mat-paginator [hidePageSize]="true" [pageSizeOptions]="[12]"></mat-paginator>
+    </div>    
+  </div>
+</div>
