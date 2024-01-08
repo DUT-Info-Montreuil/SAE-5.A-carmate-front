@@ -35,7 +35,7 @@ export class PassengerProfilesComponent {
         this.emailAddress = user.emailAddress;
         this.profilePictureBase64 = user.profilePicture;
 
-        this.passengerProfilesService.getPassengerProfile().subscribe({
+        this.passengerProfilesService.getPassengerProfile(localStorage.getItem('auth-token') ?? '').subscribe({
           next: (passenger_profile: PassengerProfile) => {
             this.description = passenger_profile.description;
             this.createdAt = passenger_profile.createdAt;
