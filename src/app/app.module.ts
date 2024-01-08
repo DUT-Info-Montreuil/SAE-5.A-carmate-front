@@ -40,11 +40,19 @@ import { MockAddressService } from './service/address/address.service.mock';
 import { MockCarpoolingService } from './service/carpooling/carpooling.service.mock';
 import { SearchBarComponent } from './layout/search-bar/search-bar.component';
 import { ResultCarpoolComponent } from './layout/result-carpool/result-carpool.component';
-import { MatCardModule } from '@angular/material/card';
+import { MatCard, MatCardModule } from '@angular/material/card';
 import { CarpoolingComponent } from './layout/carpooling/carpooling.component';
 import { MapComponent } from './layout/map/map.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ScoreboardPageComponent } from './layout/scoreboard-page/scoreboard-page.component';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { SCOREBOARD_SERVICE_TOKEN } from './interface/scoreboard';
+import { ScoreboardService } from './service/scoreboard/scoreboard.service';
+import { MockScoreboardService } from './service/scoreboard/scoreboard.service.mock';
+import { frPaginatorIntl } from './utils/french-paginator-intl';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -102,6 +110,7 @@ const customNotifierOptions: NotifierOptions = {
     ResultCarpoolComponent,
     CarpoolingComponent,
     MapComponent,
+    ScoreboardPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +133,10 @@ const customNotifierOptions: NotifierOptions = {
     MatCardModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
   ],
   providers: [
     {
@@ -152,6 +165,14 @@ const customNotifierOptions: NotifierOptions = {
     {
       provide: ADDRESS_SERVICE_TOKEN,
       useClass: environment.production ? AddressService : MockAddressService,
+    },
+    {
+      provide: SCOREBOARD_SERVICE_TOKEN,
+      useClass: environment.production ? ScoreboardService : MockScoreboardService,
+    },
+    {
+      provide: MatPaginatorIntl,
+      useClass: frPaginatorIntl 
     }
   ],
   bootstrap: [RootComponent]

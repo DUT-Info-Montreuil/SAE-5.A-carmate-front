@@ -6,6 +6,7 @@ import { HomePageComponent } from './layout/home-page/home-page.component';
 import { PublishCarpoolComponent } from './layout/publish-carpool/publish-carpool.component';
 import { PassengerProfilesComponent } from './layout/user/passenger-profile/passenger-profiles.component';
 import { DriverProfileComponent } from './layout/user/driver-profile/driver-profile.component';
+import { ScoreboardPageComponent } from './layout/scoreboard-page/scoreboard-page.component';
 
 const routes: Routes = [
     {
@@ -32,6 +33,10 @@ const routes: Routes = [
     {
       path: 'driver-profile',
       component: DriverProfileComponent
+    },
+    {
+      path: 'scoreboard',
+      component: ScoreboardPageComponent
     }
 ];
 
