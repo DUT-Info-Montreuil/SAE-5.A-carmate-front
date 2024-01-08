@@ -15,17 +15,21 @@ export class ProfilesService extends AbstractService implements ProfilesServiceI
         super(http);
       }
     
-    getPassengerProfile(): Observable<any> {
-        let authorization_header = {
-            "Authorization": `bearer ${localStorage.getItem("auth_token")}`
-        }
-        return this.http.get<PassengerProfile>(`${environment.path}/profile/passenger`, {headers: authorization_header});   
+    getPassengerProfile(param: number | string): Observable<any> {
+        return this.http.get<PassengerProfile>(`${environment.path}/profile/passenger`, {
+            params: { param },
+            headers: {
+                "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+            },
+        });
     }
 
-    getDriverProfile(): Observable<any> {
-        let authorization_header = {
-            "Authorization": `bearer ${localStorage.getItem("auth_token")}`
-        }
-        return this.http.get<DriverProfile>(`${environment.path}/profile/driver`, {headers: authorization_header});
+    getDriverProfile(param: number | string): Observable<any> {
+        return this.http.get<DriverProfile>(`${environment.path}/profile/driver`, {
+            params: { param },
+            headers: {
+                "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+              },
+        });
     }
 }
