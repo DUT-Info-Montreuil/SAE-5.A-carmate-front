@@ -56,6 +56,11 @@ import { frPaginatorIntl } from './utils/french-paginator-intl';
 import { SCORE_SERVICE_TOKEN } from './interface/score';
 import { ScoreService } from './service/score/score.service';
 import { MockScoreService } from './service/score/score.service.mock';
+import { SubscriptionComponent } from './layout/trips-page/subscription/subscription.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { TripsPageComponent } from './layout/trips-page/trips-page.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -115,6 +120,8 @@ const customNotifierOptions: NotifierOptions = {
     MapComponent,
     CreateSubscriptionComponent,
     ScoreboardPageComponent,
+    SubscriptionComponent,
+    TripsPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,7 +148,10 @@ const customNotifierOptions: NotifierOptions = {
     MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule,
+    MatListModule,
+    MatMenuModule,
   ],
   providers: [
     {

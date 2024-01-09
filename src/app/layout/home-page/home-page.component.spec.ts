@@ -31,7 +31,7 @@ describe('HomePageComponent', () => {
     spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture']);
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish', 'search'])
     spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
-    spyCarpoolingService.$searchedCarpoolings = new BehaviorSubject<Carpooling[]>([
+    spyCarpoolingService.$carpoolings = new BehaviorSubject<Carpooling[]>([
       {
           starting_point: [48.8558516, 2.3588636],
           destination: [48.9757551, 2.559337],

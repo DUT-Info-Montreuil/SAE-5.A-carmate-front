@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import { Observable, map, of, take } from 'rxjs';
 import { environment } from 'src/app/environement/environement';
 import { AddressServiceInterface, School } from 'src/app/interface/other';
 
@@ -14,18 +14,22 @@ export class MockAddressService implements AddressServiceInterface {
   private getAddressByCoordsPostUrl = '&zoom=18&format=jsonv2&addressdetails=1&accept-language=fr&layer=address';
 
   $schoolList: School[] = [
-    {lat: 48.9757983, lon: 2.5594024, name: 'IUT de Tremblay-en-France'},
+    {lat: 48.9757551, lon: 2.559337, name: 'IUT de Tremblay-en-France'},
   ]
 
   constructor(private http: HttpClient) {}
 
   getAddressByString(term: string): Observable<any> {
     term = term.replaceAll(' ', '+');
-    return this.http.get<any>(`${this.getAddressByStringPreUrl}${term}${this.getAddressByStringPostUrl}`);
+    return this.http.get<any>(
+      `${this.getAddressByStringPreUrl}${term}${this.getAddressByStringPostUrl}`
+      ).pipe(take(1));
   }
 
   getAddressByCoords(lat: number, lon: number): Observable<any> {
-    return this.http.get<any>(`${this.getAddressByCoordsPreUrl}lat=${lat}&lon=${lon}${this.getAddressByCoordsPostUrl}`);
+    return this.http.get<any>(
+      `${this.getAddressByCoordsPreUrl}lat=${lat}&lon=${lon}${this.getAddressByCoordsPostUrl}`
+      ).pipe(take(1));
   }
   
   matchingSchoolDeparture(lat: number, lon: number): string | undefined {
@@ -35,7 +39,9 @@ export class MockAddressService implements AddressServiceInterface {
 
   getFormattedAddress(param: string | number[]): Observable<string> {    
     if (typeof param === 'string') {
-      return this.getAddressByString(param).pipe(map((addressObject) => {
+      return this.getAddressByString(param).pipe(
+        take(1),
+        map((addressObject) => {
         let schoolExist = this.matchingSchoolDeparture(addressObject.lat, addressObject.lon);
         if (schoolExist) {
           return schoolExist;
@@ -48,7 +54,9 @@ export class MockAddressService implements AddressServiceInterface {
       if (schoolExist) {
         return of(schoolExist);
       } else {
-        return this.getAddressByCoords(param[0], param[1]).pipe(map((addressObject) => {
+        return this.getAddressByCoords(param[0], param[1]).pipe(
+          take(1),
+          map((addressObject) => {
           return this.formatAddress(addressObject);
         }));
       };

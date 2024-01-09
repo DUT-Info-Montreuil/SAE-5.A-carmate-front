@@ -8,6 +8,7 @@ import { PassengerProfilesComponent } from './layout/user/passenger-profile/pass
 import { DriverProfileComponent } from './layout/user/driver-profile/driver-profile.component';
 import { CreateSubscriptionComponent } from './layout/create-subscription/create-subscription.component';
 import { ScoreboardPageComponent } from './layout/scoreboard-page/scoreboard-page.component';
+import { TripsPageComponent } from './layout/trips-page/trips-page.component';
 
 const routes: Routes = [
     {
@@ -41,6 +42,10 @@ const routes: Routes = [
     {
       path: 'scoreboard',
       component: ScoreboardPageComponent
+    },
+    {
+      path: 'subscriptions',
+      component: TripsPageComponent
     }
 ];
 
