@@ -1,0 +1,21 @@
+<mat-card class="mx-5">
+    <mat-tab-group class="h-[calc(100vh-10vh)] custom-tab-group">
+        <mat-tab label="Mes covoiturages automatiques">
+            <ng-template matTabContent>
+                <mat-accordion multi="true" [displayMode]="'flat'">
+                    <app-subscription *ngFor="let sub of subscriptions" [subscription]="sub"></app-subscription>
+                </mat-accordion>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Second">
+            <ng-template matTabContent>
+
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Third">
+            <ng-template matTabContent>
+                <!-- Mettez le contenu du troisième onglet ici -->
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>

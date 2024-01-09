@@ -20,4 +20,3 @@ export interface AddressServiceInterface {
 }
 
 export const ADDRESS_SERVICE_TOKEN = new InjectionToken<AddressServiceInterface>('AddressServiceInterface');
-

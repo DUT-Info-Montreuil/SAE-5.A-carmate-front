@@ -20,7 +20,7 @@ export class ResultCarpoolComponent {
     ) {}
 
   ngOnInit() {
-    this.carpoolingService.$searchedCarpoolings.subscribe((carpoolings) => {
+    this.carpoolingService.$carpoolings.subscribe((carpoolings) => {
       this._carpoolings = carpoolings;
       this.noResults = carpoolings.length === 0;
     });
