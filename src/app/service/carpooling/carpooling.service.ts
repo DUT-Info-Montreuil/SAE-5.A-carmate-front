@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import {Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, Search} from 'src/app/interface/carpooling';
+import {Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, CreateSubscriptionPayload, Search} from 'src/app/interface/carpooling';
 import { environment } from "../../environement/environement";
 import { AbstractService } from "../abstractService";
 import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from "src/app/interface/other";
@@ -49,5 +49,14 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
             break;
         }
     }});
+  }
+
+  createSubscription(subscription: CreateSubscriptionPayload): Observable<any> {
+    return this.http.post<any>(`${environment.path}/regular/booking/create`, subscription, {
+      headers: {
+        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+      },
+      observe: 'response'
+    });
   }
 }

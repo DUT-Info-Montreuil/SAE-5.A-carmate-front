@@ -42,6 +42,10 @@
                 <fa-icon [icon]="faCar" class="mr-2"></fa-icon> Mes covoiturages
               </button>
 
+              <button *ngIf="IsLogged()" routerLink="/create-subscription" class="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">
+                <fa-icon [icon]="faCaretRight" class="mr-2"></fa-icon> Créer un abonnement
+              </button>
+
               <button routerLink="/messages" class="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">
                 <fa-icon [icon]="faMessage" class="mr-2"></fa-icon> Mes messages
               </button>
