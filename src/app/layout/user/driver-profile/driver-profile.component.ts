@@ -35,7 +35,7 @@ export class DriverProfileComponent {
         this.emailAddress = user.emailAddress;
         this.profilePictureBase64 = user.profilePicture;
 
-        this.driverProfilesService.getDriverProfile().subscribe({
+        this.driverProfilesService.getDriverProfile(localStorage.getItem('auth-token')?? '').subscribe({
           next: (driver_profile: DriverProfile) => {
             this.description = driver_profile.description;
             this.created_at = driver_profile.createdAt;

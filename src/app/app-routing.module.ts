@@ -7,6 +7,7 @@ import { PublishCarpoolComponent } from './layout/publish-carpool/publish-carpoo
 import { PassengerProfilesComponent } from './layout/user/passenger-profile/passenger-profiles.component';
 import { DriverProfileComponent } from './layout/user/driver-profile/driver-profile.component';
 import { CreateSubscriptionComponent } from './layout/create-subscription/create-subscription.component';
+import { ScoreboardPageComponent } from './layout/scoreboard-page/scoreboard-page.component';
 
 const routes: Routes = [
     {
@@ -36,6 +37,10 @@ const routes: Routes = [
     {
       path: 'create-subscription',
       component: CreateSubscriptionComponent
+    },
+    {
+      path: 'scoreboard',
+      component: ScoreboardPageComponent
     }
 ];
 
