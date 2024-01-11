@@ -20,8 +20,7 @@ describe('ResultCarpoolComponent', () => {
 
   beforeEach(() => {
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish', 'search'])
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search', 'find', 'matchingSchoolDeparture']);
-    spyCarpoolingService.$searchedCarpoolings = new BehaviorSubject<Carpooling[]>([
+    spyCarpoolingService.$carpoolings = new BehaviorSubject<Carpooling[]>([
       {
           starting_point: [48.8558516, 2.3588636],
           destination: [48.9757551, 2.559337],
@@ -41,10 +40,14 @@ describe('ResultCarpoolComponent', () => {
           max_passengers: 2,
       },
     ]);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
+      'getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture', 'getFormattedAddress'
+    ]);
     spyAddressService.$schoolList = [
       {lat: 48.9757551, lon: 2.559337, name: 'IUT de Tremblay-en-France'}
     ];
-    spyAddressService.find.and.returnValue(of(''));
+    spyAddressService.getAddressByCoords.and.returnValue(of(''));
+    spyAddressService.getFormattedAddress.and.returnValue(of(''));
     TestBed.configureTestingModule({
       declarations: [ResultCarpoolComponent, MapComponent, CarpoolingComponent],
       imports: [

@@ -52,7 +52,7 @@ export class SearchBarComponent {
       this.searchForm.get(element)!.valueChanges.pipe(
         distinctUntilChanged(),
         debounceTime(300),
-        switchMap((value) => this.addressService.search(value!)),
+        switchMap((value) => this.addressService.getAddressByString(value!)),
       ).subscribe((addresses) => {
         if (Array.isArray(addresses) && addresses.length > 0) {
 

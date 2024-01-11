@@ -122,7 +122,10 @@ describe('CreateSubscriptionComponent', () => {
 
   beforeEach(() => {
     spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search', 'find', 'matchingSchoolDeparture']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
+      'getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture', 'formatAddress'
+    ]);
+    spyAddressService.formatAddress.and.returnValue('1 rue de la République, 13001 Marseille');
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['createSubscription', 'createSubscription']);
     TestBed.configureTestingModule({
       declarations: [CreateSubscriptionComponent],
@@ -164,7 +167,7 @@ describe('CreateSubscriptionComponent', () => {
   it('should enable the submit button when fill in correctly', (async () => {
     const button = fixture.debugElement.query(By.css('#sub_id')).nativeElement;
 
-    spyAddressService.search.and.returnValue(of([{
+    spyAddressService.getAddressByString.and.returnValue(of([{
       address: {
         house_number: '1',
         city: 'Marseille',
@@ -275,7 +278,7 @@ describe('CreateSubscriptionComponent', () => {
 
     spyCarpoolingService.createSubscription.and.returnValue(of({ status: 200 }));
 
-    spyAddressService.search.and.returnValue(of([{
+    spyAddressService.getAddressByString.and.returnValue(of([{
       address: {
         house_number: '1',
         city: 'Marseille',
@@ -293,7 +296,7 @@ describe('CreateSubscriptionComponent', () => {
   });
 
   it('should notify the user once when API return HTTP error', async () => {
-    spyAddressService.search.and.returnValue(of([{
+    spyAddressService.getAddressByString.and.returnValue(of([{
       address: {
         house_number: '1',
         city: 'Marseille',
