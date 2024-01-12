@@ -293,6 +293,7 @@ describe('PublishCarpoolComponent', () => {
   });
 
   it('should notify the user once when API return HTTP error', async () => {
+    const button = fixture.debugElement.query(By.css('#publish_id')).nativeElement;
     spyAddressService.search.and.returnValue(of([{
       address: {
         house_number: '1',
@@ -323,7 +324,7 @@ describe('PublishCarpoolComponent', () => {
       status: 401
     })));
 
-    await fillForm();
+    button.click();
 
     expect(spyNotifierService.error)
       .withContext('should notify the user he is not authorized to publish a carpool')
@@ -339,7 +340,7 @@ describe('PublishCarpoolComponent', () => {
       status: 403
     })));
   
-    await fillForm();
+    button.click();
 
     expect(spyNotifierService.error)
       .withContext('should notify the user he is not yet authorized to publish a carpool')
@@ -354,7 +355,7 @@ describe('PublishCarpoolComponent', () => {
       error: 'Internal server error'
     })));
   
-    await fillForm();
+    button.click();
 
     expect(spyNotifierService.error)
       .withContext('should notify the user of an internal server error')
