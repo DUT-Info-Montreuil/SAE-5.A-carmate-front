@@ -113,4 +113,12 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
       },
     });
   }
+
+  getCarpoolings(): Observable<any> {
+    return this.http.get<any>(`${environment.path}/carpooling/booked`, {
+      headers: {
+        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+      }
+    });
+  }
 }

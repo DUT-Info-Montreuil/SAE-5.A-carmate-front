@@ -79,6 +79,7 @@ export interface CarpoolingServiceInterface {
     getPublishedCarpoolings: (token: string) => Observable<publishedCarpooling[]>;
     postCode: (passengerCode: number, carpoolingId: number) => Observable<any>;
     book: (id: number, is_scheduled?: boolean, date?: number) => Observable<any>;
+    getCarpoolings: () => Observable<Carpooling[]>;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');

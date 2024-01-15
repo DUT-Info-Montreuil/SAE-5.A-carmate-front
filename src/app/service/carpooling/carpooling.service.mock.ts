@@ -200,6 +200,31 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
     }
   ];
 
+  $myCarpoolings: Carpooling[] = [
+    {
+      id: 1,
+      starting_point: [48.8558516, 2.3588636],
+      destination: [48.9757551, 2.559337],
+      price: 40,
+      is_canceled: false,
+      departure_date_time: "2024-01-16T08:30:00",
+      driver_id: 1,
+      max_passengers: 2,
+      seats_taken: 1,
+    },
+    {
+      id: 2,
+      starting_point: [48.8558516, 2.3588636],
+      destination: [48.9757551, 2.559337],
+      price: 40,
+      is_canceled: false,
+      departure_date_time: "2024-01-25T08:30:00",
+      driver_id: 2,
+      max_passengers: 3,
+      seats_taken: 2,
+    }
+  ];
+
   constructor(
     @Inject(NOTIFIER_SERVICE_TOKEN) private notifier: NotifierServiceInterface,
   ) { }
@@ -288,5 +313,9 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
       throwError(() => new HttpErrorResponse({error: "Ce trajet n'éxiste plus.", status: 400}));
     }
     return of('');
+  }
+  
+  getCarpoolings(): Observable<Carpooling[]> {
+    return of(this.$myCarpoolings);
   }
 }
