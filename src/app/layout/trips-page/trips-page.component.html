@@ -7,9 +7,11 @@
                 </mat-accordion>
             </ng-template>
         </mat-tab>
-        <mat-tab label="Second">
+        <mat-tab label="Mes trajets publiés">
             <ng-template matTabContent>
-
+                <mat-card *ngFor="let publishedCarpooling of publishedCarpoolings" class="m-5 p-5">
+                    <app-published-carpoolings [publishedCarpooling]="publishedCarpooling"></app-published-carpoolings>
+                </mat-card>
             </ng-template>
         </mat-tab>
         <mat-tab label="Third">

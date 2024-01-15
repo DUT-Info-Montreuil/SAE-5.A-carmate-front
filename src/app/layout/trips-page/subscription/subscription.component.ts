@@ -147,9 +147,7 @@ export class SubscriptionComponent {
       });
       bookedCarpoolingToDisplay.departure_hour = bookedCarpoolingToDisplay.departure_date.toLocaleTimeString()
       bookedCarpoolingToDisplay.isToday = moment(bookedCarpoolingToDisplay.departure_date).isSame(moment(), 'day');
-      bookedCarpoolingToDisplay.isOutdated = moment(bookedCarpoolingToDisplay.departure_date).isBefore(moment(), 'day');
-      console.log(bookedCarpoolingToDisplay);
-      
+      bookedCarpoolingToDisplay.isOutdated = moment(bookedCarpoolingToDisplay.departure_date).isBefore(moment(), 'day');      
       this.bookedCarpoolingsToDisplay.push(bookedCarpoolingToDisplay);
     }); 
   }
