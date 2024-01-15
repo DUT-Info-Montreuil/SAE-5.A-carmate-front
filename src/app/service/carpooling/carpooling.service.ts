@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, CreateSubscriptionPayload, Search, Subscription } from 'src/app/interface/carpooling';
+import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, CreateSubscriptionPayload, Search, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
 import { environment } from "../../environement/environement";
 import { AbstractService } from "../abstractService";
 import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from "src/app/interface/other";
@@ -61,7 +61,7 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
   }
 
   getSubscriptions(token: string): Observable<any> {
-    return this.http.get<Subscription[]>(`${environment.path}/TODO`, {
+    return this.http.get<Subscription[]>(`${environment.path}`, {
       headers: {
         "authorization": `Bearer ${localStorage.getItem("auth_token")}`
       },
@@ -69,6 +69,30 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
         token: token
       },
       observe: 'response',
+    });
+  }
+
+  getPublishedCarpoolings(token: string): Observable<any> {
+    return this.http.get<publishedCarpooling[]>(`${environment.path}`, {
+      headers: {
+        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+      },
+      params: {
+        token: token
+      },
+      observe: 'response',
+    });
+  }
+  
+  postCode (passengerCode: number, carpoolingId: number): Observable<any> {
+    return this.http.post<any>(`${environment.path}/carpooling/${carpoolingId}/passenger`, {
+      headers: {
+        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+      },
+      params: {
+        passenger_code: passengerCode,
+        carpooling_id: carpoolingId
+      }
     });
   }
 }

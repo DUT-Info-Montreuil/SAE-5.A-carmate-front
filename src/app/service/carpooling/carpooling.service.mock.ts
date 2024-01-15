@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, Search, Subscription } from 'src/app/interface/carpooling';
+import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, Search, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other';
@@ -130,6 +130,33 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
     },
   ];
 
+  $publishedCarpoolings: publishedCarpooling[] = [
+    {
+      id: 1,
+      starting_point: [48.8558516, 2.3588636],
+      destination: [48.9757551, 2.559337],
+      price: 40,
+      is_canceled: false,
+      departure_date_time: "2024-01-15T08:30:00",
+      driver_id: 1,
+      max_passengers: 2,
+      seats_taken: 1,
+      passengers: [1, 2]
+    },
+    {
+      id: 2,
+      starting_point: [48.8558516, 2.3588636],
+      destination: [48.9757551, 2.559337],
+      price: 40,
+      is_canceled: false,
+      departure_date_time: "2024-01-25T08:30:00",
+      driver_id: 2,
+      max_passengers: 3,
+      seats_taken: 2,
+      passengers: [3]
+    }
+  ];
+
   constructor(
     @Inject(NOTIFIER_SERVICE_TOKEN) private notifier: NotifierServiceInterface,
   ) { }
@@ -185,5 +212,17 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
 
   getSubscriptions(token: string): Observable<any> {
     return of(this.$subscriptions);
+  }
+
+  getPublishedCarpoolings(token: string): Observable<publishedCarpooling[]> {
+    return of(this.$publishedCarpoolings);
+  }
+
+  postCode(passengerCode: number, carpoolingId: number) : Observable<any> {
+    if (passengerCode === 123456) {
+      return of('');
+    } else {
+      return throwError(() => new HttpErrorResponse({error: 'Code invalide', status: 400}));
+    }
   }
 }

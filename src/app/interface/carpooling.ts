@@ -51,12 +51,27 @@ export type Search = {
     departure_date_time: string;
 }
 
+export type publishedCarpooling = {
+    id: number;
+    starting_point: number[];
+    destination: number[];
+    max_passengers: number;
+    price: number;
+    departure_date_time: string;
+    is_canceled?: boolean;
+    driver_id?: number;
+    seats_taken?: number;
+    passengers: number[];
+}
+
 export interface CarpoolingServiceInterface {
     $carpoolings: BehaviorSubject<Carpooling[]>;
     publish: (carpool: CreateCarpoolPayload) => Observable<any>;
     search: (search: Search) => void;
     createSubscription: (subscription: CreateSubscriptionPayload) => Observable<any>;
     getSubscriptions: (token: string) => Observable<Subscription[]>;
+    getPublishedCarpoolings: (token: string) => Observable<publishedCarpooling[]>;
+    postCode: (passengerCode: number, carpoolingId: number) => Observable<any>;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');

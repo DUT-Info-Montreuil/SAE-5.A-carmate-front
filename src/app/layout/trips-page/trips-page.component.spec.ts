@@ -22,7 +22,7 @@ describe('TripsPageComponent', () => {
   let spyAddressService: jasmine.SpyObj<AddressServiceInterface>;
   let spyProfileService: jasmine.SpyObj<ProfilesServiceInterface>;
   beforeEach(() => {
-    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['getSubscriptions']);
+    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['getSubscriptions', 'getPublishedCarpoolings']);
     spyCarpoolingService.getSubscriptions.and.returnValue(of([
       {
         starting_point: [0, 0],
@@ -46,6 +46,17 @@ describe('TripsPageComponent', () => {
         ]
       }
     ]));
+    spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of([{
+      starting_point: [48.8558516, 2.3588636],
+      destination: [48.9757551, 2.559337],
+      price: 40,
+      is_canceled: false,
+      departure_date_time: "2024-01-13T08:30:00",
+      driver_id: 1,
+      max_passengers: 2,
+      seats_taken: 2,
+      passengers: [1, 2],
+    }]));
     spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getFormattedAddress']);
     spyAddressService.getFormattedAddress.and.returnValue(of(''));
     spyProfileService = jasmine.createSpyObj('ProfilesServiceInterface', ['getDriverProfile']);

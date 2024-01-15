@@ -61,6 +61,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { TripsPageComponent } from './layout/trips-page/trips-page.component';
+import { PublishedCarpoolingsComponent } from './layout/trips-page/published-carpoolings/published-carpoolings.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PublishedCarpoolingDialogComponent } from './layout/trips-page/published-carpoolings/published-carpooling-dialog/published-carpooling-dialog.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -122,6 +125,8 @@ const customNotifierOptions: NotifierOptions = {
     ScoreboardPageComponent,
     SubscriptionComponent,
     TripsPageComponent,
+    PublishedCarpoolingsComponent,
+    PublishedCarpoolingDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -152,6 +157,7 @@ const customNotifierOptions: NotifierOptions = {
     MatExpansionModule,
     MatListModule,
     MatMenuModule,
+    MatDialogModule
   ],
   providers: [
     {
