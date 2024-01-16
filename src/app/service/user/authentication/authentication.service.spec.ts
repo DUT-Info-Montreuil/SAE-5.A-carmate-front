@@ -12,8 +12,8 @@ describe('AuthenticationService', () => {
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get','post']);
+    httpClientSpy.post.and.returnValue(of({banned: true}))
     authenticationService = new AuthenticationService(httpClientSpy);
-    localStorage.clear();
   });
 
   describe('login', () => {
