@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { Carpooling } from 'src/app/interface/carpooling';
+import { Carpooling, Search } from 'src/app/interface/carpooling';
 import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interface/other';
+import { CarpoolingDialogComponent } from '../carpooling-dialog/carpooling-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-carpooling',
@@ -10,6 +12,7 @@ import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interfac
 })
 export class CarpoolingComponent {
   @Input() _carpooling!: Carpooling;
+  @Input() _searchParams!: Search;
   @Output() _starting_pointDriverEmitter = new EventEmitter<number[]>();
   starting_point!: string;
   destination!: string;
@@ -19,6 +22,7 @@ export class CarpoolingComponent {
 
   constructor(
     @Inject(ADDRESS_SERVICE_TOKEN) private addressService: AddressServiceInterface,
+    public dialog: MatDialog
     ) {}
 
   ngOnInit() {
@@ -38,5 +42,15 @@ export class CarpoolingComponent {
 
   updateMap(): void {    
     this._starting_pointDriverEmitter.emit(this._carpooling.starting_point);
+  }
+
+  openDialog(): void {
+    this.dialog.open(CarpoolingDialogComponent, {
+      width: '1000px',
+      data: {
+        carpooling: this._carpooling,
+        _searchParams: this._searchParams
+      }
+    });
   }
 }

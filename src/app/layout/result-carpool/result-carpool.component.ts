@@ -1,4 +1,4 @@
-import { Component, Inject, Input, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Inject, Input, SimpleChanges } from '@angular/core';
 import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface, Search } from 'src/app/interface/carpooling';
 
 @Component({
@@ -11,8 +11,6 @@ export class ResultCarpoolComponent {
   @Input() _searchParams!: Search;
   starting_pointDriverToDisplay!: number[];
   starting_pointUserToDisplay!: number[];
-  carpoolingRegular!: Carpooling[];
-  carpoolingOnetime!: Carpooling[];
   noResults!: boolean;
 
   constructor(

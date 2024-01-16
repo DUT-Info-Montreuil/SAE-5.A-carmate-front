@@ -105,4 +105,12 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
       }
     });
   }
+  
+  book(id: number): Observable<void> {
+    return this.http.post<void>(`${environment.path}/carpooling/book/`, id, {
+      headers: {
+        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+      },
+    });
+  }
 }

@@ -10,61 +10,91 @@ import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interf
 export class MockCarpoolingService implements CarpoolingServiceInterface{
 
   $carpoolings: BehaviorSubject<Carpooling[]> = new BehaviorSubject<Carpooling[]>([
-    {
-      starting_point: [48.8558516, 2.3588636],
-      destination: [48.9757983, 2.5594024],
-      price: 50,
-      is_canceled: false,
-      departure_date_time: "2023-01-01T12:00:00",
-      driver_id: 1,
-      max_passengers: 1,
-    },
-    {
-      starting_point: [48.8520, 2.3176],
-      destination: [48.8569,2.3817],
-      price: 40,
-      is_canceled: false,
-      departure_date_time: "2023-02-15T08:30:00",
-      driver_id: 2,
-      max_passengers: 2,
-    },
-    {
-      starting_point: [48.8520, 2.3176],
-      destination: [48.9757551, 2.559337],
-      price: 35,
-      is_canceled: true,
-      departure_date_time: "2023-03-10T15:45:00",
-      driver_id: 3,
-      max_passengers: 1,
-    },
-    {
-      starting_point: [48.8520, 2.3176],
-      destination: [48.9757551, 2.559337],
-      price: 60,
-      is_canceled: false,
-      departure_date_time: "2023-04-05T09:00:00",
-      driver_id: 4,
-      max_passengers: 2,
-    },
-    {
-      starting_point: [48.9757551, 2.559337],
-      destination: [29.7604, -95.3698],
-      price: 45,
-      is_canceled: false,
-      departure_date_time: "2023-05-20T14:20:00",
-      driver_id: 5,
-      max_passengers: 3,
-    },
-    {
-      starting_point: [29.7604, -95.3698],
-      destination: [39.9526, -75.1652],
-      price: 55,
-      is_canceled: true,
-      departure_date_time: "2023-06-15T18:30:00",
-      driver_id: 6,
-      max_passengers: 3,
-    },
-  ]);
+      {
+          id: 1,
+          starting_point: [48.843487, 2.374254],
+          destination: [48.979739, 2.553426],
+          max_passengers: 3,
+          price: 20,
+          departure_date_time: "Wed, 10 Jan 2024 10:11:48 GMT",
+          is_canceled: false,
+          driver_id: 101,
+          seats_taken: 2,
+          first_name: 'John',
+          last_name: 'Doe',
+          is_scheduled: false
+      },
+      {
+          id: 2,
+          starting_point: [48.84335, 2.374057],
+          destination: [48.975527, 2.561268],
+          max_passengers: 1,
+          price: 15,
+          departure_date_time: "Wed, 11 Jan 2024 11:11:48 GMT",
+          is_canceled: false,
+          driver_id: 102,
+          seats_taken: 0,
+          first_name: 'John',
+          last_name: 'Doe',
+          is_scheduled: false
+      },
+      {
+          id: 3,
+          starting_point: [48.853686, 2.369441],
+          destination: [48.976223, 2.561324],
+          max_passengers: 4,
+          price: 25,
+          departure_date_time: "Wed, 12 Jan 2024 09:11:48 GMT",
+          is_canceled: false,
+          driver_id: 103,
+          seats_taken: 3,
+          first_name: 'John',
+          last_name: 'Doe',
+          is_scheduled: true
+      },
+      {
+          id: 4,
+          starting_point: [48.843492, 2.373834],
+          destination: [48.975508, 2.559423],
+          max_passengers: 2,
+          price: 18,
+          departure_date_time: "Wed, 13 Jan 2024 08:11:48 GMT",
+          is_canceled: false,
+          driver_id: 104,
+          seats_taken: 1,
+          first_name: 'John',
+          last_name: 'Doe',
+          is_scheduled: true
+      },
+      {
+          id: 5,
+          starting_point: [48.877086, 2.361286],
+          destination: [48.966698, 2.562614],
+          max_passengers: 3,
+          price: 22,
+          departure_date_time: "Wed, 14 Jan 2024 07:11:48 GMT",
+          is_canceled: false,
+          driver_id: 105,
+          seats_taken: 1,
+          first_name: 'John',
+          last_name: 'Doe',
+          is_scheduled: true
+      },
+      {
+          id: 6,
+          starting_point: [48.8568, 2.3837],
+          destination: [48.97591,2.55951],
+          max_passengers: 1,
+          price: 12,
+          departure_date_time: "Wed, 15 Jan 2024 07:30:48 GMT",
+          is_canceled: false,
+          driver_id: 106,
+          seats_taken: 0,
+          first_name: 'John',
+          last_name: 'Doe',
+          is_scheduled: true
+      }
+    ]);
 
   $subscriptions: Subscription[] = [
     {
@@ -86,6 +116,8 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           driver_id: 1,
           max_passengers: 2,
           seats_taken: 1,
+          first_name: 'John',
+          last_name: 'Doe',
         },
         {
           id: 2,
@@ -97,6 +129,8 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           driver_id: 2,
           max_passengers: 3,
           seats_taken: 2,
+          first_name: 'John',
+          last_name: 'Doe',
         },
         {
           id: 3,
@@ -108,6 +142,8 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           driver_id: 2,
           max_passengers: 1,
           seats_taken: 3,
+          first_name: 'John',
+          last_name: 'Doe',
         },
       ],
     },
@@ -129,6 +165,9 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           departure_date_time: "2023-05-20T14:20:00",
           driver_id: 5,
           max_passengers: 3,
+          seats_taken: 3,
+          first_name: 'John',
+          last_name: 'Doe',
         },
       ],
     },
@@ -170,14 +209,22 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
       carpool.destination !== undefined &&
       carpool.max_passengers !== undefined &&
       carpool.price !== undefined &&
-      carpool.departure_date_time !== undefined)
-      {
+      carpool.departure_date_time !== undefined) {
+        let maxId = 0;
+        if (this.$carpoolings.getValue().length > 0) {
+          maxId = Math.max(...this.$carpoolings.getValue().map(carpooling => carpooling.id || 0));
+        }
         this.$carpoolings.getValue().push({
+          id: maxId + 1,
           starting_point: carpool.starting_point,
           destination: carpool.destination,
           max_passengers: carpool.max_passengers,
           price: carpool.price,
           departure_date_time: new Date(carpool.departure_date_time).toLocaleDateString(),
+          driver_id: 1,
+          seats_taken: 0,
+          first_name: 'John',
+          last_name: 'Doe'
         });
         this.$carpoolings.next(this.$carpoolings.getValue());
         return of('');
@@ -232,5 +279,14 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
     } else {
       return throwError(() => new HttpErrorResponse({error: 'Code invalide', status: 400}));
     }
+  }
+    
+  book(id: number): Observable<any> {
+    if (id !== undefined) {
+      this.$carpoolings.next(this.$carpoolings.getValue());
+    } else {
+      throwError(() => new HttpErrorResponse({error: "Ce trajet n'éxiste plus.", status: 400}));
+    }
+    return of('');
   }
 }
