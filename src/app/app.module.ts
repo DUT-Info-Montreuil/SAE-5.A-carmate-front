@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -167,7 +168,8 @@ const customNotifierOptions: NotifierOptions = {
     MatMenuModule,
     MatDialogModule,
     MatButtonToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    NgxMatFileInputModule
   ],
   providers: [
     {
