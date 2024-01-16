@@ -17,11 +17,11 @@ export class TripsPageComponent {
   ) {}
 
   ngOnInit() {
-    this.carpoolingService.getSubscriptions(localStorage.getItem('auth-token') ?? '').subscribe((subscriptions: Subscription[]) => {
+    this.carpoolingService.getSubscriptions(localStorage.getItem('auth_token') ?? '').subscribe((subscriptions: Subscription[]) => {
       this.subscriptions = subscriptions;
     });
 
-    this.carpoolingService.getPublishedCarpoolings(localStorage.getItem('auth-token') ?? '').subscribe((bookedCarpoolings: publishedCarpooling[]) => {
+    this.carpoolingService.getPublishedCarpoolings(localStorage.getItem('auth_token') ?? '').subscribe((bookedCarpoolings: publishedCarpooling[]) => {
       this.publishedCarpoolings = bookedCarpoolings;
     });
   }

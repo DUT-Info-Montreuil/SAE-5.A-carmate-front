@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {environment} from "../../../environement/environement";
 import {BehaviorSubject, catchError, Observable, tap} from "rxjs";
 import {AbstractService} from "../../abstractService";
@@ -9,15 +9,16 @@ import { FormGroup } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService extends AbstractService implements AuthenticationServiceInterface {
+export class AuthenticationService extends AbstractService implements AuthenticationServiceInterface{
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private _isAdmin$ = new BehaviorSubject<boolean>(false);
   private _isDriver$ = new BehaviorSubject<boolean>(false);
-  
+
   constructor(
     http: HttpClient,
   ) {
     super(http);
+    this.initializeService();
   }
 
   login(email_address: string, password: string): Observable<any> {
@@ -29,17 +30,18 @@ export class AuthenticationService extends AbstractService implements Authentica
       tap((token: Token) => {
         this._isLoggedIn$.next(true);
         localStorage.setItem('auth_token', token.token);
+        this.initializeService();
       }),
       catchError(this.passErrorToComponent)
     );
   }
 
-  logOut(): Observable<any> {
+  logOut(): void {
     this._isLoggedIn$.next(false);
-    localStorage.removeItem('auth-token');
-    //TO-DO need to mplemente the route
-    return this.http.post<any>(`${environment.path}/auth/logout`,{token: localStorage.getItem('auth_token')});
-  } 
+    this._isAdmin$.next(false);
+    this._isDriver$.next(false);
+    localStorage.removeItem('auth_token');
+  }
 
   register(
     form: FormGroup,
@@ -56,17 +58,37 @@ export class AuthenticationService extends AbstractService implements Authentica
 
     return this.http.post<Token>(`${environment.path}/auth/register`, formData).pipe(
       tap((token: Token) => {
-        this._isLoggedIn$.next(true);
         localStorage.setItem('auth_token', token.token);
+        this.initializeService();
       }),
       catchError(this.passErrorToComponent)
     );
   }
 
+  private initializeService(): void {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      this.http.post(`${environment.path}/auth/check-token`, {token}).subscribe({
+        next: (response: any) => {
+          if (response.banned) {
+            this.logOut();
+          } else {
+            this._isLoggedIn$.next(true);
+            this._isAdmin$.next(response.admin);
+            this._isDriver$.next(response.driver);
+          }
+        },
+        error: () => {
+          this.logOut();
+        }
+      })
+    }
+  }
+
   isLogged(): boolean {
     return this._isLoggedIn$.getValue();
   }
-  
+
     isAdmin(): boolean {
     return this._isAdmin$.getValue();
   }

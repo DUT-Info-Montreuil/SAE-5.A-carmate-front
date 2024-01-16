@@ -35,7 +35,7 @@ export class ScoreboardPageComponent {
   ) {}
 
   ngOnInit() {
-    const token: string = localStorage.getItem('auth-token') ?? '';
+    const token: string = localStorage.getItem('auth_token') ?? '';
     this.isDriver = this.authenticationService.isDriver();
 
     if(this.isDriver) {
@@ -66,14 +66,14 @@ export class ScoreboardPageComponent {
       });
     }
     this.scoreboardService.getScoreUserData().subscribe({
-      next: (scoreUserDataList) => {                
+      next: (scoreUserDataList) => {
         const userDataListWithAverage = (scoreUserDataList as ScoreUserData[]).map(user => ({
           ...user,
           average_rating: Number(((user.economic_driving_rating! + user.safe_driving_rating! + user.sociability_rating!) / 3).toFixed(2))
         }));
 
         const sortedUserDataList = userDataListWithAverage.sort((a, b) => b.average_rating - a.average_rating);
-        
+
         const finalUserDataList = sortedUserDataList.map((user, index) => ({
           ...user,
           ranking: index + 1
