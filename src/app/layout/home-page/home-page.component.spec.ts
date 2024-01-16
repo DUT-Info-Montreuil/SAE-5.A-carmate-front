@@ -28,10 +28,10 @@ describe('HomePageComponent', () => {
   let spyNotifierService: jasmine.SpyObj<NotifierServiceInterface>;
 
   beforeEach(() => {
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search', 'find', 'matchingSchoolDeparture']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture']);
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish', 'search'])
     spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
-    spyCarpoolingService.$searchedCarpoolings = new BehaviorSubject<Carpooling[]>([
+    spyCarpoolingService.$carpoolings = new BehaviorSubject<Carpooling[]>([
       {
           starting_point: [48.8558516, 2.3588636],
           destination: [48.9757551, 2.559337],
@@ -54,7 +54,7 @@ describe('HomePageComponent', () => {
     spyAddressService.$schoolList = [
       {lat: 48.9757551, lon: 2.559337, name: 'IUT de Tremblay-en-France'}
     ];
-    spyAddressService.find.and.returnValue(of(''));
+    spyAddressService.getAddressByCoords.and.returnValue(of(''));
     TestBed.configureTestingModule({
       declarations: [HomePageComponent, SearchBarComponent, ResultCarpoolComponent, MapComponent, CarpoolingComponent],
       imports: [

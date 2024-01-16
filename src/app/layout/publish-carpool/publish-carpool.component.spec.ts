@@ -110,7 +110,11 @@ describe('PublishCarpoolComponent', () => {
 
   beforeEach(() => {
     spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search', 'find', 'matchingSchoolDeparture']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
+      'getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture', 'formatAddress'
+    ]);
+    spyAddressService.formatAddress.and.returnValue('1 rue de la République, 13001 Marseille');
+
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish'])
     TestBed.configureTestingModule({
       declarations: [PublishCarpoolComponent],
@@ -164,7 +168,7 @@ describe('PublishCarpoolComponent', () => {
   it('should enbale the submit button when selecting the first autocomplete option and filling the date manually', (async () => {
     const button = fixture.debugElement.query(By.css('#publish_id')).nativeElement;
     
-    spyAddressService.search.and.returnValue(of([{
+    spyAddressService.getAddressByString.and.returnValue(of([{
       address: {
         house_number: '1',
         city: 'Marseille',
@@ -212,7 +216,7 @@ describe('PublishCarpoolComponent', () => {
       .toBeFalsy();
 
     expect(spyCarpoolingService.publish.calls.count())
-      .withContext('search must be called once')
+      .withContext('getAddressByString must be called once')
       .toEqual(1);
   }));
 
@@ -275,7 +279,7 @@ describe('PublishCarpoolComponent', () => {
 
     spyCarpoolingService.publish.and.returnValue(of({ status: 200, data: {} }));
 
-    spyAddressService.search.and.returnValue(of([{
+    spyAddressService.getAddressByString.and.returnValue(of([{
       address: {
         house_number: '1',
         city: 'Marseille',
@@ -294,7 +298,7 @@ describe('PublishCarpoolComponent', () => {
 
   it('should notify the user once when API return HTTP error', async () => {
     const button = fixture.debugElement.query(By.css('#publish_id')).nativeElement;
-    spyAddressService.search.and.returnValue(of([{
+    spyAddressService.getAddressByString.and.returnValue(of([{
       address: {
         house_number: '1',
         city: 'Marseille',

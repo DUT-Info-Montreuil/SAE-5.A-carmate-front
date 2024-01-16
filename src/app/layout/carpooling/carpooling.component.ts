@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { Carpooling } from 'src/app/interface/carpooling';
 import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interface/other';
 
@@ -23,50 +24,19 @@ export class CarpoolingComponent {
   ngOnInit() {
     let dateTime = new Date(this._carpooling.departure_date_time);
     this.departure_date = dateTime.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    this.departure_time = dateTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });    
-  
-    let matchingSchoolDeparture = this.addressService.matchingSchoolDeparture(
-      this._carpooling.starting_point[0], this._carpooling.starting_point[1]
-      );
+    this.departure_time = dateTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
-    let matchingSchoolDestination = this.addressService.matchingSchoolDeparture(
-      this._carpooling.destination[0], this._carpooling.destination[1]
-      );
-
-    if(matchingSchoolDeparture) { 
-      this.starting_point = matchingSchoolDeparture;     
-    } else {
-      this.addressService.find(this._carpooling.starting_point[0], this._carpooling.starting_point[1]).subscribe((addressObject) => {
-        let address = addressObject.address;
-        let house_number = 'house_number' in address ? address.house_number : '';
-        let building = 'building' in address ? address.building : '';
-        let town = 'town' in address ? address.town : '';
-        let city = 'city' in address ? address.city : '';
-        let village = 'village' in address ? address.village : '';
-
-        this.starting_point = `${building || house_number} ${address.road}, ${city || village || town}`  
-        this.isLoading = false;
-      });
-    }
-
-    if(matchingSchoolDestination) { 
-      this.destination = matchingSchoolDestination;     
-    } else {
-      this.addressService.find(this._carpooling.destination[0], this._carpooling.destination[1]).subscribe((addressObject) => {
-        let address = addressObject.address;
-        let house_number = 'house_number' in address ? address.house_number : '';
-        let building = 'building' in address ? address.building : '';
-        let town = 'town' in address ? address.town : '';
-        let city = 'city' in address ? address.city : '';
-        let village = 'village' in address ? address.village : '';
-
-        this.destination = `${building || house_number} ${address.road}, ${city || village || town}`
-        this.isLoading = false;
-      });
-    }
+    forkJoin({
+      starting_point: this.addressService.getFormattedAddress(this._carpooling.starting_point),
+      destination: this.addressService.getFormattedAddress(this._carpooling.destination)
+    }).subscribe(({ starting_point, destination }) => {
+      this.starting_point = starting_point;
+      this.destination = destination;
+      this.isLoading = false;
+    });
   }
 
-  updateMap(): void {
+  updateMap(): void {    
     this._starting_pointDriverEmitter.emit(this._carpooling.starting_point);
   }
 }

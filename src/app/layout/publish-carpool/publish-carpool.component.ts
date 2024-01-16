@@ -54,22 +54,13 @@ export class PublishCarpoolComponent {
       this.publishForm.get(element)!.valueChanges.pipe(
         distinctUntilChanged(),
         debounceTime(300),
-        switchMap((value) => this.addressService.search(value!)),
+        switchMap((value) => this.addressService.getAddressByString(value!)),
       ).subscribe((addresses) => {
         if (Array.isArray(addresses) && addresses.length > 0) {
-
           let displayResults: string[] = [];
 
           for (let index = 0; index < addresses.length; index++) {
-            let house_number = addresses[index].address.house_number || '';
-            let building = addresses[index].address.building || '';
-            let town = addresses[index].address.town || '';
-            let city = addresses[index].address.city || '';
-            let village = addresses[index].address.village || '';
-
-            displayResults.push(
-            `${building || house_number} ${addresses[index].address.road}, ${city || village || town}, ${addresses[index].address.postcode}`
-            );
+            displayResults.push(this.addressService.formatAddress(addresses[index]));
           }
 
           this.displayedAddresses = displayResults;

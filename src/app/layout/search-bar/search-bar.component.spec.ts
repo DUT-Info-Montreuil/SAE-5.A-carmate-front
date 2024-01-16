@@ -79,7 +79,7 @@ describe('SearchBarComponent', () => {
   }
 
   beforeEach(() => {
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search', 'find', 'matchingSchoolDeparture']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture']);
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish', 'search'])
     spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
     TestBed.configureTestingModule({
@@ -129,7 +129,7 @@ describe('SearchBarComponent', () => {
 
   it('should enbale the sbumit button when selecting the first autocomplete option and filling the date manually', (async () => {
     const button = fixture.debugElement.query(By.css('#search_id')).nativeElement;
-    spyAddressService.search.and.returnValue(of([{
+    spyAddressService.getAddressByString.and.returnValue(of([{
       lat: 43.296482,
       lon: 5.36978,
       address: {

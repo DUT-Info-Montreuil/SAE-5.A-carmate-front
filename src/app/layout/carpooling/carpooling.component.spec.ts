@@ -12,7 +12,9 @@ describe('CarpoolingComponent', () => {
   let spyAddressService: jasmine.SpyObj<AddressServiceInterface>;
 
   beforeEach(() => {
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['search', 'find', 'matchingSchoolDeparture']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
+      'getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture', 'getFormattedAddress'
+    ]);
     TestBed.configureTestingModule({
       declarations: [CarpoolingComponent],
       imports: [
@@ -28,19 +30,7 @@ describe('CarpoolingComponent', () => {
     spyAddressService.$schoolList = [
       {lat: 48.9757551, lon: 2.559337, name: 'IUT de Tremblay-en-France'}
     ];
-    spyAddressService.matchingSchoolDeparture.and.callFake((lat: number, lon: number): string | undefined => 
-    spyAddressService.$schoolList.find(school => school.lat === lat && school.lon === lon)?.name
-  );
-    spyAddressService.find.and.returnValue(of(
-      {
-        address: {
-          house_number: '1',
-          city: 'Marseille',
-          road: 'Rue de la République',
-          postcode: '13001',
-        },
-      },
-    ));
+    spyAddressService.getFormattedAddress.and.returnValue(of('IUT de Tremblay-en-France'));
     component._carpooling = {
       starting_point: [48.9757551, 2.559337],
       destination: [48.8558516, 2.3588636],

@@ -57,29 +57,16 @@ export class CreateSubscriptionComponent {
 
   ngOnInit() {
     ['starting_point','destination'].forEach((element => {
-
       this.subForm.get(element)!.valueChanges.pipe(
         distinctUntilChanged(),
         debounceTime(300),
-        switchMap((value) => this.addressService.search(value!)),
+        switchMap((value) => this.addressService.getAddressByString(value!)),
       ).subscribe((addresses) => {
         if (Array.isArray(addresses) && addresses.length > 0) {
-
           let displayResults: string[] = [];
 
           for (let index = 0; index < addresses.length; index++) {
-            let address = addresses[index].address;
-            if (address) {
-              let house_number = 'house_number' in address ? address.house_number : '';
-              let building = 'building' in address ? address.building : '';
-              let town = 'town' in address ? address.town : '';
-              let city = 'city' in address ? address.city : '';
-              let village = 'village' in address ? address.village : '';
-
-              displayResults.push(
-              `${building || house_number} ${addresses[index].address.road}, ${city || village || town}, ${addresses[index].address.postcode}`
-              );
-            }
+            displayResults.push(this.addressService.formatAddress(addresses[index]));
           }
 
           this.displayedAddresses = displayResults;
