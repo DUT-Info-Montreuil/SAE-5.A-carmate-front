@@ -67,6 +67,7 @@ import { PublishedCarpoolingsComponent } from './layout/trips-page/published-car
 import { PublishedCarpoolingDialogComponent } from './layout/trips-page/published-carpoolings/published-carpooling-dialog/published-carpooling-dialog.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import {BecomeDriverComponent} from "./layout/become-driver/become-driver.component";
 
 registerLocaleData(localeFr);
 const customNotifierOptions: NotifierOptions = {
@@ -127,6 +128,7 @@ const customNotifierOptions: NotifierOptions = {
     MapComponent,
     CreateSubscriptionComponent,
     ScoreboardPageComponent,
+    BecomeDriverComponent,
     SubscriptionComponent,
     TripsPageComponent,
     SubscriptionDialogComponent,
@@ -172,11 +174,11 @@ const customNotifierOptions: NotifierOptions = {
     {
       provide: AUTHENTICATION_SERVICE_TOKEN,
       useClass: environment.production ? AuthenticationService : MockAuthenticationService,
-    }, 
+    },
     {
       provide: PROFILE_SERVICE_TOKEN,
       useClass: environment.production ? ProfilesService : MockProfilesService,
-    }, 
+    },
     {
       provide: USER_SERVICE_TOKEN,
       useClass: environment.production ? UserService : MockUserService,
@@ -198,10 +200,9 @@ const customNotifierOptions: NotifierOptions = {
     },
     {
       provide: MatPaginatorIntl,
-      useClass: frPaginatorIntl 
+      useClass: frPaginatorIntl
     },
     { provide: LOCALE_ID, useValue: 'fr-FR' }
-
   ],
   bootstrap: [RootComponent]
 })

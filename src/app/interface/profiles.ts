@@ -25,6 +25,7 @@ export interface DriverProfile {
 export interface ProfilesServiceInterface {
     getPassengerProfile: (param: number | string) => Observable<PassengerProfile>;
     getDriverProfile: (param: number | string) => Observable<DriverProfile>;
+    becomeDriver: (param: FormData) => Observable<any>;
 }
 
 export const PROFILE_SERVICE_TOKEN = new InjectionToken<ProfilesServiceInterface>('ProfilesServiceInterface');

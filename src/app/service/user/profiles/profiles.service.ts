@@ -14,7 +14,15 @@ export class ProfilesService extends AbstractService implements ProfilesServiceI
       ) {
         super(http);
       }
-    
+
+    becomeDriver(param: FormData){
+      return this.http.post(`${environment.path}/profile/driver`, param, {
+        headers: {
+          "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+        },
+      });
+    }
+
     getPassengerProfile(param: number | string): Observable<any> {
         return this.http.get<PassengerProfile>(`${environment.path}/profile/passenger`, {
             params: { param },

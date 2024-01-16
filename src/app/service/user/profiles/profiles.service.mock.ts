@@ -12,6 +12,10 @@ export class MockProfilesService implements ProfilesServiceInterface {
 
     constructor() {}
 
+    becomeDriver(param: FormData) {
+        return of({});
+    }
+
     getPassengerProfile(): Observable<PassengerProfile> {
         return of({
             user_id: 1,
