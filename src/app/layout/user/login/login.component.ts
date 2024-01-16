@@ -68,7 +68,7 @@ export class LoginComponent {
   }
 
   private redirect() {
-    this.router.navigate([this.redirection || '/']);
+    this.router.navigate([this.redirection || '/home']);
   }
 
   get email() {

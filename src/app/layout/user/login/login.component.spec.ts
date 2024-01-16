@@ -183,7 +183,7 @@ describe('LoginComponent', () => {
 
     expect(spyAuthService.isLogged).toHaveBeenCalled();
     expect(spyRouterService.navigate).toHaveBeenCalled();
-    expect(spyRouterService.navigate.calls.mostRecent().args).toEqual([['/']]);
+    expect(spyRouterService.navigate.calls.mostRecent().args).toEqual([['/home']]);
   });
 
   it('should redirect the user to the redirect page query if he is logged', () => {
@@ -204,7 +204,7 @@ describe('LoginComponent', () => {
     component.submit();
 
     expect(spyRouterService.navigate).toHaveBeenCalled();
-    expect(spyRouterService.navigate.calls.mostRecent().args).toEqual([['/']]);
+    expect(spyRouterService.navigate.calls.mostRecent().args).toEqual([['/home']]);
   });
 
   it('should not redirect the user after a failed login', () => {
