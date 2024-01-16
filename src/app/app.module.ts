@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './layout/user/login/login.component';
@@ -63,7 +63,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { TripsPageComponent } from './layout/trips-page/trips-page.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SubscriptionDialogComponent } from './layout/trips-page/subscription/subscription-dialog/subscription-dialog.component';
+import { PublishedCarpoolingsComponent } from './layout/trips-page/published-carpoolings/published-carpoolings.component';
+import { PublishedCarpoolingDialogComponent } from './layout/trips-page/published-carpoolings/published-carpooling-dialog/published-carpooling-dialog.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
+registerLocaleData(localeFr);
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -125,6 +130,8 @@ const customNotifierOptions: NotifierOptions = {
     SubscriptionComponent,
     TripsPageComponent,
     SubscriptionDialogComponent,
+    PublishedCarpoolingsComponent,
+    PublishedCarpoolingDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -192,7 +199,9 @@ const customNotifierOptions: NotifierOptions = {
     {
       provide: MatPaginatorIntl,
       useClass: frPaginatorIntl 
-    }
+    },
+    { provide: LOCALE_ID, useValue: 'fr-FR' }
+
   ],
   bootstrap: [RootComponent]
 })

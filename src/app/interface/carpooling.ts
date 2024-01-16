@@ -21,7 +21,7 @@ export type CreateCarpoolPayload = {
     departure_date_time: number;
 }
 
-export type WeekDay = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
+export type WeekDay = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
 
 export type CreateSubscriptionPayload = {
     starting_point: number[];
@@ -52,6 +52,19 @@ export type Search = {
     departure_date_time: string;
 }
 
+export type publishedCarpooling = {
+    id: number;
+    starting_point: number[];
+    destination: number[];
+    max_passengers: number;
+    price: number;
+    departure_date_time: string;
+    is_canceled?: boolean;
+    driver_id?: number;
+    seats_taken?: number;
+    passengers: number[];
+}
+
 export interface CarpoolingServiceInterface {
     $carpoolings: BehaviorSubject<Carpooling[]>;
     publish: (carpool: CreateCarpoolPayload) => Observable<any>;
@@ -59,6 +72,8 @@ export interface CarpoolingServiceInterface {
     createSubscription: (subscription: CreateSubscriptionPayload) => Observable<any>;
     getSubscriptions: (token: string) => Observable<Subscription[]>;
     getCode: (carpooling_id: number) => Observable<number>;
+    getPublishedCarpoolings: (token: string) => Observable<publishedCarpooling[]>;
+    postCode: (passengerCode: number, carpoolingId: number) => Observable<any>;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');

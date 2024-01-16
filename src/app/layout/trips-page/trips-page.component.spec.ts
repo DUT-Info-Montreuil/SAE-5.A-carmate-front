@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TripsPageComponent } from './trips-page.component';
-import { CarpoolingServiceInterface, CARPOOLING_SERVICE_TOKEN, Subscription } from 'src/app/interface/carpooling';
+import { CarpoolingServiceInterface, CARPOOLING_SERVICE_TOKEN, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { of } from 'rxjs';
@@ -23,7 +23,7 @@ describe('TripsPageComponent', () => {
   let spyAddressService: jasmine.SpyObj<AddressServiceInterface>;
   let spyProfileService: jasmine.SpyObj<ProfilesServiceInterface>;
   beforeEach(() => {
-    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['getSubscriptions']);
+    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['getSubscriptions', 'getPublishedCarpoolings']);
     spyCarpoolingService.getSubscriptions.and.returnValue(of([
       {
         starting_point: [0, 0],
@@ -47,6 +47,18 @@ describe('TripsPageComponent', () => {
         ]
       }
     ]));
+    spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of([{
+      id: 1,
+      starting_point: [48.8558516, 2.3588636],
+      destination: [48.9757551, 2.559337],
+      price: 40,
+      is_canceled: false,
+      departure_date_time: "2024-01-13T08:30:00",
+      driver_id: 1,
+      max_passengers: 2,
+      seats_taken: 2,
+      passengers: [1, 2],
+    }]));
     spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getFormattedAddress']);
     spyAddressService.getFormattedAddress.and.returnValue(of(''));
     spyProfileService = jasmine.createSpyObj('ProfilesServiceInterface', ['getDriverProfile']);
@@ -97,6 +109,14 @@ describe('TripsPageComponent', () => {
     const getSubscriptionsSpy = spyCarpoolingService.getSubscriptions.and.returnValue(of([]));
     component.ngOnInit();
     expect(getSubscriptionsSpy).toHaveBeenCalled();
+    expect(component.subscriptions).toBeTruthy;
+  });
+
+  it('should call getPublishedCarpoolings on ngOnInit', () => {
+    const getPublishedCarpoolingsSpy = spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of([]));
+    component.ngOnInit();
+    expect(getPublishedCarpoolingsSpy).toHaveBeenCalled();
+    expect(component.publishedCarpoolings).toBeTruthy;
   });
 
   it('should set subscriptions on ngOnInit', () => {
@@ -126,5 +146,25 @@ describe('TripsPageComponent', () => {
     spyCarpoolingService.getSubscriptions.and.returnValue(of(testSubscriptions));
     component.ngOnInit();
     expect(component.subscriptions).toEqual(testSubscriptions);
+  });
+
+  it('should set publishedCarpoolings on ngOnInit', () => {
+    const testPublishedCarpoolings: publishedCarpooling[] = [
+      {
+        id: 1,
+        starting_point: [48.8558516, 2.3588636],
+        destination: [48.9757551, 2.559337],
+        price: 40,
+        is_canceled: false,
+        departure_date_time: "2024-01-15T08:30:00",
+        driver_id: 1,
+        max_passengers: 2,
+        seats_taken: 1,
+        passengers: [1, 2]
+      },
+    ];
+    spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of(testPublishedCarpoolings));
+    component.ngOnInit();
+    expect(component.publishedCarpoolings).toEqual(testPublishedCarpoolings);
   });
 });
