@@ -68,6 +68,14 @@ const routes: Routes = [
     {
       path: 'trips',
       component: TripsPageComponent
+    },
+    {
+      path: 'passenger-profile',
+      component: PassengerProfilesComponent
+    },
+    {
+      path: 'driver-profile',
+      component: DriverProfileComponent
     }
 ];
 

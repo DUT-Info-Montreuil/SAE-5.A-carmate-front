@@ -16,9 +16,12 @@ export class DriverProfileComponent {
   protected lastName: string | undefined;
   protected emailAddress: string | undefined;
   protected profilePictureBase64: string | null = null;
-  // From PassengerProfiles
+  // From DriverProfiles
   protected description: string = ' ';
   protected created_at: string | undefined;
+  protected nb_carpools_done: number | undefined;
+  protected first_name: string | undefined;
+  protected last_name: string | undefined;
 
   constructor(
     private router: Router,
@@ -29,7 +32,7 @@ export class DriverProfileComponent {
 
   ngOnInit() {
     this.userService.getUser().subscribe({
-      next: (user: User) => {
+      next: (user: User) => {        
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.emailAddress = user.emailAddress;
@@ -39,6 +42,7 @@ export class DriverProfileComponent {
           next: (driver_profile: DriverProfile) => {
             this.description = driver_profile.description;
             this.created_at = driver_profile.createdAt;
+            this.nb_carpools_done = driver_profile.nb_carpools_done;
           },
           error: (error: HttpErrorResponse) => {
             if (error.status === 401) {

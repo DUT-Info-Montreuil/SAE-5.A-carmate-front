@@ -19,7 +19,9 @@ export class PassengerProfilesComponent {
   // From PassengerProfiles
   protected description: string = ' '
   protected createdAt: string | undefined
-
+  protected nb_carpools_done: number | undefined;
+  protected first_name: string | undefined;
+  protected last_name: string | undefined;
   constructor(
     private router: Router,
     @Inject(PROFILE_SERVICE_TOKEN) private passengerProfilesService: ProfilesServiceInterface,
@@ -39,6 +41,7 @@ export class PassengerProfilesComponent {
           next: (passenger_profile: PassengerProfile) => {
             this.description = passenger_profile.description;
             this.createdAt = passenger_profile.createdAt;
+            this.nb_carpools_done = passenger_profile.nb_carpools_done;
           },
           error: (error: HttpErrorResponse) => {
             if (error.status === 401) {

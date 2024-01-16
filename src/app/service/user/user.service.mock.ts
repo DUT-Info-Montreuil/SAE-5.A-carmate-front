@@ -34,7 +34,7 @@ export class MockUserService implements UserServiceInterface {
     }
 
     getUser(): Observable<any> {
-        let user_id = this.getUserIdFromToken();
+        let user_id = this.getUserIdFromToken();        
         if (user_id < 0) {
             return throwError(() => new HttpErrorResponse({error: 'Not logged', status: 401}));
         }
@@ -46,7 +46,7 @@ export class MockUserService implements UserServiceInterface {
             }
         });
 
-        if (_user !== null)
+        if (_user === null)
             return throwError(() => new HttpErrorResponse({error: 'User nor found', status: 404}));
         return of(_user)
     }
