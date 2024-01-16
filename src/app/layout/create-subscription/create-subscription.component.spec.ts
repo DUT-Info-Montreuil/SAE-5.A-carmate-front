@@ -17,6 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { of } from "rxjs/internal/observable/of";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user";
 
 describe('CreateSubscriptionComponent', () => {
   let component: CreateSubscriptionComponent;
@@ -24,6 +25,7 @@ describe('CreateSubscriptionComponent', () => {
   let spyNotifierService: jasmine.SpyObj<NotifierServiceInterface>;
   let spyAddressService: jasmine.SpyObj<AddressServiceInterface>;
   let spyCarpoolingService: jasmine.SpyObj<CarpoolingServiceInterface>;
+  let spyAuthenticationService: jasmine.SpyObj<AuthenticationServiceInterface>;
 
   const selectLabel = async (inputUser: string) => {
     component["subForm"].controls.label.setValue(inputUser);
@@ -127,6 +129,7 @@ describe('CreateSubscriptionComponent', () => {
     ]);
     spyAddressService.formatAddress.and.returnValue('1 rue de la République, 13001 Marseille');
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['createSubscription', 'createSubscription']);
+    spyAuthenticationService = jasmine.createSpyObj('AuthenticationServiceInterface', ['isDriver']);
     TestBed.configureTestingModule({
       declarations: [CreateSubscriptionComponent],
       imports: [
@@ -145,7 +148,8 @@ describe('CreateSubscriptionComponent', () => {
       providers: [
         {provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifierService},
         {provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService},
-        {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService}
+        {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService},
+        {provide: AUTHENTICATION_SERVICE_TOKEN, useValue: spyAuthenticationService}
       ]
     });
     fixture = TestBed.createComponent(CreateSubscriptionComponent);

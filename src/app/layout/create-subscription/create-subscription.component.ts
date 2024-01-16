@@ -8,6 +8,7 @@ import { faClock, faEuro, faLocationDot, faUser, faCalendarDay } from '@fortawes
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user";
 
 @Component({
   selector: 'app-create-subscription',
@@ -42,7 +43,9 @@ export class CreateSubscriptionComponent {
     date_end: new FormControl("", [Validators.required, this.dateValidator()]),
     start_hour: new FormControl("", [Validators.required]),
     days: new FormControl("", [Validators.required]),
-    label: new FormControl("", [Validators.required])
+    label: new FormControl("", [Validators.required]),
+    is_carpooling: new FormControl(false),
+    max_passengers: new FormControl(1,[Validators.required, Validators.min(1), Validators.max(4)])
   });
   @ViewChild(MatAutocompleteTrigger) destinationTrigger!: MatAutocompleteTrigger;
   @ViewChild(MatAutocompleteTrigger) departureTrigger!: MatAutocompleteTrigger;
@@ -53,6 +56,7 @@ export class CreateSubscriptionComponent {
     @Inject(ADDRESS_SERVICE_TOKEN) private addressService: AddressServiceInterface,
     @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
     @Inject(NOTIFIER_SERVICE_TOKEN) private notifier: NotifierServiceInterface,
+    @Inject(AUTHENTICATION_SERVICE_TOKEN) protected authenticationService: AuthenticationServiceInterface,
     ) {}
 
   ngOnInit() {
@@ -128,7 +132,7 @@ export class CreateSubscriptionComponent {
       }
     };
   }
-  
+
   private dateValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
@@ -168,19 +172,22 @@ export class CreateSubscriptionComponent {
       days: this.subForm.get('days')!.getRawValue().map((day: WeekDay) => this.daysMapping[day]),
       label: this.subForm.get('label')!.value!
     }
+    if (this.is_driver) {
+      payload.max_passengers = this.subForm.get('max_passengers')!.value!;
+    }
 
     this.carpoolingService.createSubscription(payload).subscribe({
       next: () => {
-        this.notifier.success("L'abonnement a été crée avec succès");        
+        this.notifier.success("L'abonnement a été crée avec succès");
         this._snackBar.open("Souhaitez-vous regarder le résultat de votre abonnement ?", "Voir", {
           duration: 5000,
         }).onAction().subscribe(() => {
           this.router.navigate(['/carpooling/my-subscriptions']);
         });
       },
-      error: (error: HttpErrorResponse) => {        
+      error: (error: HttpErrorResponse) => {
         switch (error.status) {
-          case 400:            
+          case 400:
             this.notifier.error("Un ou plusieurs champs sont invalides.");
             break;
           case 401:
@@ -205,5 +212,9 @@ export class CreateSubscriptionComponent {
         }
       }
     })
+  }
+
+  get is_driver() {
+    return this.authenticationService.isDriver();
   }
 }
