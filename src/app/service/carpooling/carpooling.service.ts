@@ -52,7 +52,7 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
   }
 
   createSubscription(subscription: CreateSubscriptionPayload): Observable<any> {
-    return this.http.post<any>(`${environment.path}/regular/booking/create`, subscription, {
+    return this.http.post<any>(`${environment.path}/regular/${subscription.max_passengers ? 'carpooling' : 'booking'}`, subscription, {
       headers: {
         "authorization": `Bearer ${localStorage.getItem("auth_token")}`
       },
@@ -71,7 +71,7 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
       observe: 'response',
     });
   }
-  
+
   getCode(carpooling_id: number): Observable<number> {
     return this.http.get<number>(`${environment.path}/carpooling/TODO`, {
       headers: {
@@ -93,7 +93,7 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
       }
     });
   }
-  
+
   postCode (passengerCode: number, carpoolingId: number): Observable<any> {
     return this.http.get<publishedCarpooling[]>(`${environment.path}/TODO`, {
       headers: {

@@ -31,6 +31,7 @@ export type CreateSubscriptionPayload = {
     start_hour: string;
     days: WeekDay[];
     label: string;
+    max_passengers?: number;
 }
 
 export type Subscription = {

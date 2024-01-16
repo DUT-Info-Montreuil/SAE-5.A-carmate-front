@@ -56,6 +56,8 @@ import { frPaginatorIntl } from './utils/french-paginator-intl';
 import { SCORE_SERVICE_TOKEN } from './interface/score';
 import { ScoreService } from './service/score/score.service';
 import { MockScoreService } from './service/score/score.service.mock';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import { SubscriptionComponent } from './layout/trips-page/subscription/subscription.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
@@ -149,7 +151,6 @@ const customNotifierOptions: NotifierOptions = {
     MatFormFieldModule,
     MatIconModule,
     MatDividerModule,
-    MatButtonModule,
     MatAutocompleteModule,
     MatCardModule,
     MatTabsModule,
@@ -163,6 +164,8 @@ const customNotifierOptions: NotifierOptions = {
     MatListModule,
     MatMenuModule,
     MatDialogModule,
+    MatButtonToggleModule,
+    MatCheckboxModule
   ],
   providers: [
     {
@@ -172,11 +175,11 @@ const customNotifierOptions: NotifierOptions = {
     {
       provide: AUTHENTICATION_SERVICE_TOKEN,
       useClass: environment.production ? AuthenticationService : MockAuthenticationService,
-    }, 
+    },
     {
       provide: PROFILE_SERVICE_TOKEN,
       useClass: environment.production ? ProfilesService : MockProfilesService,
-    }, 
+    },
     {
       provide: USER_SERVICE_TOKEN,
       useClass: environment.production ? UserService : MockUserService,
@@ -198,7 +201,7 @@ const customNotifierOptions: NotifierOptions = {
     },
     {
       provide: MatPaginatorIntl,
-      useClass: frPaginatorIntl 
+      useClass: frPaginatorIntl
     },
     { provide: LOCALE_ID, useValue: 'fr-FR' }
 

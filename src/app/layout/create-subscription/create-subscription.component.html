@@ -2,7 +2,9 @@
    <form [formGroup]="subForm" (ngSubmit)="submit()" class="justify-center p-5 rounded-md shadow-md flex flex-col items-center gap-6 w-96">
 
         <h1 class="text-3xl" >Créer un abonnement</h1>
-
+        <div *ngIf="is_driver">
+          <mat-checkbox formControlName="is_carpooling">Créer un covoiturage régulier</mat-checkbox>
+        </div>
         <mat-form-field subscriptSizing="dynamic" class="w-full">
             <mat-label>Titre de l'abonnement</mat-label>
             <input matInput formControlName="label" placeholder="Aller tous les lundi et mardi du S1">
@@ -68,6 +70,12 @@
             <input matInput required formControlName="start_hour" type="time">
             <fa-icon [icon]="faClock" matSuffix class="pr-3"></fa-icon>
             <mat-error>Veuillez renseigner une heure de départ.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field subscriptSizing="dynamic" class="w-full" *ngIf="subForm.get('is_carpooling')?.value === true">
+          <mat-label>Nombre de passagers maximum</mat-label>
+          <input matInput required formControlName="max_passengers" type="number" min="1" max="4">
+          <mat-error>Veuillez renseigner un nombre de passager maximum.</mat-error>
         </mat-form-field>
 
         <button [disabled]="subForm.invalid" mat-raised-button class="ml-2 h-fit text-lg" type="submit" id="sub_id">Créer</button>
