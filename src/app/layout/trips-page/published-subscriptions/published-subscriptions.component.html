@@ -2,20 +2,20 @@
     <mat-expansion-panel-header>
         <mat-panel-title>
           <fa-icon [icon]="faTag" class="mr-3"></fa-icon>
-          <span>{{ subscription.label }}</span>
+          <span>{{ publishedSubscription.label }}</span>
         </mat-panel-title>
     </mat-expansion-panel-header>
     <mat-list>
       <mat-list-item class="mb-5">
         <div matListItemLine>
           <fa-icon matListItemIcon [icon]="faCalendar" class="mr-3"></fa-icon>
-          <span>{{ subscription.start_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR'}}</span>
+          <span>{{ publishedSubscription.start_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR'}}</span>
           <fa-icon matListItemIcon [icon]="faArrowRight" class="mx-2"></fa-icon>
-          <span>{{ subscription.end_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR'}}</span>
+          <span>{{ publishedSubscription.end_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR'}}</span>
         </div>
         <div matListItemLine>
           <fa-icon matListItemIcon [icon]="faRepeat" class="mr-3"></fa-icon>
-          <span *ngFor="let day of translateDays(subscription.days); let isLast=last">{{ day }}{{isLast ? '' : ', '}}</span>
+          <span *ngFor="let day of translateDays(publishedSubscription.days); let isLast=last">{{ day }}{{isLast ? '' : ', '}}</span>
         </div>
         <div matListItemLine>
           <fa-icon [icon]="faLocationDot" class="mr-3"></fa-icon>
@@ -25,7 +25,7 @@
         </div>
         <div matListItemLine>
           <fa-icon [icon]="faClock" class="mr-3"></fa-icon>
-          <span>{{ subscription.start_hour }}</span>
+          <span>{{ publishedSubscription.start_hour }}</span>
         </div>
       </mat-list-item>
 
@@ -36,8 +36,8 @@
           <div class="flex items-center">
             <fa-icon matListItemIcon [icon]="faCalendar" class="mr-2"></fa-icon>
             <span> Trajet du {{ carpolling.departure_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR' }} </span>
-            <button mat-stroked-button color="primary" *ngIf="carpolling.isToday" class="ml-5" (click)="openDialog(carpolling.id)">
-              Voir le code
+            <button class="ml-5" mat-stroked-button color="primary" *ngIf="carpolling.isToday" (click)="openDialog(carpolling.id)">
+              Entrer le code
             </button>
             <button *ngIf="!carpolling.isToday && !carpolling.isOutdated" matListItemMeta mat-button [disabled]="true" [disableRipple]="true">
               À venir
@@ -54,10 +54,6 @@
               <button mat-menu-item disabled>
                 <fa-icon [icon]="faXmark" class="mr-2"></fa-icon>
                 <span>Annuler le trajet</span>
-              </button>
-              <button mat-menu-item disabled>
-                <fa-icon [icon]="faStarHalfStroke" class="mr-2"></fa-icon>
-                <span>Noter</span>
               </button>
             </mat-menu>
           </div>
@@ -81,8 +77,14 @@
         </div>
         <div matListItemLine>
           <fa-icon matListItemIcon [icon]="faUser" class="mr-3"></fa-icon>
-          <span> {{ carpolling.seats_taken }}/{{ carpolling.max_passengers}}</span>
+          <span> {{ carpolling.seats_taken }}/{{ carpolling.max_passengers}} :</span>
+          <ul style="list-style: disc;">
+            <li *ngFor="let userName of carpolling.passengers" class="ml-10">
+                {{ userName }}
+            </li>
+        </ul>
         </div>
+
       </mat-list-item>
 
       <mat-divider></mat-divider>

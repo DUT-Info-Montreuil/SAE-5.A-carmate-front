@@ -79,6 +79,7 @@ import { ValidationService } from './service/admin/validation/validation.service
 import { SideBarComponent } from './layout/admin/side-bar/side-bar.component';
 import { CarpoolingDialogComponent } from './layout/carpooling-dialog/carpooling-dialog.component';
 import { MyCarpoolingsComponent } from './layout/trips-page/my-carpoolings/my-carpoolings.component';
+import { PublishedSubscriptionsComponent } from './layout/trips-page/published-subscriptions/published-subscriptions.component';
 
 registerLocaleData(localeFr);
 const customNotifierOptions: NotifierOptions = {
@@ -150,6 +151,7 @@ const customNotifierOptions: NotifierOptions = {
     PublishedCarpoolingDialogComponent,
     MyCarpoolingsComponent,
     CarpoolingDialogComponent,
+    PublishedSubscriptionsComponent,
   ],
   imports: [
     BrowserModule,

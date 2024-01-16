@@ -1,5 +1,5 @@
 import { Component, Inject, Input } from '@angular/core';
-import { Subscription, WeekDay } from 'src/app/interface/carpooling';
+import { PublishedSubscription, WeekDay } from 'src/app/interface/carpooling';
 import { 
   faCalendar,
   faCar,
@@ -11,7 +11,6 @@ import {
   faSpinner,
   faUser,
   faEllipsisV,
-  faStarHalfStroke,
   faXmark
   } from '@fortawesome/free-solid-svg-icons';
 import { registerLocaleData } from '@angular/common';
@@ -21,17 +20,17 @@ import * as moment from 'moment';
 import { take } from 'rxjs';
 import { PROFILE_SERVICE_TOKEN, ProfilesServiceInterface } from 'src/app/interface/profiles';
 import { MatDialog } from '@angular/material/dialog';
-import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
+import { PublishedCarpoolingDialogComponent } from '../published-carpoolings/published-carpooling-dialog/published-carpooling-dialog.component';
 
 registerLocaleData(localeFr, 'fr');
 
 @Component({
-  selector: 'app-subscription',
-  templateUrl: './subscription.component.html',
-  styleUrls: ['./subscription.component.scss']
+  selector: 'app-published-subscriptions',
+  templateUrl: './published-subscriptions.component.html',
+  styleUrls: ['./published-subscriptions.component.scss']
 })
 
-export class SubscriptionComponent {
+export class PublishedSubscriptionsComponent {
   protected readonly faCalendar = faCalendar;
   protected readonly faCar = faCar;
   protected readonly faArrowRight = faArrowRight;
@@ -42,9 +41,8 @@ export class SubscriptionComponent {
   protected readonly faSpinner = faSpinner;
   protected readonly faUser = faUser;
   protected readonly faEllipsisV = faEllipsisV;
-  protected readonly faStarHalfStroke = faStarHalfStroke;
   protected readonly faXmark = faXmark;
-  @Input() subscription!: Subscription;
+  @Input() publishedSubscription!: PublishedSubscription;
   startingPointToDisplay!: string;
   destinationToDisplay!: string;
   pendingCarpoolingsToDisplay!: Date[];
@@ -56,6 +54,7 @@ export class SubscriptionComponent {
     departure_hour: string,
     max_passengers: number,
     seats_taken: number,
+    passengers: string[],
     driver_first_name: string,
     driver_last_name: string,
     isToday: boolean,
@@ -75,13 +74,13 @@ export class SubscriptionComponent {
     @Inject(ADDRESS_SERVICE_TOKEN) private addressService: AddressServiceInterface,
     @Inject(PROFILE_SERVICE_TOKEN) private profileService: ProfilesServiceInterface,
     public dialog: MatDialog
-  ) {}
+    ) {}
 
   ngOnInit(): void {    
-    this.addressService.getFormattedAddress(this.subscription.starting_point).pipe(take(1)).subscribe((startingPoint) => {
+    this.addressService.getFormattedAddress(this.publishedSubscription.starting_point).pipe(take(1)).subscribe((startingPoint) => {
       this.startingPointToDisplay = startingPoint;
     });
-    this.addressService.getFormattedAddress(this.subscription.destination).pipe(take(1)).subscribe((destination) => {
+    this.addressService.getFormattedAddress(this.publishedSubscription.destination).pipe(take(1)).subscribe((destination) => {
       this.destinationToDisplay = destination;
     });
     this.generatePendingCarpoolings();
@@ -97,19 +96,19 @@ export class SubscriptionComponent {
     let dates: Date[] = [];
     let currentDate = moment();
 
-    while (currentDate.unix() <= this.subscription.end_date) {
-      if (this.subscription.days.includes(currentDate.format('dddd') as WeekDay)) {
+    while (currentDate.unix() <= this.publishedSubscription.end_date/1000) {
+      if (this.publishedSubscription.days.includes(currentDate.format('dddd') as WeekDay)) {
         dates.push(currentDate.toDate());
       }
       currentDate.add(1, 'days');
     }    
 
-    let carpoolingDates = this.subscription.carpools.map(c => moment(c.departure_date_time).startOf('day').unix());
+    let carpoolingDates = this.publishedSubscription.carpools.map(c => moment(c.departure_date_time).startOf('day').unix());
     this.pendingCarpoolingsToDisplay = dates.filter(date => !carpoolingDates.includes(moment(date).startOf('day').unix()));
   }
 
   private generateBookedCarpoolings(): void {
-    this.subscription.carpools.filter(c => !c.is_canceled).forEach(carpool => {
+    this.publishedSubscription.carpools.filter(c => !c.is_canceled).forEach(carpool => {
       let bookedCarpoolingToDisplay: {
         id: number,
         starting_point: string,
@@ -118,18 +117,20 @@ export class SubscriptionComponent {
         departure_hour: string,
         max_passengers: number,
         seats_taken: number,
+        passengers: string[],
         driver_first_name: string,
         driver_last_name: string,
         isToday: boolean,
         isOutdated: boolean,
       } = {
-        id: carpool.id!,
+        id: carpool.id,
         starting_point: '',
         destination: '',
         departure_date: new Date(carpool.departure_date_time),
         departure_hour: '',
         max_passengers: carpool.max_passengers,
         seats_taken: carpool.seats_taken!,
+        passengers: [],
         driver_first_name: '',
         driver_last_name: '',
         isToday: false,
@@ -146,18 +147,24 @@ export class SubscriptionComponent {
         bookedCarpoolingToDisplay.driver_first_name = profile.first_name;
         bookedCarpoolingToDisplay.driver_last_name = profile.last_name;
       });
+      carpool.passengers.forEach(passengerId => {
+        this.profileService.getPassengerProfile(passengerId).pipe(take(1)).subscribe((profile) => {
+          bookedCarpoolingToDisplay.passengers.push(`${profile.first_name} ${profile.last_name}`);
+        });
+      });
+
       bookedCarpoolingToDisplay.departure_hour = bookedCarpoolingToDisplay.departure_date.toLocaleTimeString()
       bookedCarpoolingToDisplay.isToday = moment(bookedCarpoolingToDisplay.departure_date).isSame(moment(), 'day');
-      bookedCarpoolingToDisplay.isOutdated = moment(bookedCarpoolingToDisplay.departure_date).isBefore(moment(), 'day');      
-      this.bookedCarpoolingsToDisplay.push(bookedCarpoolingToDisplay);
-    }); 
+      bookedCarpoolingToDisplay.isOutdated = moment(bookedCarpoolingToDisplay.departure_date).isBefore(moment(), 'day');
+      this.bookedCarpoolingsToDisplay.push(bookedCarpoolingToDisplay);            
+    });    
   }
 
   openDialog(carpooling_id: number): void {
-    this.dialog.open(SubscriptionDialogComponent, {
-      width: '360px',
+    this.dialog.open(PublishedCarpoolingDialogComponent, {
+      width: '340px',
       data: {id: carpooling_id}
-    });    
+    });
   }
 
   sortCarpoolings(): void {

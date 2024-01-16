@@ -24,6 +24,10 @@
             <fa-icon [icon]="faClock" class="mx-3"></fa-icon>
             <span>{{ carpoolingToDisplay.departureTime }}</span>
         </div>
+        <div>
+          <fa-icon [icon]="faUser" class="mx-3"></fa-icon>
+          <span>{{ carpoolingToDisplay.seats_takens }}/{{ carpoolingToDisplay.max_passengers }}</span>
+      </div>
     </div>
     <div>
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

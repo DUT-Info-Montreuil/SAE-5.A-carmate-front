@@ -1,5 +1,6 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
-import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
+import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface, PublishedSubscription, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
+import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from 'src/app/interface/user';
 
 @Component({
   selector: 'app-trips-page',
@@ -10,24 +11,34 @@ import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface, Subsc
 
 export class TripsPageComponent {
   subscriptions: Subscription[] = [];
+  publishedSubscriptions: PublishedSubscription[] = [];
   publishedCarpoolings: publishedCarpooling[] = [];
   carpoolings: Carpooling[] = [];
 
   constructor(
     @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
+    @Inject(AUTHENTICATION_SERVICE_TOKEN) public authService: AuthenticationServiceInterface,
   ) {}
 
   ngOnInit() {
-    this.carpoolingService.getSubscriptions(localStorage.getItem('auth_token') ?? '').subscribe((subscriptions: Subscription[]) => {
+    this.carpoolingService.getSubscriptions().subscribe((subscriptions: Subscription[]) => {
       this.subscriptions = subscriptions;
     });
 
-    this.carpoolingService.getPublishedCarpoolings(localStorage.getItem('auth_token') ?? '').subscribe((bookedCarpoolings: publishedCarpooling[]) => {
+    this.carpoolingService.getPublishedSubscriptions().subscribe((publishedSubscriptions: PublishedSubscription[]) => {
+      this.publishedSubscriptions = publishedSubscriptions;
+    });
+
+    this.carpoolingService.getPublishedCarpoolings().subscribe((bookedCarpoolings: publishedCarpooling[]) => {
       this.publishedCarpoolings = bookedCarpoolings;
     });
 
     this.carpoolingService.getCarpoolings().subscribe((carpoolings: Carpooling[]) => {
       this.carpoolings = carpoolings;
     });
+  }
+
+  IsDriver(){
+    return this.authService.isDriver();
   }
 }
