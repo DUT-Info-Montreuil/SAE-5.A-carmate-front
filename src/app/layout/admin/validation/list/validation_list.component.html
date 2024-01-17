@@ -1,0 +1,45 @@
+<main class="main">
+  <div class="list_">
+    <div class="verif-document-main">
+      <h1 class="text-center">Document A Verifier</h1>
+      <table style="width: 100%; margin-top: 5%;">
+        <tr>
+          <td>type de compte</td>
+          <td>nom</td>
+          <td>prenom</td>
+          <td>date</td>
+          <td></td>
+        </tr>
+        <tr *ngFor="let item of user_list">
+          <td>{{ item.license_type }}</td>
+          <td>{{ item.first_name }}</td>
+          <td>{{ item.last_name }}</td>
+          <td>{{ item.published_at.toLocaleString() }}</td>
+          <td>
+            <button class="verify" (click)="showDocument(item.document_id)">Verifier</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="paging">
+      <button (click)="previousPage()" id="previous">
+        <fa-icon [icon]="faAnglesLeft" class="fa-id-arrow-icon"></fa-icon>
+      </button>
+      <button class="next-prev" (click)="previousPage()">Previous</button>
+      <div id="pageList">
+        <button
+          *ngFor="let button of pageButtons"
+          class="paging-number"
+          [ngClass]="{ 'bold-class': button.isCurrent }"
+          (click)="changePage(button.value)"
+        >
+          {{ button.value }}
+        </button>
+      </div>
+      <button class="next-prev" (click)="nextPage()" id="next">Next</button>
+      <button (click)="nextPage()">
+        <fa-icon [icon]="faAnglesRight" class="fa-id-arrow-icon"></fa-icon>
+      </button>
+    </div>
+  </div>
+</main>

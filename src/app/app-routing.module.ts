@@ -6,6 +6,9 @@ import { HomePageComponent } from './layout/home-page/home-page.component';
 import { PublishCarpoolComponent } from './layout/publish-carpool/publish-carpool.component';
 import { PassengerProfilesComponent } from './layout/user/passenger-profile/passenger-profiles.component';
 import { DriverProfileComponent } from './layout/user/driver-profile/driver-profile.component';
+import { ValidationComponent } from './layout/admin/validation/list/validation_list.component';
+import { ValidationDocComponent } from './layout/admin/validation/document/validation_doc.component';
+import { SideBarComponent } from "./layout/admin/side-bar/side-bar.component";
 import { CreateSubscriptionComponent } from './layout/create-subscription/create-subscription.component';
 import { ScoreboardPageComponent } from './layout/scoreboard-page/scoreboard-page.component';
 import {BecomeDriverComponent} from "./layout/become-driver/become-driver.component";
@@ -35,6 +38,20 @@ const routes: Routes = [
     {
       path: 'driver-profile',
       component: DriverProfileComponent
+    },
+    {
+      path: 'admin',
+      component: SideBarComponent,
+      children: [
+        {
+          path: 'license/to-validate',
+          component: ValidationComponent
+        },
+        {
+          path: 'license',
+          component: ValidationDocComponent
+        },
+      ]
     },
     {
       path: 'create-subscription',
