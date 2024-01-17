@@ -36,7 +36,7 @@
           <div class="flex items-center">
             <fa-icon matListItemIcon [icon]="faCalendar" class="mr-2"></fa-icon>
             <span> Trajet du {{ carpolling.departure_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR' }} </span>
-            <button matListItemMeta mat-stroked-button color="primary" *ngIf="carpolling.isToday" (click)="openDialog(carpolling.id)">
+            <button matListItemMeta mat-stroked-button color="primary" *ngIf="carpolling.isToday" (click)="openCarpoolingDialog(carpolling.id)">
               Voir le code
             </button>
             <button *ngIf="!carpolling.isToday && !carpolling.isOutdated" matListItemMeta mat-button [disabled]="true" [disableRipple]="true">
@@ -55,7 +55,7 @@
                 <fa-icon [icon]="faXmark" class="mr-2"></fa-icon>
                 <span>Annuler le trajet</span>
               </button>
-              <button mat-menu-item disabled>
+              <button mat-menu-item (click)="openRatingDialog(carpolling.id)">
                 <fa-icon [icon]="faStarHalfStroke" class="mr-2"></fa-icon>
                 <span>Noter</span>
               </button>

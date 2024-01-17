@@ -22,6 +22,7 @@ import { take } from 'rxjs';
 import { PROFILE_SERVICE_TOKEN, ProfilesServiceInterface } from 'src/app/interface/profiles';
 import { MatDialog } from '@angular/material/dialog';
 import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
+import { RatingDialogComponent } from 'src/app/rating-dialog/rating-dialog.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -152,10 +153,18 @@ export class SubscriptionComponent {
     }); 
   }
 
-  openDialog(carpooling_id: number): void {
+  openCarpoolingDialog(carpooling_id: number): void {
     this.dialog.open(SubscriptionDialogComponent, {
       width: '360px',
       data: {id: carpooling_id}
     });    
+  }
+
+
+  openRatingDialog(carpooling_id: number): void {
+    this.dialog.open(RatingDialogComponent, {
+      width: '500px',
+      data: {id: carpooling_id}
+    });
   }
 }

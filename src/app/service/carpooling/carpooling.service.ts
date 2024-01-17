@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, CreateSubscriptionPayload, Search, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
+import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, CreateSubscriptionPayload, RatingPayload, Search, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
 import { environment } from "../../environement/environement";
 import { AbstractService } from "../abstractService";
 import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from "src/app/interface/other";
@@ -120,5 +120,16 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
         "authorization": `Bearer ${localStorage.getItem("auth_token")}`
       }
     });
+  }
+
+  rate(payload: RatingPayload): Observable<any> {
+    console.log('prout');
+    
+      return this.http.post<any>(`${environment.path}/TODO`, {
+        headers: {
+          "authorization": `Bearer ${localStorage.getItem("auth_token")}`
+        }
+      });
+
   }
 }

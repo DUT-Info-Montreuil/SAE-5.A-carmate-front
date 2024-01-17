@@ -1,0 +1,29 @@
+<form [formGroup]="ratingForm" class="flex flex-col items-center p-5">
+
+    <mat-form-field subscriptSizing="dynamic" class="w-full mt-3">
+        <mat-label>economic_driving_rating</mat-label><br>
+        <input matInput required formControlName="economic_driving_rating" type="number" min="1" max="5">
+        <mat-error *ngIf="ratingForm.get('economic_driving_rating')!.hasError('required')">Veuillez renseigner une note.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic" class="w-full mt-3">
+        <mat-label>Note de conduite sûre</mat-label>
+        <input matInput required formControlName="safe_driving_rating" type="number" min="1" max="5">
+        <mat-error *ngIf="ratingForm.get('safe_driving_rating')!.hasError('required')">Veuillez renseigner une note.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>sociability_rating</mat-label><br>
+        <input matInput required formControlName="sociability_rating" type="number" min="1" max="5">
+        <mat-error *ngIf="ratingForm.get('economic_driving_rating')!.hasError('required')">Veuillez renseigner une note.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Commentaire</mat-label>
+        <textarea matInput formControlName="comment" style="resize: none;"></textarea>
+    </mat-form-field>
+
+    <button type="submit" (click)="submitRating" mat-raised-button [disabled]="!ratingForm.valid" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Valider
+    </button>
+</form>

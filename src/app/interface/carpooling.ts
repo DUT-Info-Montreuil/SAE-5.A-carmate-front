@@ -69,6 +69,13 @@ export type publishedCarpooling = {
     passengers: number[];
 }
 
+export type RatingPayload = {
+    id_carpooling: number;
+    economic_driving_rating: number;
+    safe_driving_rating: number;
+    sociability_rating: number;
+}
+
 export interface CarpoolingServiceInterface {
     $carpoolings: BehaviorSubject<Carpooling[]>;
     publish: (carpool: CreateCarpoolPayload) => Observable<any>;
@@ -80,6 +87,7 @@ export interface CarpoolingServiceInterface {
     postCode: (passengerCode: number, carpoolingId: number) => Observable<any>;
     book: (id: number, is_scheduled?: boolean, date?: number) => Observable<any>;
     getCarpoolings: () => Observable<Carpooling[]>;
+    rate: (payload: RatingPayload) => Observable<any>;
 }
 
 export const CARPOOLING_SERVICE_TOKEN = new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');

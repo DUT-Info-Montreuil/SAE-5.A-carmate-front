@@ -5,7 +5,7 @@
             <span>{{ carpoolingToDisplay.departure }}</span>
             <fa-icon [icon]="faArrowRight" class="mx-3"></fa-icon>
             <span>{{ carpoolingToDisplay.destination }}</span>
-            <button mat-stroked-button color="primary" *ngIf="carpoolingToDisplay.isToday" class="ml-5" (click)="openDialog()">
+            <button mat-stroked-button color="primary" *ngIf="carpoolingToDisplay.isToday" class="ml-5" (click)="openCaropolingDialog()">
                 Voir le code
             </button>
             <button *ngIf="!carpoolingToDisplay.isToday && !carpoolingToDisplay.isOutdated"
@@ -34,7 +34,7 @@
             <fa-icon [icon]="faXmark" class="mr-2"></fa-icon>
             <span>Annuler le trajet</span>
           </button>
-          <button mat-menu-item disabled>
+          <button mat-menu-item (click)="openRatingDialog">
             <fa-icon [icon]="faStarHalfStroke" class="mr-2"></fa-icon>
             <span>Noter</span>
           </button>

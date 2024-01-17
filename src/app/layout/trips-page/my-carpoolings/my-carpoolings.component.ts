@@ -5,6 +5,7 @@ import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interfac
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { CarpoolingDialogComponent } from './carpooling-dialog/carpooling-dialog.component';
+import { RatingDialogComponent } from 'src/app/rating-dialog/rating-dialog.component';
 
 @Component({
   selector: 'app-my-carpoolings',
@@ -62,9 +63,16 @@ export class MyCarpoolingsComponent {
     this.carpoolingToDisplay.isOutdated = moment(this.carpooling.departure_date_time).isBefore(moment(), 'day');
   }
 
-  openDialog(): void {
+  openCaropolingDialog(): void {
     this.dialog.open(CarpoolingDialogComponent, {
       width: '340px',
+      data: {id: this.carpooling.id}
+    });
+  }
+
+  openRatingDialog(): void {
+    this.dialog.open(RatingDialogComponent, {
+      width: '500px',
       data: {id: this.carpooling.id}
     });
   }
