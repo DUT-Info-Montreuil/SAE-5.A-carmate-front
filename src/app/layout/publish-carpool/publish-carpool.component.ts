@@ -32,11 +32,11 @@ export class PublishCarpoolComponent {
     max_passengers: new FormControl("", [Validators.required, this.max_passengersValidator()]),
     price: new FormControl("", [Validators.required, this.priceValidator(), Validators.min(1)]),
     departure_date: new FormControl("", [Validators.required]),
-    departure_time: new FormControl("", [Validators.required]), 
+    departure_time: new FormControl("", [Validators.required]),
   });
   @ViewChild(MatAutocompleteTrigger) destinationTrigger!: MatAutocompleteTrigger;
   @ViewChild(MatAutocompleteTrigger) departureTrigger!: MatAutocompleteTrigger;
-  
+
   constructor(
     @Inject(ADDRESS_SERVICE_TOKEN) private addressService: AddressServiceInterface,
     @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
@@ -175,6 +175,10 @@ export class PublishCarpoolComponent {
             break;
           case 403:
             this.notifier.error("Le rôle de conducteur n'est pas encore validé.");
+            break;
+          case 409:
+            this.notifier.error("Création impossible: \
+            Cet abonnement est en conflit avec une réservation, un covoiturage créer un autre abonnement ou un covoiturage régulier");
             break;
           default:
             this.notifier.error("Erreur interne.");
