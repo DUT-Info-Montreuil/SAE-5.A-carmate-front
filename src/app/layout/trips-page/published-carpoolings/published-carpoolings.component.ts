@@ -2,7 +2,7 @@ import { Component, Inject, Input } from '@angular/core';
 import { publishedCarpooling } from 'src/app/interface/carpooling';
 import { faCar, faLocationDot, faArrowRight, faCalendar, faClock, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interface/other';
-import { PROFILE_SERVICE_TOKEN, ProfilesServiceInterface } from 'src/app/interface/profiles';
+import {PassengerProfile, PROFILE_SERVICE_TOKEN, ProfilesServiceInterface} from 'src/app/interface/profiles';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { PublishedCarpoolingDialogComponent } from './published-carpooling-dialog/published-carpooling-dialog.component';
@@ -38,11 +38,13 @@ export class PublishedCarpoolingsComponent {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    const date = new Date(this.publishedCarpooling.departure_date_time)
+    date.setHours(date.getHours() - 1)
     this.carpoolingToDisplay = {
       departure: '',
       destination: '',
-      departureDate: new Date(this.publishedCarpooling.departure_date_time),
+      departureDate: new Date(date),
       departureTime: '',
       max_passengers: this.publishedCarpooling.max_passengers,
       seats_takens: this.publishedCarpooling.seats_taken!,
@@ -50,6 +52,7 @@ export class PublishedCarpoolingsComponent {
       isToday: false,
       isOutdated: false,
     };
+
     this.addressService.getFormattedAddress(this.publishedCarpooling.starting_point).subscribe(
       (address) => {
         this.carpoolingToDisplay.departure = address;
@@ -60,16 +63,9 @@ export class PublishedCarpoolingsComponent {
         this.carpoolingToDisplay.destination = address;
       }
     );
-    this.publishedCarpooling.passengers.forEach((passenger) => {
-      this.profileService.getPassengerProfile(passenger).subscribe(
-        (profile) => {
-          this.carpoolingToDisplay.passengers.push(profile.first_name + ' ' + profile.last_name);
-        }
-      );
-    });
-    this.carpoolingToDisplay.departureTime = moment(this.publishedCarpooling.departure_date_time).format('HH:mm');
-    this.carpoolingToDisplay.isToday = moment(this.publishedCarpooling.departure_date_time).isSame(moment(), 'day');
-    this.carpoolingToDisplay.isOutdated = moment(this.publishedCarpooling.departure_date_time).isBefore(moment(), 'day');
+    this.carpoolingToDisplay.departureTime = moment(date).format('HH:mm');
+    this.carpoolingToDisplay.isToday = moment(date).isSame(moment(), 'day');
+    this.carpoolingToDisplay.isOutdated = moment(date).isBefore(moment(), 'day');
   }
 
   openDialog(): void {
@@ -77,5 +73,5 @@ export class PublishedCarpoolingsComponent {
       width: '340px',
       data: {id: this.publishedCarpooling.id}
     });
-  } 
+  }
 }

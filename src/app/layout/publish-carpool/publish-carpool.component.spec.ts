@@ -86,7 +86,7 @@ describe('PublishCarpoolComponent', () => {
   }
 
   const selectPrice = async (inputUser: number) => {
-    component["publishForm"].controls.price.setValue(String(inputUser));
+    component["publishForm"].controls.price.setValue(inputUser);
     await fixture.whenStable();
     fixture.detectChanges();
   }
@@ -167,7 +167,7 @@ describe('PublishCarpoolComponent', () => {
 
   it('should enbale the submit button when selecting the first autocomplete option and filling the date manually', (async () => {
     const button = fixture.debugElement.query(By.css('#publish_id')).nativeElement;
-    
+
     spyAddressService.getAddressByString.and.returnValue(of([{
       address: {
         house_number: '1',
@@ -267,7 +267,7 @@ describe('PublishCarpoolComponent', () => {
   }));
 
   it('should invalidate input when the price is not valid', (async () => {
-    await selectPrice(0);
+    await selectPrice(-1);
 
     expect(component["publishForm"].controls.price.invalid)
       .withContext('price should be invalid when <= 0')
@@ -338,12 +338,12 @@ describe('PublishCarpoolComponent', () => {
       .toEqual(1);
 
     spyNotifierService.error.calls.reset();
-      
+
     spyCarpoolingService.publish.and.returnValue(throwError(() => new HttpErrorResponse({
       error: 'Driver role not yet assigned',
       status: 403
     })));
-  
+
     button.click();
 
     expect(spyNotifierService.error)
@@ -358,7 +358,7 @@ describe('PublishCarpoolComponent', () => {
     spyCarpoolingService.publish.and.returnValue(throwError(() => new HttpErrorResponse({
       error: 'Internal server error'
     })));
-  
+
     button.click();
 
     expect(spyNotifierService.error)

@@ -9,7 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { of } from 'rxjs';
 import { AddressServiceInterface, ADDRESS_SERVICE_TOKEN } from 'src/app/interface/other';
-import { ProfilesServiceInterface, PROFILE_SERVICE_TOKEN } from 'src/app/interface/profiles';
+import {ProfilesServiceInterface, PROFILE_SERVICE_TOKEN, PassengerProfile} from 'src/app/interface/profiles';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -91,7 +91,16 @@ describe('PublishedSubscriptionsComponent', () => {
         driver_id: 1,
         max_passengers: 2,
         seats_taken: 1,
-        passengers: [1, 2]
+        passengers_profile: [
+          {
+          first_name: 'John',
+          last_name: 'Doe'
+          } as PassengerProfile,
+          {
+            first_name: 'Johny',
+            last_name: 'Doey'
+          } as PassengerProfile
+        ]
       }]
     };
     component.dayTranslations = {

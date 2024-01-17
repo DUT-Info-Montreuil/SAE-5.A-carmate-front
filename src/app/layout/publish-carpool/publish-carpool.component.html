@@ -35,9 +35,9 @@
             <mat-error>Veuillez renseigner entre 1 et 4 passagers.</mat-error>
         </mat-form-field>
 
-        <mat-form-field subscriptSizing="dynamic" class="w-full">
+        <mat-form-field subscriptSizing="dynamic" class="w-full !hidden">
             <mat-label>Prix</mat-label>
-            <input matInput required formControlName="price" type="number" min="1">
+            <input matInput required formControlName="price" type="number" min="0">
             <fa-icon [icon]="faEuro" matSuffix class="pr-3"></fa-icon>
             <mat-error *ngIf="publishForm.get('price')!.hasError('required')">Veuillez renseigner un prix.</mat-error>
             <mat-error *ngIf="publishForm.get('price')!.hasError('min')">Le prix doit être supérieur à 0.</mat-error>
@@ -49,7 +49,7 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-error>Veuillez renseigner une date de départ.</mat-error>
             <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field> 
+        </mat-form-field>
 
         <mat-form-field subscriptSizing="dynamic" class="w-full">
             <mat-label>Heure de départ</mat-label>

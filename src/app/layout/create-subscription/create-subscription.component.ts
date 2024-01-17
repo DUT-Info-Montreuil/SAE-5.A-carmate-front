@@ -166,13 +166,13 @@ export class CreateSubscriptionComponent {
     let payload: CreateSubscriptionPayload  = {
       starting_point: this.starting_coords,
       destination: this.destination_coords,
-      start_date: date_start.getTime(),
-      end_date: date_end.getTime(),
+      start_date: date_start.getTime() / 1000,
+      end_date: date_end.getTime() / 1000,
       start_hour: this.subForm.get('start_hour')!.value!,
       days: this.subForm.get('days')!.getRawValue().map((day: WeekDay) => this.daysMapping[day]),
       label: this.subForm.get('label')!.value!
     }
-    if (this.is_driver) {
+    if (this.subForm.get('is_carpooling')!.value!) {
       payload.max_passengers = this.subForm.get('max_passengers')!.value!;
     }
 

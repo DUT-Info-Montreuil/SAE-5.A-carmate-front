@@ -20,7 +20,7 @@ export class MyCarpoolingsComponent {
   protected readonly faUser = faUser;
   protected readonly faXmark = faXmark;
   protected readonly faStarHalfStroke = faStarHalfStroke;
-  @Input() carpooling!: Carpooling;
+  @Input() carpooling!: Carpooling & {passenger_code?: number}
   carpoolingToDisplay!: {
     departure: string,
     destination: string,
@@ -28,6 +28,7 @@ export class MyCarpoolingsComponent {
     departureTime: string,
     max_passengers: number,
     seats_takens: number,
+    passenger_code: number,
     isToday: boolean,
     isOutdated: boolean,
   };
@@ -36,14 +37,18 @@ export class MyCarpoolingsComponent {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    const date = new Date(this.carpooling.departure_date_time)
+    date.setHours(date.getHours() - 1)
+
     this.carpoolingToDisplay = {
       departure: '',
       destination: '',
-      departureDate: new Date(this.carpooling.departure_date_time),
+      departureDate: date,
       departureTime: '',
       max_passengers: this.carpooling.max_passengers,
       seats_takens: this.carpooling.seats_taken!,
+      passenger_code: this.carpooling.passenger_code!,
       isToday: false,
       isOutdated: false,
     };
@@ -57,15 +62,15 @@ export class MyCarpoolingsComponent {
         this.carpoolingToDisplay.destination = address;
       }
     );
-    this.carpoolingToDisplay.departureTime = moment(this.carpooling.departure_date_time).format('HH:mm');
-    this.carpoolingToDisplay.isToday = moment(this.carpooling.departure_date_time).isSame(moment(), 'day');
-    this.carpoolingToDisplay.isOutdated = moment(this.carpooling.departure_date_time).isBefore(moment(), 'day');
+    this.carpoolingToDisplay.departureTime = moment(date).format('HH:mm');
+    this.carpoolingToDisplay.isToday = moment(date).isSame(moment(), 'day');
+    this.carpoolingToDisplay.isOutdated = moment(date).isBefore(moment(), 'day');
   }
 
   openDialog(): void {
     this.dialog.open(CarpoolingDialogComponent, {
       width: '340px',
-      data: {id: this.carpooling.id}
+      data: {code: this.carpooling.passenger_code}
     });
   }
 }

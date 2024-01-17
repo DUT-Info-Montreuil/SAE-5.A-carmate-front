@@ -25,11 +25,11 @@ export class ResultCarpoolComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes['_searchParams'].previousValue || 
+    if (!changes['_searchParams'].previousValue ||
       changes['_searchParams'].currentValue.start_lat !== changes['_searchParams'].previousValue.start_lat ||
-      changes['_searchParams'].currentValue.start_lon !== changes['_searchParams'].previousValue.start_lon) 
+      changes['_searchParams'].currentValue.start_lon !== changes['_searchParams'].previousValue.start_lon)
     {
-      this.starting_pointUserToDisplay = [this._searchParams.start_lat, this._searchParams.start_lon]; 
+      this.starting_pointUserToDisplay = [this._searchParams.start_lat, this._searchParams.start_lon];
     }
   }
 

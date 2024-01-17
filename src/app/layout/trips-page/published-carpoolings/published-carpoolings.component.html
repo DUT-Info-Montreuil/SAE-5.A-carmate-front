@@ -26,14 +26,7 @@
         </div>
         <div>
             <fa-icon [icon]="faUser" class="mx-3"></fa-icon>
-            <span>{{ carpoolingToDisplay.seats_takens }}/{{ carpoolingToDisplay.max_passengers }} : </span>
-        </div>
-        <div>
-            <ul style="list-style: disc;">
-                <li *ngFor="let user of carpoolingToDisplay.passengers" class="ml-10">
-                    {{ user }}
-                </li>
-            </ul>
+            <span>{{ carpoolingToDisplay.seats_takens }}/{{ carpoolingToDisplay.max_passengers }} </span>
         </div>
     </div>
     <div>

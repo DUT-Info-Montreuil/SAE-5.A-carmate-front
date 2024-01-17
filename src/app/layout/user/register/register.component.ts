@@ -145,7 +145,7 @@ export class RegisterComponent {
   }
 
   private redirect() {
-    this.router.navigate([this.redirection || '/']);
+    this.router.navigate([this.redirection || '/home']);
   }
 
   get firstName() {

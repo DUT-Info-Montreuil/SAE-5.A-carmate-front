@@ -3,6 +3,7 @@ import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, Published
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other';
+import {PassengerProfile} from "../../interface/profiles";
 
 @Injectable({
   providedIn: 'root'
@@ -193,7 +194,16 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           driver_id: 1,
           max_passengers: 2,
           seats_taken: 1,
-          passengers: [1, 2]
+          passengers_profile: [
+            {
+              first_name: 'John',
+              last_name: 'Doe'
+            } as PassengerProfile,
+            {
+              first_name: 'Johny',
+              last_name: 'Doey'
+            } as PassengerProfile
+          ]
         },
         {
           id: 2,
@@ -205,7 +215,12 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           driver_id: 2,
           max_passengers: 3,
           seats_taken: 2,
-          passengers: [3]
+          passengers_profile: [
+            {
+              first_name: 'John',
+              last_name: 'Doe'
+            } as PassengerProfile
+          ]
         },
         {
           id: 3,
@@ -217,7 +232,12 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           driver_id: 2,
           max_passengers: 1,
           seats_taken: 1,
-          passengers: [1]
+          passengers_profile: [
+            {
+              first_name: 'John',
+              last_name: 'Doe'
+            } as PassengerProfile
+          ]
         },
       ],
     },
@@ -240,7 +260,16 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           driver_id: 5,
           max_passengers: 3,
           seats_taken: 2,
-          passengers: [1, 2]
+          passengers_profile: [
+            {
+              first_name: 'John',
+              last_name: 'Doe'
+            } as PassengerProfile,
+            {
+              first_name: 'Johny',
+              last_name: 'Doey'
+            } as PassengerProfile
+          ]
         },
       ],
     },
@@ -257,7 +286,16 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
       driver_id: 1,
       max_passengers: 2,
       seats_taken: 1,
-      passengers: [1, 2]
+      passengers_profile: [
+        {
+          first_name: 'John',
+          last_name: 'Doe'
+        } as PassengerProfile,
+        {
+          first_name: 'Johny',
+          last_name: 'Doey'
+        } as PassengerProfile
+      ]
     },
     {
       id: 2,
@@ -269,7 +307,12 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
       driver_id: 2,
       max_passengers: 3,
       seats_taken: 2,
-      passengers: [3]
+      passengers_profile: [
+        {
+          first_name: 'John',
+          last_name: 'Doe'
+        } as PassengerProfile
+      ]
     }
   ];
 
@@ -366,7 +409,7 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
   getCode(carpooling_id: number): Observable<number> {
     return of(123456);
   }
-  
+
   getPublishedSubscriptions(): Observable<PublishedSubscription[]> {
     return of(this.$publishedSubscriptions);
   }
@@ -376,13 +419,13 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
   }
 
   postCode(passengerCode: number, carpoolingId: number) : Observable<any> {
-    if (passengerCode == 123456) {      
+    if (passengerCode == 123456) {
       return of('');
     } else {
       return throwError(() => new HttpErrorResponse({error: 'Code invalide', status: 400}));
     }
   }
-    
+
   book(id: number): Observable<any> {
     if (id !== undefined) {
       this.$carpoolings.next(this.$carpoolings.getValue());
@@ -391,7 +434,7 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
     }
     return of('');
   }
-  
+
   getCarpoolings(): Observable<Carpooling[]> {
     return of(this.$myCarpoolings);
   }

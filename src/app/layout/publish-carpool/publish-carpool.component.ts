@@ -30,7 +30,7 @@ export class PublishCarpoolComponent {
     starting_point: new FormControl("", [Validators.required, this.starting_pointValidator()]),
     destination: new FormControl("", [Validators.required,  this.destinationtValidator()]),
     max_passengers: new FormControl("", [Validators.required, this.max_passengersValidator()]),
-    price: new FormControl("", [Validators.required, this.priceValidator(), Validators.min(1)]),
+    price: new FormControl(0, [Validators.required, this.priceValidator()]),
     departure_date: new FormControl("", [Validators.required]),
     departure_time: new FormControl("", [Validators.required]),
   });
@@ -135,7 +135,7 @@ export class PublishCarpoolComponent {
 
   private priceValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if (control.value > 0) {
+      if (control.value >= 0) {
         return null;
       } else {
         return { 'Invalid price input': true };

@@ -63,8 +63,6 @@ export class ValidationDocComponent {
   public recharge_page(idDocument: number) {
     this.validDocService.getDocument(idDocument).subscribe({
       next: (data: Document) => {
-        console.log(data);
-        
         this.doc = data;
       },
       error: (error: HttpErrorResponse) => {

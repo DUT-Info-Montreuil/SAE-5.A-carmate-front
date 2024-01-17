@@ -61,7 +61,7 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
   }
 
   getSubscriptions(): Observable<any> {
-    return this.http.get<Subscription[]>(`${environment.path}/TODO`, {
+    return this.http.get<Subscription[]>(`${environment.path}/history/schedule-carpooling/booked`, {
       headers: {
         "authorization": `Bearer ${localStorage.getItem("auth_token")}`
       }
@@ -106,17 +106,21 @@ export class CarpoolingService extends AbstractService implements CarpoolingServ
       },
     });
   }
-  
-  book(id: number): Observable<void> {
-    return this.http.post<void>(`${environment.path}/carpooling/book/`, id, {
+
+  book(id: number, is_scheduled?: boolean, date?: number): Observable<void> {
+    return this.http.post<void>(`${environment.path}/carpooling/book`, {
+      carpooling_id: id,
+      is_scheduled: is_scheduled,
+      date_for_scheduled: date
+    }, {
       headers: {
         "authorization": `Bearer ${localStorage.getItem("auth_token")}`
-      },
+      }
     });
   }
 
   getCarpoolings(): Observable<any> {
-    return this.http.get<any>(`${environment.path}/carpooling/booked`, {
+    return this.http.get<any>(`${environment.path}/history/carpooling/booked`, {
       headers: {
         "authorization": `Bearer ${localStorage.getItem("auth_token")}`
       }

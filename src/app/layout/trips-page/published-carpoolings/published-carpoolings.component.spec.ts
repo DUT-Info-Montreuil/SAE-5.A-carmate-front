@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PublishedCarpoolingsComponent } from './published-carpoolings.component';
 import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interface/other';
-import { PROFILE_SERVICE_TOKEN, ProfilesServiceInterface } from 'src/app/interface/profiles';
+import {PassengerProfile, PROFILE_SERVICE_TOKEN, ProfilesServiceInterface} from 'src/app/interface/profiles';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { of } from 'rxjs';
@@ -62,7 +62,13 @@ describe('PublishedCarpoolingsComponent', () => {
       driver_id: 1,
       max_passengers: 2,
       seats_taken: 1,
-      passengers: [0]
+      passengers_profile: [
+        {
+          first_name: 'John',
+          last_name: 'Doe'
+        } as PassengerProfile,
+      ]
+
     };
     fixture.detectChanges();
   });
@@ -72,11 +78,12 @@ describe('PublishedCarpoolingsComponent', () => {
   });
 
   it('should initialize carpoolingToDisplay on ngOnInit', () => {
-    expect(component.carpoolingToDisplay.departureDate).toEqual(new Date(component.publishedCarpooling.departure_date_time));
+    const date = new Date(component.publishedCarpooling.departure_date_time);
+    date.setHours(date.getHours() - 1);
+    expect(component.carpoolingToDisplay.departureDate).toEqual(date);
     expect(component.carpoolingToDisplay.max_passengers).toEqual(component.publishedCarpooling.max_passengers);
     expect(component.carpoolingToDisplay.seats_takens).toEqual(component.publishedCarpooling.seats_taken!);
     expect(spyAddressService.getFormattedAddress).toHaveBeenCalledTimes(2);
-    expect(spyProfileService.getPassengerProfile).toHaveBeenCalledTimes(component.publishedCarpooling.passengers.length);
   });
 
   it('should update carpoolingToDisplay when getFormattedAddress resolves', () => {
@@ -86,22 +93,6 @@ describe('PublishedCarpoolingsComponent', () => {
 
     expect(component.carpoolingToDisplay.departure).toEqual(testAddress);
     expect(component.carpoolingToDisplay.destination).toEqual(testAddress);
-  });
-
-  it('should update carpoolingToDisplay.passengers when getPassengerProfile resolves', () => {
-    const testProfile = {
-      user_id: 0,
-      first_name: 'John',
-      last_name: 'Doe',
-      description: 'description',
-      createdAt: '09/01/2024',
-      nb_carpools_done: 42,
-      profile_picture: 'profile_picture'
-    };
-    spyProfileService.getPassengerProfile.and.returnValue(of(testProfile));
-    component.ngOnInit();
-
-    expect(component.carpoolingToDisplay.passengers).toEqual([`${testProfile.first_name} ${testProfile.last_name}`]);
   });
 
   it('should open dialog when openDialog is called', () => {
