@@ -14,9 +14,11 @@
                 </mat-card>
             </ng-template>
         </mat-tab>
-        <mat-tab label="Third">
+        <mat-tab label="Mes trajets">
             <ng-template matTabContent>
-                <!-- Mettez le contenu du troisième onglet ici -->
+                <mat-card *ngFor="let carpooling of carpoolings" class="m-5 p-5">
+                    <app-my-carpoolings [carpooling]="carpooling"></app-my-carpoolings>
+                </mat-card>
             </ng-template>
         </mat-tab>
     </mat-tab-group>

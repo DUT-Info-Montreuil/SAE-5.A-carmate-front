@@ -1,5 +1,5 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
-import { CARPOOLING_SERVICE_TOKEN, CarpoolingServiceInterface, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
+import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
 
 @Component({
   selector: 'app-trips-page',
@@ -11,6 +11,7 @@ import { CARPOOLING_SERVICE_TOKEN, CarpoolingServiceInterface, Subscription, pub
 export class TripsPageComponent {
   subscriptions: Subscription[] = [];
   publishedCarpoolings: publishedCarpooling[] = [];
+  carpoolings: Carpooling[] = [];
 
   constructor(
     @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
@@ -23,6 +24,10 @@ export class TripsPageComponent {
 
     this.carpoolingService.getPublishedCarpoolings(localStorage.getItem('auth_token') ?? '').subscribe((bookedCarpoolings: publishedCarpooling[]) => {
       this.publishedCarpoolings = bookedCarpoolings;
+    });
+
+    this.carpoolingService.getCarpoolings().subscribe((carpoolings: Carpooling[]) => {
+      this.carpoolings = carpoolings;
     });
   }
 }
