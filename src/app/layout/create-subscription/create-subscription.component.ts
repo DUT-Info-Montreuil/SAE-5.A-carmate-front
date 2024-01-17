@@ -198,7 +198,7 @@ export class CreateSubscriptionComponent {
             break;
           case 409:
             this.notifier.error("Création impossible: \
-            Cet abonnement est en conflit avec une réservation ou un autre abonnement");
+            Cet abonnement est en conflit avec une réservation, un covoiturage créer un autre abonnement ou un covoiturage régulier");
             break;
           case 500:
             this.notifier.error("Erreur inconnue")

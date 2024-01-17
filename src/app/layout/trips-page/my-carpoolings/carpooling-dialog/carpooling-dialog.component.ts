@@ -39,6 +39,10 @@ constructor(
           case 404:
             this.notifier.error("Code invalide.");
             break;
+          case 409:
+            this.notifier.error("Création impossible: \
+            Cet abonnement est en conflit avec une réservation, un covoiturage créer un autre abonnement ou un covoiturage régulier");
+            break;
           case 410:
             this.notifier.error("Code confirmé trop tard ou trop tôt.");
             break;
