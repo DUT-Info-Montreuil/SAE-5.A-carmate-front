@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MyCarpoolingsComponent } from './my-carpoolings.component';
 import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interface/other';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,8 +11,13 @@ import { of } from 'rxjs';
 describe('MyCarpoolingsComponent', () => {
   let component: MyCarpoolingsComponent;
   let fixture: ComponentFixture<MyCarpoolingsComponent>;
+  let spyDialog: jasmine.SpyObj<MatDialog>;
   let spyAddressService: jasmine.SpyObj<AddressServiceInterface>;
+  const carpooling_id: number = 1;
+
   beforeEach(() => {
+    spyDialog = jasmine.createSpyObj('MatDialog', ['open', 'close']);
+
     spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getFormattedAddress']);
     spyAddressService.getFormattedAddress.and.returnValue(of(''));
     TestBed.configureTestingModule({
@@ -25,7 +30,9 @@ describe('MyCarpoolingsComponent', () => {
         MatButtonModule
       ],
       providers: [
-        { provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService },
+        {provide: MatDialog, useValue: spyDialog},
+        {provide: MAT_DIALOG_DATA, useValue: carpooling_id},
+        {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService}
       ]
     });
     fixture = TestBed.createComponent(MyCarpoolingsComponent);

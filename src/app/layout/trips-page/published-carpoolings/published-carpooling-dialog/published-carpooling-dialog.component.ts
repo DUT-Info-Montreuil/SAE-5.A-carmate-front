@@ -29,7 +29,7 @@ export class PublishedCarpoolingDialogComponent {
   checkInputLength(event: any) {
     if (event.target.value.length >= 6) {
       event.target.blur();
-      this.carpoolingService.postCode(event.target.value, this._carpoolingId).subscribe({
+      this.carpoolingService.postCode(parseInt(event.target.value), this._carpoolingId).subscribe({
         next: () => {
           this.notifier.success("Code validé !");
           this.dialogRef.close();

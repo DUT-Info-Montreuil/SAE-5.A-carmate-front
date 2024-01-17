@@ -1,30 +1,44 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarpoolingDialogComponent } from './carpooling-dialog.component';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { CarpoolingServiceInterface, CARPOOLING_SERVICE_TOKEN } from 'src/app/interface/carpooling';
 import { NotifierServiceInterface, NOTIFIER_SERVICE_TOKEN } from 'src/app/interface/other';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CarpoolingDialogComponent', () => {
   let component: CarpoolingDialogComponent;
   let fixture: ComponentFixture<CarpoolingDialogComponent>;
   let spyDialog: jasmine.SpyObj<MatDialog>;
-  let spyNotifier: jasmine.SpyObj<NotifierServiceInterface>;
+  let spyNotifierService: jasmine.SpyObj<NotifierServiceInterface>;
   let spyCarpoolingService: jasmine.SpyObj<CarpoolingServiceInterface>;
   const carpooling_id: number = 1;
   beforeEach(() => {
     spyDialog = jasmine.createSpyObj('MatDialog', ['open', 'close']);
-    spyNotifier = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success']);
-    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['getCode']);
-    spyCarpoolingService.getCode.and.returnValue(of(1234));
+    spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['success', 'error']);
+    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['getCode', 'getPublishedSubscriptions']);
+    spyCarpoolingService.getCode.and.returnValue(of(123456));
+    spyCarpoolingService.getPublishedSubscriptions.and.returnValue(of([]));
     TestBed.configureTestingModule({
       declarations: [CarpoolingDialogComponent],
-      imports: [],
+      imports: [
+        HttpClientTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatFormFieldModule
+      ],
       providers: [
         {provide: MatDialog, useValue: spyDialog},
         {provide: MAT_DIALOG_DATA, useValue: carpooling_id},
         {provide: MatDialogRef, useValue: { close: () => {} }},
-        {provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifier},
+        {provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifierService},
         {provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService}
       ]
     });

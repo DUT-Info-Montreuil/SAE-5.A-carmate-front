@@ -15,6 +15,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from 'src/app/interface/user';
+import { PublishedSubscriptionsComponent } from './published-subscriptions/published-subscriptions.component';
+import { SubscriptionDialogComponent } from './subscription/subscription-dialog/subscription-dialog.component';
+import { MyCarpoolingsComponent } from './my-carpoolings/my-carpoolings.component';
+import { CarpoolingDialogComponent } from './my-carpoolings/carpooling-dialog/carpooling-dialog.component';
 
 describe('TripsPageComponent', () => {
   let component: TripsPageComponent;
@@ -22,8 +27,11 @@ describe('TripsPageComponent', () => {
   let spyCarpoolingService: jasmine.SpyObj<CarpoolingServiceInterface>;
   let spyAddressService: jasmine.SpyObj<AddressServiceInterface>;
   let spyProfileService: jasmine.SpyObj<ProfilesServiceInterface>;
+  let spyAuthService: jasmine.SpyObj<AuthenticationServiceInterface>;
   beforeEach(() => {
-    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['getSubscriptions', 'getPublishedCarpoolings', 'getCarpoolings']);
+    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', [
+      'getSubscriptions', 'getPublishedCarpoolings', 'getCarpoolings', 'getPublishedSubscriptions'
+    ]);
     spyCarpoolingService.getSubscriptions.and.returnValue(of([
       {
         starting_point: [0, 0],
@@ -73,6 +81,31 @@ describe('TripsPageComponent', () => {
         seats_taken: 2,
       },
     ]));
+    spyCarpoolingService.getPublishedSubscriptions.and.returnValue(of([
+      {
+      starting_point: [0, 0],
+      destination: [0, 0],
+      start_date: 0,
+      end_date: 0,
+      start_hour: "",
+      days: ["Monday"],
+      label: "",
+      carpools: [
+        {
+          id: 0,
+          starting_point: [0, 0],
+          destination: [0, 0],
+          max_passengers: 0,
+          price: 0,
+          departure_date_time: "2023-01-01T12:00:00",
+          is_canceled: false,
+          driver_id: 0,
+          seats_taken: 0,
+          passengers: [1, 2]
+        }
+      ]
+    }
+  ]));
     spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getFormattedAddress']);
     spyAddressService.getFormattedAddress.and.returnValue(of(''));
     spyProfileService = jasmine.createSpyObj('ProfilesServiceInterface', ['getDriverProfile']);
@@ -86,11 +119,15 @@ describe('TripsPageComponent', () => {
       nb_carpools_done: 0,
       profile_picture: ''
     }));
-    
+    spyAuthService = jasmine.createSpyObj('AuthenticationServiceInterface', ['isDriver']);
     TestBed.configureTestingModule({
       declarations: [
         TripsPageComponent,
-        SubscriptionComponent
+        SubscriptionComponent,
+        PublishedSubscriptionsComponent,
+        SubscriptionDialogComponent,
+        MyCarpoolingsComponent,
+        CarpoolingDialogComponent
       ],
       imports: [
         BrowserAnimationsModule,
@@ -107,7 +144,8 @@ describe('TripsPageComponent', () => {
       providers: [
         {provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService},
         {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService},
-        {provide: PROFILE_SERVICE_TOKEN, useValue: spyProfileService}
+        {provide: PROFILE_SERVICE_TOKEN, useValue: spyProfileService},
+        {provide: AUTHENTICATION_SERVICE_TOKEN, useValue: spyAuthService}
       ]
     });
     fixture = TestBed.createComponent(TripsPageComponent);

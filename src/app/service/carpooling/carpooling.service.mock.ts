@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, Search, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
+import { Carpooling, CarpoolingServiceInterface, CreateCarpoolPayload, PublishedSubscription, Search, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other';
@@ -16,7 +16,7 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           destination: [48.979739, 2.553426],
           max_passengers: 3,
           price: 20,
-          departure_date_time: "Wed, 10 Jan 2024 10:11:48 GMT",
+          departure_date_time: "Wed, 17 Jan 2024 10:11:48 GMT",
           is_canceled: false,
           driver_id: 101,
           seats_taken: 2,
@@ -112,7 +112,7 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
           destination: [48.9757551, 2.559337],
           price: 40,
           is_canceled: false,
-          departure_date_time: "2024-01-15T08:30:00",
+          departure_date_time: "2024-01-17T08:30:00",
           driver_id: 1,
           max_passengers: 2,
           seats_taken: 1,
@@ -173,6 +173,79 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
     },
   ];
 
+  $publishedSubscriptions: PublishedSubscription[] = [
+    {
+      starting_point: [48.8558516, 2.3588636],
+      destination: [48.9757551, 2.559337],
+      start_date: 1704067200,
+      end_date: 1706745600,
+      start_hour: "08:30",
+      days: ["Monday", "Wednesday", "Friday"],
+      label: "Tous les lundi mercredi et vendredi de janvier",
+      carpools: [
+        {
+          id: 1,
+          starting_point: [48.8558516, 2.3588636],
+          destination: [48.9757551, 2.559337],
+          price: 40,
+          is_canceled: false,
+          departure_date_time: "2024-01-17T08:30:00",
+          driver_id: 1,
+          max_passengers: 2,
+          seats_taken: 1,
+          passengers: [1, 2]
+        },
+        {
+          id: 2,
+          starting_point: [48.8558516, 2.3588636],
+          destination: [48.9757551, 2.559337],
+          price: 40,
+          is_canceled: false,
+          departure_date_time: "2024-01-25T08:30:00",
+          driver_id: 2,
+          max_passengers: 3,
+          seats_taken: 2,
+          passengers: [3]
+        },
+        {
+          id: 3,
+          starting_point: [48.8558516, 2.3588636],
+          destination: [48.9757551, 2.559337],
+          price: 40,
+          is_canceled: false,
+          departure_date_time: "2024-01-08T08:30:00",
+          driver_id: 2,
+          max_passengers: 1,
+          seats_taken: 1,
+          passengers: [1]
+        },
+      ],
+    },
+    {
+      starting_point: [48.9757551, 2.559337],
+      destination: [29.7604, -95.3698],
+      start_date: 1718046955,
+      end_date: 1733861755,
+      start_hour: "14:20",
+      days: ["Monday", "Wednesday", "Friday"],
+      label: "Travail",
+      carpools: [
+        {
+          id: 4,
+          starting_point: [48.9757551, 2.559337],
+          destination: [29.7604, -95.3698],
+          price: 45,
+          is_canceled: false,
+          departure_date_time: "2023-05-20T14:20:00",
+          driver_id: 5,
+          max_passengers: 3,
+          seats_taken: 2,
+          passengers: [1, 2]
+        },
+      ],
+    },
+  ];
+
   $publishedCarpoolings: publishedCarpooling[] = [
     {
       id: 1,
@@ -180,7 +253,7 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
       destination: [48.9757551, 2.559337],
       price: 40,
       is_canceled: false,
-      departure_date_time: "2024-01-15T08:30:00",
+      departure_date_time: "2024-01-17T08:30:00",
       driver_id: 1,
       max_passengers: 2,
       seats_taken: 1,
@@ -207,7 +280,7 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
       destination: [48.9757551, 2.559337],
       price: 40,
       is_canceled: false,
-      departure_date_time: "2024-01-16T08:30:00",
+      departure_date_time: "2024-01-17T08:30:00",
       driver_id: 1,
       max_passengers: 2,
       seats_taken: 1,
@@ -286,7 +359,7 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
       }
   }
 
-  getSubscriptions(token: string): Observable<any> {
+  getSubscriptions(): Observable<any> {
     return of(this.$subscriptions);
   }
 
@@ -294,12 +367,16 @@ export class MockCarpoolingService implements CarpoolingServiceInterface{
     return of(123456);
   }
   
-  getPublishedCarpoolings(token: string): Observable<publishedCarpooling[]> {
+  getPublishedSubscriptions(): Observable<PublishedSubscription[]> {
+    return of(this.$publishedSubscriptions);
+  }
+
+  getPublishedCarpoolings(): Observable<publishedCarpooling[]> {
     return of(this.$publishedCarpoolings);
   }
 
   postCode(passengerCode: number, carpoolingId: number) : Observable<any> {
-    if (passengerCode === 123456) {
+    if (passengerCode == 123456) {      
       return of('');
     } else {
       return throwError(() => new HttpErrorResponse({error: 'Code invalide', status: 400}));

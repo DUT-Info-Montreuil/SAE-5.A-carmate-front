@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubscriptionComponent } from './subscription.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CARPOOLING_SERVICE_TOKEN, CarpoolingServiceInterface, WeekDay } from 'src/app/interface/carpooling';
+import { WeekDay } from 'src/app/interface/carpooling';
 import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interface/other';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatListModule } from '@angular/material/list';
@@ -10,19 +10,15 @@ import { of } from 'rxjs';
 import { PROFILE_SERVICE_TOKEN, ProfilesServiceInterface } from 'src/app/interface/profiles';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import * as moment from 'moment';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 
 describe('SubscriptionComponent', () => {
   let component: SubscriptionComponent;
   let fixture: ComponentFixture<SubscriptionComponent>;
-  let spyCarpoolingService: jasmine.SpyObj<CarpoolingServiceInterface>;
   let spyAddressService: jasmine.SpyObj<AddressServiceInterface>;
   let spyProfileService: jasmine.SpyObj<ProfilesServiceInterface>;
   beforeEach(() => {
-    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['find', 'getSubscriptions']);
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getAddressByString']);
     spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getFormattedAddress']);
     spyAddressService.getFormattedAddress.and.returnValue(of(''));
     spyProfileService = jasmine.createSpyObj('ProfilesServiceInterface', ['getDriverProfile']);
@@ -49,7 +45,6 @@ describe('SubscriptionComponent', () => {
         MatDialogModule
       ],
       providers: [
-        {provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService},
         {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService},
         {provide: PROFILE_SERVICE_TOKEN, useValue: spyProfileService}
       ]
@@ -65,19 +60,17 @@ describe('SubscriptionComponent', () => {
       start_hour: "08:30",
       days: ["Monday", "Wednesday", "Friday"],
       label: "Tous les lundi mercredi et vendredi de janvier",
-      carpools: [
-        {
-          id: 1,
-          starting_point: [48.8558516, 2.3588636],
-          destination: [48.9757551, 2.559337],
-          price: 40,
-          is_canceled: false,
-          departure_date_time: "2024-01-03T08:30:00",
-          driver_id: 1,
-          max_passengers: 2,
-          seats_taken: 1,
-        }
-        ]
+      carpools: [{
+        id: 1,
+        starting_point: [48.8558516, 2.3588636],
+        destination: [48.9757551, 2.559337],
+        price: 40,
+        is_canceled: false,
+        departure_date_time: "2024-01-03T08:30:00",
+        driver_id: 1,
+        max_passengers: 2,
+        seats_taken: 1,
+      }]
       };
     fixture.detectChanges();
   });

@@ -63,10 +63,21 @@ export type publishedCarpooling = {
     max_passengers: number;
     price: number;
     departure_date_time: string;
-    is_canceled?: boolean;
-    driver_id?: number;
-    seats_taken?: number;
+    is_canceled: boolean;
+    driver_id: number;
+    seats_taken: number;
     passengers: number[];
+}
+
+export type PublishedSubscription = {
+    starting_point: number[];
+    destination: number[];
+    start_date: number;
+    end_date: number;
+    start_hour: string;
+    days: WeekDay[];
+    label: string;
+    carpools: publishedCarpooling[];
 }
 
 export interface CarpoolingServiceInterface {
@@ -74,9 +85,10 @@ export interface CarpoolingServiceInterface {
     publish: (carpool: CreateCarpoolPayload) => Observable<any>;
     search: (search: Search) => void;
     createSubscription: (subscription: CreateSubscriptionPayload) => Observable<any>;
-    getSubscriptions: (token: string) => Observable<Subscription[]>;
+    getSubscriptions: () => Observable<Subscription[]>;
     getCode: (carpooling_id: number) => Observable<number>;
-    getPublishedCarpoolings: (token: string) => Observable<publishedCarpooling[]>;
+    getPublishedSubscriptions: () => Observable<PublishedSubscription[]>;
+    getPublishedCarpoolings: () => Observable<publishedCarpooling[]>;
     postCode: (passengerCode: number, carpoolingId: number) => Observable<any>;
     book: (id: number, is_scheduled?: boolean, date?: number) => Observable<any>;
     getCarpoolings: () => Observable<Carpooling[]>;
