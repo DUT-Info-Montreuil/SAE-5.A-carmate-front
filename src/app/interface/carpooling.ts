@@ -1,5 +1,6 @@
 import {BehaviorSubject, Observable} from "rxjs";
 import { InjectionToken } from "@angular/core";
+import {PassengerProfile} from "./profiles";
 
 export type Carpooling = {
     id: number;
@@ -66,7 +67,7 @@ export type publishedCarpooling = {
     is_canceled: boolean;
     driver_id: number;
     seats_taken: number;
-    passengers: number[];
+    passengers_profile: PassengerProfile[];
 }
 
 export type PublishedSubscription = {

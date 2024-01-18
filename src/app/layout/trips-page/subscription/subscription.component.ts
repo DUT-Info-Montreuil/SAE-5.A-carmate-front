@@ -1,6 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import { Subscription, WeekDay } from 'src/app/interface/carpooling';
-import { 
+import {
   faCalendar,
   faCar,
   faArrowRight,
@@ -70,14 +70,14 @@ export class SubscriptionComponent {
     'Saturday': 'Samedi',
     'Sunday': 'Dimanche'
   };
-  
+
   constructor(
     @Inject(ADDRESS_SERVICE_TOKEN) private addressService: AddressServiceInterface,
     @Inject(PROFILE_SERVICE_TOKEN) private profileService: ProfilesServiceInterface,
     public dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.addressService.getFormattedAddress(this.subscription.starting_point).pipe(take(1)).subscribe((startingPoint) => {
       this.startingPointToDisplay = startingPoint;
     });
@@ -102,7 +102,7 @@ export class SubscriptionComponent {
         dates.push(currentDate.toDate());
       }
       currentDate.add(1, 'days');
-    }    
+    }
 
     let carpoolingDates = this.subscription.carpools.map(c => moment(c.departure_date_time).startOf('day').unix());
     this.pendingCarpoolingsToDisplay = dates.filter(date => !carpoolingDates.includes(moment(date).startOf('day').unix()));
@@ -148,16 +148,16 @@ export class SubscriptionComponent {
       });
       bookedCarpoolingToDisplay.departure_hour = bookedCarpoolingToDisplay.departure_date.toLocaleTimeString()
       bookedCarpoolingToDisplay.isToday = moment(bookedCarpoolingToDisplay.departure_date).isSame(moment(), 'day');
-      bookedCarpoolingToDisplay.isOutdated = moment(bookedCarpoolingToDisplay.departure_date).isBefore(moment(), 'day');      
+      bookedCarpoolingToDisplay.isOutdated = moment(bookedCarpoolingToDisplay.departure_date).isBefore(moment(), 'day');
       this.bookedCarpoolingsToDisplay.push(bookedCarpoolingToDisplay);
-    }); 
+    });
   }
 
   openDialog(carpooling_id: number): void {
     this.dialog.open(SubscriptionDialogComponent, {
       width: '360px',
       data: {id: carpooling_id}
-    });    
+    });
   }
 
   sortCarpoolings(): void {
@@ -165,16 +165,16 @@ export class SubscriptionComponent {
       if (!a.hasOwnProperty('departure_date') || !b.hasOwnProperty('departure_date')) {
         throw new Error('dataIncompatible');
       }
-  
+
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-  
+
       const dateA = new Date(a.departure_date);
       dateA.setHours(0, 0, 0, 0);
-  
+
       const dateB = new Date(b.departure_date);
       dateB.setHours(0, 0, 0, 0);
-  
+
       if (dateA.getTime() === today.getTime() && dateB.getTime() !== today.getTime()) {
         return -1;
       } else if (dateA.getTime() !== today.getTime() && dateB.getTime() === today.getTime()) {

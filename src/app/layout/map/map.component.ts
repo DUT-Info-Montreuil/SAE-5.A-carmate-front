@@ -68,16 +68,16 @@ export class MapComponent {
     if(changes['_starting_pointDriver'] && changes['_starting_pointDriver'].currentValue !== changes['_starting_pointDriver'].previousValue) {
       const extent = boundingExtent([[...this._starting_pointDriver].reverse(), [...this._starting_pointUser].reverse()]);
       this.updateMap(extent);
-  
+
       this.map.getAllLayers().forEach((layer) => {
         if(layer.getProperties()['name'] === 'driver') {
           this.map.removeLayer(layer);
         }
         this.addLayerIcon([...this._starting_pointDriver].reverse(), this.driverIconStyle);
-      }); 
+      });
     }
-  
-    if(changes['_starting_pointUser'] && this._starting_pointDriver && changes['_starting_pointUser'].currentValue !== changes['_starting_pointUser'].previousValue) {      
+
+    if(changes['_starting_pointUser'] && this._starting_pointDriver && changes['_starting_pointUser'].currentValue !== changes['_starting_pointUser'].previousValue) {
       const extent = boundingExtent([[...this._starting_pointDriver].reverse(), [...this._starting_pointUser].reverse()]);
       this.updateMap(extent);
 
@@ -86,7 +86,7 @@ export class MapComponent {
           this.map.removeLayer(layer);
           this.addLayerIcon([...this._starting_pointUser].reverse(), this.userIconStyle);
         }
-      }); 
+      });
     }
   }
 
@@ -106,7 +106,7 @@ export class MapComponent {
 
     vectorLayer.setProperties({name: styleIcon === this.userIconStyle ? 'user' : 'driver'});
 
-    this.map.addLayer(vectorLayer);    
+    this.map.addLayer(vectorLayer);
   }
 
   private updateMap(extent: Extent) {
@@ -118,5 +118,5 @@ export class MapComponent {
       padding: [100, 100, 50, 100],
     });
   }
-  
+
 }

@@ -27,6 +27,7 @@ export class CarpoolingComponent {
 
   ngOnInit() {
     let dateTime = new Date(this._carpooling.departure_date_time);
+    dateTime.setHours(dateTime.getHours() - 1);
     this.departure_date = dateTime.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
     this.departure_time = dateTime.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
@@ -40,7 +41,7 @@ export class CarpoolingComponent {
     });
   }
 
-  updateMap(): void {    
+  updateMap(): void {
     this._starting_pointDriverEmitter.emit(this._carpooling.starting_point);
   }
 

@@ -12,7 +12,7 @@ import { SCORE_SERVICE_TOKEN, ScoreServiceInterface, ScoreUserData } from 'src/a
 })
 export class CarpoolingDialogComponent {
   _driverScore!: ScoreUserData;
-  
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {carpooling: Carpooling, _searchParams: Search},
     @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
@@ -24,8 +24,7 @@ export class CarpoolingDialogComponent {
   ngOnInit() {
     this.scoreboardService.getScoreUserData(this.data.carpooling.driver_id).subscribe({
       next: (score) => {
-        console.log(score);
-        
+
         this._driverScore = score as ScoreUserData;
       },
       error: (error: HttpErrorResponse) => {
@@ -41,7 +40,7 @@ export class CarpoolingDialogComponent {
             break;
         }
       }
-    });    
+    });
   }
 
   onClose(): void {
@@ -49,8 +48,6 @@ export class CarpoolingDialogComponent {
   }
 
   submit(): void {
-    console.log(this.data.carpooling.id, this.data.carpooling.is_scheduled, parseInt(this.data._searchParams.departure_date_time));
-    
     this.carpoolingService.book(this.data.carpooling.id, this.data.carpooling.is_scheduled, parseInt(this.data._searchParams.departure_date_time)).subscribe({
       next: () => {
         this.dialogRef.close();
@@ -68,7 +65,8 @@ export class CarpoolingDialogComponent {
             this.notifier.error("Le covoiturage n'existe pas.");
             break;
           case 409:
-            this.notifier.error("Un problème est survenu dans la réservation du covoiturage."); 
+            this.notifier.error("Création impossible: \
+            Cet abonnement est en conflit avec une réservation, un covoiturage créer un autre abonnement ou un covoiturage régulier");
             break;
           case 410:
             this.notifier.error("Le covoiturage a été annulé.");

@@ -9,7 +9,7 @@ import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interfac
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatListModule } from '@angular/material/list';
-import { PROFILE_SERVICE_TOKEN, ProfilesServiceInterface } from 'src/app/interface/profiles';
+import {PassengerProfile, PROFILE_SERVICE_TOKEN, ProfilesServiceInterface} from 'src/app/interface/profiles';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -66,7 +66,16 @@ describe('TripsPageComponent', () => {
       driver_id: 1,
       max_passengers: 2,
       seats_taken: 2,
-      passengers: [1, 2],
+      passengers_profile: [
+        {
+          first_name: 'John',
+          last_name: 'Doe'
+        } as PassengerProfile,
+        {
+          first_name: 'Johny',
+          last_name: 'Doey'
+        } as PassengerProfile
+      ]
     }]));
     spyCarpoolingService.getCarpoolings.and.returnValue(of([
       {
@@ -101,7 +110,17 @@ describe('TripsPageComponent', () => {
           is_canceled: false,
           driver_id: 0,
           seats_taken: 0,
-          passengers: [1, 2]
+          passengers_profile: [
+            {
+              first_name: 'John',
+              last_name: 'Doe'
+            } as PassengerProfile,
+            {
+              first_name: 'Johny',
+              last_name: 'Doey'
+            } as PassengerProfile
+          ]
+
         }
       ]
     }
@@ -213,7 +232,17 @@ describe('TripsPageComponent', () => {
         driver_id: 1,
         max_passengers: 2,
         seats_taken: 1,
-        passengers: [1, 2]
+        passengers_profile: [
+          {
+            first_name: 'John',
+            last_name: 'Doe'
+          } as PassengerProfile,
+          {
+            first_name: 'Johny',
+            last_name: 'Doey'
+          } as PassengerProfile
+        ]
+
       },
     ];
     spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of(testPublishedCarpoolings));
