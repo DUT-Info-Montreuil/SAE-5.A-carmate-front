@@ -45,10 +45,11 @@
               <button *ngIf="IsLogged()" routerLink="/create-subscription" class="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">
                 <fa-icon [icon]="faCaretRight" class="mr-2"></fa-icon> Créer un abonnement
               </button>
-
+              <!-- TODO: implement some day
               <button *ngIf="IsLogged()" routerLink="/scoreboard" class="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">
                 <fa-icon [icon]="faRankingStar" class="mr-2"></fa-icon> Classement
               </button>
+              -->
 
               <button *ngIf="IsLogged()" routerLink="/trips" class="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">
                 <fa-icon [icon]="faCar" class="mr-2"></fa-icon> Gérer mes trajets

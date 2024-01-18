@@ -96,7 +96,9 @@ export class PublishCarpoolComponent {
   (date: Date | null) => {
     if (date != null){
       const day = date.getDay();
-      if(date > new Date()){
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+      if(date > yesterday){
         return day !== 0 && day !== 6;
       }
     }

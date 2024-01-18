@@ -106,7 +106,10 @@ export class SearchBarComponent {
   (date: Date | null) => {
     if (date != null){
       const day = date.getDay();
-      if(date > new Date()){
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+
+      if(date > yesterday){
         return day !== 0 && day !== 6;
       }
     }
@@ -148,7 +151,7 @@ export class SearchBarComponent {
       end_lon: end_lon,
       departure_date_time: `${Math.floor(dateStart.getTime() / 1000)}`
     };
-    
+
     if(searchParams.departure_date_time !== undefined &&
       searchParams.start_lat !== undefined &&
       searchParams.start_lon !== undefined &&
@@ -156,9 +159,9 @@ export class SearchBarComponent {
       searchParams.end_lon !== undefined)
     {
       this.carpoolingService.search(searchParams);
-      this.searchParamsEmitter.emit(searchParams);       
+      this.searchParamsEmitter.emit(searchParams);
     } else {
-      this.notifier.error("Un ou plusieurs champs sont invalides.");      
+      this.notifier.error("Un ou plusieurs champs sont invalides.");
     }
   }
 }
