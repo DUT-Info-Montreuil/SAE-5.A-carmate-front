@@ -103,15 +103,18 @@ export class CreateSubscriptionComponent {
   }
 
   dateFilter: (date: Date | null) => boolean =
-  (date: Date | null) => {
-    if (date != null){
-      const day = date.getDay();
-      if(date > new Date()){
-        return day !== 0 && day !== 6;
+    (date: Date | null) => {
+      if (date != null) {
+        const day = date.getDay();
+        const yesterday = new Date()
+        yesterday.setDate(yesterday.getDate() - 1)
+
+        if (date > yesterday) {
+          return day !== 0 && day !== 6;
+        }
       }
+      return false;
     }
-    return false;
-  }
 
   private starting_pointValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
