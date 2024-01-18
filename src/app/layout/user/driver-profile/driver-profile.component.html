@@ -1,0 +1,23 @@
+<main class="main mt-10">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Profil conducteur</h1>
+    <div class="flex flex-col items-center mb-6">
+      <img class="rounded-full w-32 h-32 mb-4" [src]="'data:image/jpeg;base64,' + profilePictureBase64">
+      <h2 class="text-xl font-semibold">Bienvenue {{ firstName }} {{ lastName?.toUpperCase() }}</h2>
+    </div>
+  
+    <div class="mb-6 text-center">
+      <h2 class="text-2xl font-semibold mb-2">Description:</h2>
+      <p class="text-gray-700">{{ description }}</p>
+    </div>
+  
+    <div class="flex justify-center">
+      <div class="mb-6">
+        <h2 class="text-2xl font-semibold mb-2">Informations du compte:</h2>
+        <ul class="list-disc list-inside">
+          <li>Email: {{ this.emailAddress }}</li>
+          <li>Crée le: {{ created_at }}</li>
+        </ul>
+      </div>
+    </div>
+</main>
+  

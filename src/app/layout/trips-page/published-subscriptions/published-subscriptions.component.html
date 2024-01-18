@@ -1,0 +1,101 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+          <fa-icon [icon]="faTag" class="mr-3"></fa-icon>
+          <span>{{ publishedSubscription.label }}</span>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item class="mb-5">
+        <div matListItemLine>
+          <fa-icon matListItemIcon [icon]="faCalendar" class="mr-3"></fa-icon>
+          <span>{{ publishedSubscription.start_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR'}}</span>
+          <fa-icon matListItemIcon [icon]="faArrowRight" class="mx-2"></fa-icon>
+          <span>{{ publishedSubscription.end_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR'}}</span>
+        </div>
+        <div matListItemLine>
+          <fa-icon matListItemIcon [icon]="faRepeat" class="mr-3"></fa-icon>
+          <span *ngFor="let day of translateDays(publishedSubscription.days); let isLast=last">{{ day }}{{isLast ? '' : ', '}}</span>
+        </div>
+        <div matListItemLine>
+          <fa-icon [icon]="faLocationDot" class="mr-3"></fa-icon>
+          <span>{{ startingPointToDisplay }}</span>
+          <fa-icon matListItemIcon [icon]="faArrowRight" class="mx-3"></fa-icon>
+          <span>{{ destinationToDisplay }}</span>
+        </div>
+        <div matListItemLine>
+          <fa-icon [icon]="faClock" class="mr-3"></fa-icon>
+          <span>{{ publishedSubscription.start_hour }}</span>
+        </div>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item *ngFor="let carpolling of bookedCarpoolingsToDisplay; let i = index" class="mt-5 mb-10">
+        <div matListItemTitle class="pb-3 flex justify-between w-full">
+          <div class="flex items-center">
+            <fa-icon matListItemIcon [icon]="faCalendar" class="mr-2"></fa-icon>
+            <span> Trajet du {{ carpolling.departure_date | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR' }} </span>
+            <button class="ml-5" mat-stroked-button color="primary" *ngIf="carpolling.isToday" (click)="openDialog(carpolling.id)">
+              Entrer le code
+            </button>
+            <button *ngIf="!carpolling.isToday && !carpolling.isOutdated" matListItemMeta mat-button [disabled]="true" [disableRipple]="true">
+              À venir
+            </button>
+            <button *ngIf="carpolling.isOutdated" matListItemMeta mat-button [disabled]="true" [disableRipple]="true">
+              Passé
+            </button>
+          </div>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item disabled>
+                <fa-icon [icon]="faXmark" class="mr-2"></fa-icon>
+                <span>Annuler le trajet</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+
+        <div matListItemLine>
+          <fa-icon matListItemIcon [icon]="faCar" class="mr-3"></fa-icon>
+          <span>Conducteur : {{ carpolling.driver_first_name }} {{ carpolling.driver_last_name }}</span>
+        </div>
+
+        <div matListItemLine>
+          <fa-icon matListItemIcon [icon]="faLocationDot" class="mr-3"></fa-icon>
+          <span>{{ carpolling.starting_point }}</span>
+          <fa-icon matListItemIcon [icon]="faArrowRight" class="mx-3"></fa-icon>
+          <span>{{ carpolling.destination }}</span>
+        </div>
+
+        <div matListItemLine>
+          <fa-icon matListItemIcon [icon]="faClock" class="mr-3"></fa-icon>
+          <span>{{ carpolling.departure_hour }}</span>
+        </div>
+        <div matListItemLine>
+          <fa-icon matListItemIcon [icon]="faUser" class="mr-3"></fa-icon>
+          <span> {{ carpolling.seats_taken }}/{{ carpolling.max_passengers}} :</span>
+          <ul style="list-style: disc;">
+            <li *ngFor="let userName of carpolling.passengers" class="ml-10">
+                {{ userName }}
+            </li>
+        </ul>
+        </div>
+
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item *ngFor="let carpoolDate of pendingCarpoolingsToDisplay" class="mt-5">
+        <div matListItemLine>
+          <fa-icon matListItemIcon [icon]="faSpinner" class="mr-2"></fa-icon>
+          <span> Trajet du {{ carpoolDate | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR' }} </span>
+          <button matListItemMeta mat-button [disabled]="true" [disableRipple]="true"> En attente</button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  
+</mat-expansion-panel>

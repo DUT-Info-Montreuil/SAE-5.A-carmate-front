@@ -1,0 +1,8 @@
+<app-search-bar (searchParamsEmitter)="handleSearchEvent($event)"></app-search-bar>
+<app-result-carpool *ngIf="resultDisplayed" [_searchParams]="searchParams"></app-result-carpool>
+
+<div *ngIf="!resultDisplayed" class="flex justify-center items-center">
+  <mat-card class="flex-grow m-5 pt-80 pb-80 items-center ">
+    <p class="font-bold text-gray-500 text-xl">Veuillez éffectuer une recherche...</p>
+  </mat-card>
+</div>

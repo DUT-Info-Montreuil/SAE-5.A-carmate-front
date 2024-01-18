@@ -1,0 +1,48 @@
+<div class="flex justify-center mt-5 mb-5">
+    <form [formGroup]="searchForm" (ngSubmit)="submit()" class="lg:flex lg:flex-row md:flex-col justify-center p-2.5 rounded-md shadow-md">
+
+        <mat-form-field subscriptSizing="dynamic" class="mr-2">
+            <mat-label>Départ</mat-label>
+            <input id="starting_point_id" #departureTrigger="matAutocompleteTrigger" required matInput formControlName="starting_point" [matAutocomplete]="starting_pointAutocomplete" class="w-full">
+
+            <mat-autocomplete id="autocompleteStarting_id" autoActiveFirstOption #starting_pointAutocomplete="matAutocomplete" (optionSelected)="starting_pointOptionSelectedHandler($event)">
+                <mat-option *ngFor="let address of obsDisplayedAddressesStart | async" [value]="address">
+                  {{ address }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-divider [vertical]="true"></mat-divider>
+
+        <mat-form-field subscriptSizing="dynamic" class="mx-2">
+            <mat-label>Destination</mat-label>
+            <input id="destination_id" #destinationTrigger="matAutocompleteTrigger" required matInput formControlName="destination" [matAutocomplete]="destinationAutocomplete">
+
+        <mat-autocomplete autoActiveFirstOption #destinationAutocomplete="matAutocomplete" (optionSelected)="destinationOptionSelectedHandler($event)">
+                <mat-option *ngFor="let address of obsDisplayedAddressesDest | async" [value]="address">
+                  {{ address }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-divider [vertical]="true"></mat-divider>
+
+        <mat-form-field subscriptSizing="dynamic" class="mx-2">
+            <input id="departure_date_id" required matInput formControlName="departure_date" [matDatepicker]="picker" placeholder="Date du départ" [matDatepickerFilter]="dateFilter">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-divider [vertical]="true"></mat-divider>
+
+        <mat-form-field subscriptSizing="dynamic" class="mx-2">
+            <mat-label>Heure de départ</mat-label>
+            <input id="departure_time_id" matInput formControlName="departure_time" type="time">
+        </mat-form-field>
+
+        <mat-divider [vertical]="true"></mat-divider>
+
+        <button id="search_id" mat-raised-button class="ml-2 h-fit" type="submit" [disabled]="searchForm.invalid" >RECHERCHER</button>
+
+    </form>
+</div>

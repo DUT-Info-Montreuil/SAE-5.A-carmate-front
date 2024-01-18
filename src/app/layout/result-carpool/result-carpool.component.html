@@ -1,0 +1,24 @@
+    <div class="flex mt-5 p-5 h-[calc(100vh-21vh)]">
+
+
+          <mat-card *ngIf="!noResults" class="flex-1 p-5 bg-black overflow-y-auto">
+            <app-carpooling *ngFor="let carpooling of _carpoolings" 
+            [_carpooling]="carpooling" 
+            (_starting_pointDriverEmitter)="handleStartingPointDriverEmitter($event)"
+            [_searchParams]="_searchParams"
+            ></app-carpooling>
+          </mat-card>
+
+          <mat-card *ngIf="noResults" class="flex-1 p-5 bg-black overflow-y-auto flex items-center justify-center">
+            Aucun résultats...
+          </mat-card>
+
+      <mat-divider [vertical]="true"></mat-divider>
+
+      <mat-card class="flex-1 p-5 ml-5">
+        <mat-card-content>
+          <app-map [_starting_pointDriver]="starting_pointDriverToDisplay" [_starting_pointUser]="starting_pointUserToDisplay"></app-map>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
