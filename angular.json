@@ -40,7 +40,7 @@
               "xml-utils/get-attribute.js",
               "web-worker",
               "rbush"
-           ]
+            ]
           },
           "configurations": {
             "production": {
@@ -106,11 +106,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "3d1feb54-07cd-4ebd-9715-1fef9915850d"
+    "analytics": "3d1feb54-07cd-4ebd-9715-1fef9915850d",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
