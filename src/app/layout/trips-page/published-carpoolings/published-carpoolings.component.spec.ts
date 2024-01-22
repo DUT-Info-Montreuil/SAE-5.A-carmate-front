@@ -1,14 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PublishedCarpoolingsComponent } from './published-carpoolings.component';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-} from 'src/app/interface/other';
-import {
-  PassengerProfile,
-  PROFILE_SERVICE_TOKEN,
-  ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { of } from 'rxjs';
@@ -21,6 +12,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import {
+  AddressServiceInterface,
+  ADDRESS_SERVICE_TOKEN,
+} from 'src/app/interface/address.interface';
+import {
+  ProfilesServiceInterface,
+  PROFILE_SERVICE_TOKEN,
+} from 'src/app/interface/profiles.interface';
+import { PassengerProfile } from 'src/app/model/profile.model';
 
 describe('PublishedCarpoolingsComponent', () => {
   registerLocaleData(localeFr);

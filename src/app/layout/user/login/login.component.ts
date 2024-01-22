@@ -1,10 +1,16 @@
-import {Component, Inject} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {faMale, faLock} from "@fortawesome/free-solid-svg-icons";
-import {ActivatedRoute, Router} from '@angular/router';
-import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../interface/other.interface";
-import {HttpErrorResponse} from "@angular/common/http";
-import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../../interface/user.interface";
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { faMale, faLock } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from '../../../interface/notifier.interface';
+import { HttpErrorResponse } from '@angular/common/http';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from '../../../interface/user.interface';
 
 @Component({
   selector: 'app-login',

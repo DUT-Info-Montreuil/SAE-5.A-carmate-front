@@ -1,10 +1,9 @@
 import { Component, Inject, Input, SimpleChanges } from '@angular/core';
 import {
   CARPOOLING_SERVICE_TOKEN,
-  Carpooling,
   CarpoolingServiceInterface,
-  Search,
-} from 'src/app/interface/carpooling';
+} from 'src/app/interface/carpooling.interface';
+import { Carpooling, Search } from 'src/app/model/carpooling.model';
 
 @Component({
   selector: 'app-result-carpool',

@@ -1,22 +1,21 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import {
-  Carpooling,
-  CarpoolingServiceInterface,
-  CreateCarpoolPayload,
-  CreateSubscriptionPayload,
-  PublishedSubscription,
-  Search,
-  Subscription,
-  publishedCarpooling,
-} from 'src/app/interface/carpooling';
 import { environment } from '../../environement/environement';
 import { AbstractService } from '../abstractService';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
+} from 'src/app/interface/notifier.interface';
+import { CarpoolingServiceInterface } from 'src/app/interface/carpooling.interface';
+import {
+  Carpooling,
+  CreateCarpoolPayload,
+  Search,
+  CreateSubscriptionPayload,
+  PublishedSubscription,
+  publishedCarpooling,
+} from 'src/app/model/carpooling.model';
 
 @Injectable({
   providedIn: 'root',

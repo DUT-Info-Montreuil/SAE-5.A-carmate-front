@@ -1,12 +1,18 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ValidationComponent} from './validation_list.component';
-import {ActivatedRoute, Router} from "@angular/router";
-import {BehaviorSubject, of, throwError} from "rxjs";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../../interface/other.interface";
-import { VALIDATION_SERVICE_TOKEN, ValidationServiceInterface } from 'src/app/interface/admin.interface';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ValidationComponent } from './validation_list.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, of, throwError } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import {
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from '../../../../interface/notifier.interface';
+import {
+  ValidationServiceInterface,
+  VALIDATION_SERVICE_TOKEN,
+} from 'src/app/interface/admin.interface';
 
 describe('validationComponent', () => {
   let component: ValidationComponent;

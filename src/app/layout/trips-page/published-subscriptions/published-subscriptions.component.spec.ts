@@ -8,18 +8,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { of } from 'rxjs';
-import {
-  AddressServiceInterface,
-  ADDRESS_SERVICE_TOKEN,
-} from 'src/app/interface/other';
-import {
-  ProfilesServiceInterface,
-  PROFILE_SERVICE_TOKEN,
-  PassengerProfile,
-} from 'src/app/interface/profiles';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  AddressServiceInterface,
+  ADDRESS_SERVICE_TOKEN,
+} from 'src/app/interface/address.interface';
+import {
+  ProfilesServiceInterface,
+  PROFILE_SERVICE_TOKEN,
+} from 'src/app/interface/profiles.interface';
+import { PassengerProfile } from 'src/app/model/profile.model';
 
 describe('PublishedSubscriptionsComponent', () => {
   let component: PublishedSubscriptionsComponent;

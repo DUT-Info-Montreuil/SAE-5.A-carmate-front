@@ -1,7 +1,5 @@
-import {
-  DocumentMetaDatas,
-  Document, LicenseStatus,
-} from "../../../interface/admin.interface";
+import { LicenseStatus, DocumentMetaDatas } from 'src/app/model/admin.model';
+import { Document } from 'src/app/model/admin.model';
 
 export class MutualizedMockData {
   static generalData: (Document & {

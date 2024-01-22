@@ -16,18 +16,6 @@ import {
   switchMap,
 } from 'rxjs';
 import {
-  CARPOOLING_SERVICE_TOKEN,
-  CarpoolingServiceInterface,
-  CreateSubscriptionPayload,
-  WeekDay,
-} from 'src/app/interface/carpooling.interface';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from 'src/app/interface/other.interface';
-import {
   faClock,
   faEuro,
   faLocationDot,
@@ -37,7 +25,26 @@ import {
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user.interface";
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from '../../interface/user.interface';
+import {
+  CreateSubscriptionPayload,
+  WeekDay,
+} from 'src/app/model/carpooling.model';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/address.interface';
+import {
+  CARPOOLING_SERVICE_TOKEN,
+  CarpoolingServiceInterface,
+} from 'src/app/interface/carpooling.interface';
+import {
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from 'src/app/interface/notifier.interface';
 
 @Component({
   selector: 'app-create-subscription',

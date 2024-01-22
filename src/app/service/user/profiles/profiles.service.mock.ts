@@ -1,11 +1,8 @@
-import {
-  DriverProfile,
-  PassengerProfile,
-  ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { ProfilesServiceInterface } from 'src/app/interface/profiles.interface';
+import { PassengerProfile, DriverProfile } from 'src/app/model/profile.model';
 
 @Injectable({
   providedIn: 'root',

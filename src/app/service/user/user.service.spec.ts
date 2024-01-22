@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { UserService } from './user.service';
-import { UserServiceInterface } from 'src/app/interface/user';
+import { UserServiceInterface } from 'src/app/interface/user.interface';
 
 describe('UserService', () => {
   let userService: UserServiceInterface;

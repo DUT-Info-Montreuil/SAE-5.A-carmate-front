@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AbstractService } from '../../abstractService';
-import {
-  Document,
-  LicenseStatus,
-  NextDocument,
-  PaginatedDocMetaDatas,
-  ValidationServiceInterface,
-} from 'src/app/interface/admin';
+
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environement/environement';
+import { ValidationServiceInterface } from 'src/app/interface/admin.interface';
+import {
+  LicenseStatus,
+  NextDocument,
+  PaginatedDocMetaDatas,
+} from 'src/app/model/admin.model';
 
 @Injectable({
   providedIn: 'root',

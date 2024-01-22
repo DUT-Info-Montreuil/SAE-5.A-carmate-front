@@ -1,18 +1,25 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {LoginComponent} from './login.component';
-import {ActivatedRoute, Router} from "@angular/router";
-import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../interface/other.interface";
-import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface, Token} from "../../../interface/user.interface";
-import {BehaviorSubject, of, throwError} from "rxjs";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {By} from "@angular/platform-browser";
-import {HttpErrorResponse} from "@angular/common/http";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginComponent } from './login.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from '../../../interface/notifier.interface';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from '../../../interface/user.interface';
+import { BehaviorSubject, of, throwError } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { HttpErrorResponse } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Token } from 'src/app/model/user.model';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

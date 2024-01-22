@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, of } from 'rxjs';
-import { AddressServiceInterface, School } from 'src/app/interface/other';
+import { AddressServiceInterface } from 'src/app/interface/address.interface';
+import { School } from 'src/app/model/address.model';
 
 @Injectable({
   providedIn: 'root',

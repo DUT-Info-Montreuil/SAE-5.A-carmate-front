@@ -7,27 +7,26 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
-import {
-  SCORE_SERVICE_TOKEN,
-  ScoreUserData,
-  ScoreServiceInterface,
-} from 'src/app/interface/score';
 import { of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import {
-  NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
-import {
-  AUTHENTICATION_SERVICE_TOKEN,
-  AuthenticationServiceInterface,
-} from 'src/app/interface/user';
+  NOTIFIER_SERVICE_TOKEN,
+} from 'src/app/interface/notifier.interface';
 import {
   ProfilesServiceInterface,
   PROFILE_SERVICE_TOKEN,
-  DriverProfile,
-  PassengerProfile,
-} from 'src/app/interface/profiles';
+} from 'src/app/interface/profiles.interface';
+import {
+  ScoreServiceInterface,
+  SCORE_SERVICE_TOKEN,
+} from 'src/app/interface/score.interface';
+import {
+  AuthenticationServiceInterface,
+  AUTHENTICATION_SERVICE_TOKEN,
+} from 'src/app/interface/user.interface';
+import { DriverProfile, PassengerProfile } from 'src/app/model/profile.model';
+import { ScoreUserData } from 'src/app/model/score.model';
 
 describe('ScoreboardPageComponent', () => {
   let component: ScoreboardPageComponent;

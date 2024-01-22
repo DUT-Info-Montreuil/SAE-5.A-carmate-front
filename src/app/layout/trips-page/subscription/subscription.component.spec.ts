@@ -1,24 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubscriptionComponent } from './subscription.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { WeekDay } from 'src/app/interface/carpooling';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-} from 'src/app/interface/other';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 import {
   PROFILE_SERVICE_TOKEN,
   ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
-import { MatIconModule } from '@angular/material/icon';
+} from 'src/app/interface/profiles.interface';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/address.interface';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { WeekDay } from 'src/app/model/carpooling.model';
 describe('SubscriptionComponent', () => {
   let component: SubscriptionComponent;
   let fixture: ComponentFixture<SubscriptionComponent>;

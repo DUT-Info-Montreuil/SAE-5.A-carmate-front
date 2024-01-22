@@ -4,17 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
+} from 'src/app/interface/notifier.interface';
 import {
   PROFILE_SERVICE_TOKEN,
-  PassengerProfile,
   ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
+} from 'src/app/interface/profiles.interface';
 import {
   USER_SERVICE_TOKEN,
-  User,
   UserServiceInterface,
-} from 'src/app/interface/user';
+} from 'src/app/interface/user.interface';
+import { PassengerProfile } from 'src/app/model/profile.model';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-passenger-profiles',

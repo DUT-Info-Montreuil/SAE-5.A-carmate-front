@@ -6,11 +6,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MockAuthenticationService } from './service/user/authentication/authentication.service.mock';
 import { RootComponent } from './layout/root/root.component';
-import { HttpClientModule } from "@angular/common/http";
-import {NotifierModule, NotifierOptions} from "angular-notifier";
-import {ADDRESS_SERVICE_TOKEN, NOTIFIER_SERVICE_TOKEN} from "./interface/other.interface";
-import {AngularNotifierService} from "./service/other/notifier/AngularNotifierService";
-import {AUTHENTICATION_SERVICE_TOKEN, USER_SERVICE_TOKEN} from "./interface/user.interface";
+import { HttpClientModule } from '@angular/common/http';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { NOTIFIER_SERVICE_TOKEN } from './interface/notifier.interface';
+import { ADDRESS_SERVICE_TOKEN } from './interface/address.interface';
+import { AngularNotifierService } from './service/other/notifier/AngularNotifierService';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  USER_SERVICE_TOKEN,
+} from './interface/user.interface';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';

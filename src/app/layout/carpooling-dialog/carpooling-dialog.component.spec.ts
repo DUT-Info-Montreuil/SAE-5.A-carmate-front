@@ -2,20 +2,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarpoolingDialogComponent } from './carpooling-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { of } from 'rxjs';
 import {
   CarpoolingServiceInterface,
-  Carpooling,
   CARPOOLING_SERVICE_TOKEN,
-} from 'src/app/interface/carpooling';
+} from 'src/app/interface/carpooling.interface';
 import {
-  SCORE_SERVICE_TOKEN,
-  ScoreServiceInterface,
-} from 'src/app/interface/score';
-import {
-  NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
-import { of } from 'rxjs';
+  NOTIFIER_SERVICE_TOKEN,
+} from 'src/app/interface/notifier.interface';
+import {
+  ScoreServiceInterface,
+  SCORE_SERVICE_TOKEN,
+} from 'src/app/interface/score.interface';
 
 describe('CarpoolingDialogComponent', () => {
   let component: CarpoolingDialogComponent;

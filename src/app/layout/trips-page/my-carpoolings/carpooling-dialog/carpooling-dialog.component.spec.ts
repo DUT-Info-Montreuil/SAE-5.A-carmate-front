@@ -7,19 +7,19 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { of } from 'rxjs';
-import {
-  CarpoolingServiceInterface,
-  CARPOOLING_SERVICE_TOKEN,
-} from 'src/app/interface/carpooling';
-import {
-  NotifierServiceInterface,
-  NOTIFIER_SERVICE_TOKEN,
-} from 'src/app/interface/other';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  CarpoolingServiceInterface,
+  CARPOOLING_SERVICE_TOKEN,
+} from 'src/app/interface/carpooling.interface';
+import {
+  NotifierServiceInterface,
+  NOTIFIER_SERVICE_TOKEN,
+} from 'src/app/interface/notifier.interface';
 
 describe('CarpoolingDialogComponent', () => {
   let component: CarpoolingDialogComponent;

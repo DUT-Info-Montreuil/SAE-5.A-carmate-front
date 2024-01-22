@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Search } from 'src/app/interface/carpooling';
+import { Search } from 'src/app/model/carpooling.model';
 
 @Component({
   selector: 'app-home-page',

@@ -1,9 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavBarComponent } from './nav-bar.component';
-import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user.interface";
-import { RouterTestingModule } from "@angular/router/testing";
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {Router} from "@angular/router";
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from '../../interface/user.interface';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Router } from '@angular/router';
 
 describe('NavBarComponent', () => {
   let component: NavBarComponent;

@@ -1,5 +1,6 @@
 import { Observable, forkJoin, map, of } from 'rxjs';
-import { ScoreUserData, ScoreServiceInterface } from 'src/app/interface/score';
+import { ScoreServiceInterface } from 'src/app/interface/score.interface';
+import { ScoreUserData } from 'src/app/model/score.model';
 
 export class MockScoreService implements ScoreServiceInterface {
   img =

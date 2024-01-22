@@ -16,12 +16,21 @@ import {
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other.interface';
-import { CARPOOLING_SERVICE_TOKEN, CarpoolingServiceInterface, Search } from '../../interface/carpooling.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from '../../interface/other.interface';
-import {MatAutocompleteTrigger} from "@angular/material/autocomplete";
-
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/address.interface';
+import {
+  CARPOOLING_SERVICE_TOKEN,
+  CarpoolingServiceInterface,
+} from 'src/app/interface/carpooling.interface';
+import { Search } from 'src/app/model/carpooling.model';
+import {
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from 'src/app/interface/notifier.interface';
 
 @Component({
   selector: 'app-search-bar',

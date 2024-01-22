@@ -1,15 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateSubscriptionComponent } from './create-subscription.component';
-import {
-  CARPOOLING_SERVICE_TOKEN,
-  CarpoolingServiceInterface,
-} from 'src/app/interface/carpooling.interface';
-import {
-  NotifierServiceInterface,
-  AddressServiceInterface,
-  ADDRESS_SERVICE_TOKEN,
-  NOTIFIER_SERVICE_TOKEN,
-} from 'src/app/interface/other.interface';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -23,9 +13,24 @@ import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { of } from "rxjs/internal/observable/of";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user.interface";
+import { of } from 'rxjs/internal/observable/of';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from '../../interface/user.interface';
+import {
+  AddressServiceInterface,
+  ADDRESS_SERVICE_TOKEN,
+} from 'src/app/interface/address.interface';
+import {
+  CarpoolingServiceInterface,
+  CARPOOLING_SERVICE_TOKEN,
+} from 'src/app/interface/carpooling.interface';
+import {
+  NotifierServiceInterface,
+  NOTIFIER_SERVICE_TOKEN,
+} from 'src/app/interface/notifier.interface';
 
 describe('CreateSubscriptionComponent', () => {
   let component: CreateSubscriptionComponent;

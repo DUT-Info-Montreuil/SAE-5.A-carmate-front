@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, throwError } from "rxjs";
-import { AuthenticationServiceInterface } from "../../../interface/user.interface";
-import { HttpErrorResponse } from "@angular/common/http";
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { AuthenticationServiceInterface } from '../../../interface/user.interface';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({

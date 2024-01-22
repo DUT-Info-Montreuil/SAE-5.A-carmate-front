@@ -2,8 +2,9 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/app/environement/environement';
 import { Injectable } from '@angular/core';
-import { User, UserServiceInterface } from 'src/app/interface/user';
 import { AbstractService } from '../abstractService';
+import { UserServiceInterface } from 'src/app/interface/user.interface';
+import { User } from 'src/app/model/user.model';
 
 @Injectable({
   providedIn: 'root',

@@ -16,10 +16,20 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface, NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other.interface';
-import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface } from '../../interface/carpooling.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/address.interface';
+import {
+  CARPOOLING_SERVICE_TOKEN,
+  CarpoolingServiceInterface,
+} from 'src/app/interface/carpooling.interface';
+import {
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from 'src/app/interface/notifier.interface';
 
 @Component({
   selector: 'app-publish-carpool',

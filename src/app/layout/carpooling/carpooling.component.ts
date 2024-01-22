@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { Carpooling, Search } from 'src/app/interface/carpooling';
+import { CarpoolingDialogComponent } from '../carpooling-dialog/carpooling-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import {
   ADDRESS_SERVICE_TOKEN,
   AddressServiceInterface,
-} from 'src/app/interface/other';
-import { CarpoolingDialogComponent } from '../carpooling-dialog/carpooling-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+} from 'src/app/interface/address.interface';
+import { Carpooling, Search } from 'src/app/model/carpooling.model';
 
 @Component({
   selector: 'app-carpooling',
