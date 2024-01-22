@@ -8,19 +8,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  AddressServiceInterface,
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from '../../interface/other';
+import { AddressServiceInterface, NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from "../../interface/other.interface";
 import { PublishCarpoolComponent } from './publish-carpool.component';
-import { CarpoolingServiceInterface } from 'src/app/interface/carpooling';
-import { CARPOOLING_SERVICE_TOKEN } from 'src/app/interface/carpooling';
-import { ADDRESS_SERVICE_TOKEN } from '../../interface/other';
-import { By } from '@angular/platform-browser';
-import { of } from 'rxjs/internal/observable/of';
-import { throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { CarpoolingServiceInterface } from "src/app/interface/carpooling.interface";
+import { CARPOOLING_SERVICE_TOKEN } from "src/app/interface/carpooling.interface";
+import { ADDRESS_SERVICE_TOKEN } from "../../interface/other.interface";
+import { By } from "@angular/platform-browser";
+import { of } from "rxjs/internal/observable/of";
+import { throwError } from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
 
 describe('PublishCarpoolComponent', () => {
   let component: PublishCarpoolComponent;

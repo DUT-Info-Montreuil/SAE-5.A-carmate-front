@@ -1,7 +1,7 @@
 import { AuthenticationService } from './authentication.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AuthenticationServiceInterface, Token } from '../../../interface/user';
-import { of, throwError } from 'rxjs';
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {AuthenticationServiceInterface, Token} from "../../../interface/user.interface";
+import {of, throwError} from "rxjs";
 
 describe('AuthenticationService', () => {
   let authenticationService: AuthenticationServiceInterface;

@@ -1,18 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from '../../../interface/other';
-import {
-  AUTHENTICATION_SERVICE_TOKEN,
-  AuthenticationServiceInterface,
-  Token,
-} from '../../../interface/user';
-import { BehaviorSubject, of } from 'rxjs';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ActivatedRoute, Router } from "@angular/router";
+import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from "../../../interface/other.interface";
+import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface, Token } from "../../../interface/user.interface";
+import { BehaviorSubject, of } from "rxjs";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatFormFieldModule } from '@angular/material/form-field';
 

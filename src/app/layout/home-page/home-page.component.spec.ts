@@ -8,17 +8,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  CARPOOLING_SERVICE_TOKEN,
-  Carpooling,
-  CarpoolingServiceInterface,
-} from 'src/app/interface/carpooling';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from '../../interface/other';
+import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface } from "src/app/interface/carpooling.interface";
+import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface, NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from "../../interface/other.interface";
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ResultCarpoolComponent } from '../result-carpool/result-carpool.component';

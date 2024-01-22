@@ -1,15 +1,9 @@
-import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from '../../interface/other';
-import {
-  PROFILE_SERVICE_TOKEN,
-  ProfilesServiceInterface,
-} from '../../interface/profiles';
-import { HttpErrorResponse } from '@angular/common/http';
+import {Component, Inject} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../interface/other.interface";
+import {PROFILE_SERVICE_TOKEN, ProfilesServiceInterface} from "../../interface/profiles.interface";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-become-driver',

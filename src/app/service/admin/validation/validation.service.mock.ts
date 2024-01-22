@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
   LicenseStatus,
-  ValidationServiceInterface,
-} from '../../../interface/admin';
-import { Observable, of, throwError } from 'rxjs';
-import { MutualizedMockData } from './MutualizedMockData';
-import { HttpErrorResponse } from '@angular/common/http';
+  ValidationServiceInterface
+} from "../../../interface/admin.interface";
+import {Observable, of, throwError} from 'rxjs';
+import {MutualizedMockData} from "./MutualizedMockData";
+import {HttpErrorResponse} from "@angular/common/http";
+
 
 @Injectable({
   providedIn: 'root',

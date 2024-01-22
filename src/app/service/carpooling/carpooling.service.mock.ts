@@ -7,14 +7,11 @@ import {
   Search,
   Subscription,
   publishedCarpooling,
-} from 'src/app/interface/carpooling';
+} from 'src/app/interface/carpooling.interface';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from 'src/app/interface/other';
-import { PassengerProfile } from '../../interface/profiles';
+import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other.interface';
+import {PassengerProfile} from "../../interface/profiles.interface";
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
-import { BehaviorSubject, Observable } from 'rxjs';
-import { InjectionToken } from '@angular/core';
-import { PassengerProfile } from './profiles';
+import {BehaviorSubject, Observable} from "rxjs";
+import { InjectionToken } from "@angular/core";
+import {PassengerProfile} from "./profiles.interface";
 
 export type Carpooling = {
   id: number;

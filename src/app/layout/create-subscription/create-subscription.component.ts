@@ -20,13 +20,13 @@ import {
   CarpoolingServiceInterface,
   CreateSubscriptionPayload,
   WeekDay,
-} from 'src/app/interface/carpooling';
+} from 'src/app/interface/carpooling.interface';
 import {
   ADDRESS_SERVICE_TOKEN,
   AddressServiceInterface,
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
+} from 'src/app/interface/other.interface';
 import {
   faClock,
   faEuro,
@@ -37,10 +37,7 @@ import {
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  AUTHENTICATION_SERVICE_TOKEN,
-  AuthenticationServiceInterface,
-} from '../../interface/user';
+import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user.interface";
 
 @Component({
   selector: 'app-create-subscription',

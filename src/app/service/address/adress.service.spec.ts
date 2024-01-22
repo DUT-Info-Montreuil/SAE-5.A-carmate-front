@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { AddressService } from './address.service';
 import { CarpoolingService } from '../carpooling/carpooling.service';
-import { NotifierServiceInterface } from '../../interface/other';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {NotifierServiceInterface} from "../../interface/other.interface";
+import { HttpClient,  HttpClientModule} from '@angular/common/http';
 
 describe('AddressService', () => {
   let service: AddressService;

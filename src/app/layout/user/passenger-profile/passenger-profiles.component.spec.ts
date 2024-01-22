@@ -1,20 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PassengerProfilesComponent } from './passenger-profiles.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Router } from '@angular/router';
-import {
-  USER_SERVICE_TOKEN,
-  UserServiceInterface,
-} from '../../../interface/user';
-import {
-  PROFILE_SERVICE_TOKEN,
-  ProfilesServiceInterface,
-} from '../../../interface/profiles';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from 'src/app/interface/other';
+import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {Router} from "@angular/router";
+import {USER_SERVICE_TOKEN, UserServiceInterface} from "../../../interface/user.interface";
+import {PROFILE_SERVICE_TOKEN, ProfilesServiceInterface} from "../../../interface/profiles.interface";
+import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 

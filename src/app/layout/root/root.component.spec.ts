@@ -1,13 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { RootComponent } from './root.component';
-import { NotifierModule } from 'angular-notifier';
-import { NavBarComponent } from '../nav-bar/nav-bar.component';
-import {
-  AUTHENTICATION_SERVICE_TOKEN,
-  AuthenticationServiceInterface,
-} from '../../interface/user';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {RootComponent} from './root.component';
+import {NotifierModule} from "angular-notifier";
+import {NavBarComponent} from "../nav-bar/nav-bar.component";
+import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user.interface";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 describe('RootComponent', () => {
   let component: RootComponent;

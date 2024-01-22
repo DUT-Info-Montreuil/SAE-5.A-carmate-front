@@ -5,12 +5,9 @@ import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import {
   DocumentMetaDatas,
   VALIDATION_SERVICE_TOKEN,
-  ValidationServiceInterface,
-} from '../../../../interface/admin';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from '../../../../interface/other';
+  ValidationServiceInterface
+} from "../../../../interface/admin.interface";
+import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../../interface/other.interface";
 
 @Component({
   selector: 'app-validation-list',

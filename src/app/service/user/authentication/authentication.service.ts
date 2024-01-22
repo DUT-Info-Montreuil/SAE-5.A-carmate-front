@@ -1,9 +1,9 @@
-import { Injectable, OnInit } from '@angular/core';
-import { environment } from '../../../environement/environement';
-import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
-import { AbstractService } from '../../abstractService';
-import { AuthenticationServiceInterface, Token } from '../../../interface/user';
-import { HttpClient } from '@angular/common/http';
+import {Injectable, OnInit} from '@angular/core';
+import {environment} from "../../../environement/environement";
+import {BehaviorSubject, catchError, Observable, tap} from "rxjs";
+import {AbstractService} from "../../abstractService";
+import {AuthenticationServiceInterface, Token} from "../../../interface/user.interface";
+import {HttpClient} from "@angular/common/http";
 import { FormGroup } from '@angular/forms';
 
 @Injectable({

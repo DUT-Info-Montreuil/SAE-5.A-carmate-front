@@ -4,13 +4,9 @@ import {
   Document,
   LicenseStatus,
   NextDocument,
-  VALIDATION_SERVICE_TOKEN,
-  ValidationServiceInterface,
-} from '../../../../interface/admin';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from '../../../../interface/other';
+  VALIDATION_SERVICE_TOKEN, ValidationServiceInterface
+} from "../../../../interface/admin.interface";
+import {NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface} from "../../../../interface/other.interface";
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({

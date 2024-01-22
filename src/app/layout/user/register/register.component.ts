@@ -14,15 +14,9 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from '../../../interface/other';
+import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from '../../../interface/other.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  AUTHENTICATION_SERVICE_TOKEN,
-  AuthenticationServiceInterface,
-} from '../../../interface/user';
+import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from '../../../interface/user.interface';
 import { MaxSizeValidator } from '@angular-material-components/file-input';
 import { ThemePalette } from '@angular/material/core';
 
