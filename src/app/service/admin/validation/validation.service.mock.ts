@@ -1,20 +1,20 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   LicenseStatus,
-  ValidationServiceInterface
-} from "../../../interface/admin";
-import {Observable, of, throwError} from 'rxjs';
-import {MutualizedMockData} from "./MutualizedMockData";
-import {HttpErrorResponse} from "@angular/common/http";
-
+  ValidationServiceInterface,
+} from '../../../interface/admin';
+import { Observable, of, throwError } from 'rxjs';
+import { MutualizedMockData } from './MutualizedMockData';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ValidationServiceMock implements ValidationServiceInterface {
   getDocument(document_id: number): Observable<any> {
-    const foundData = MutualizedMockData.getAllOrCreate().find((doc) => doc.document_id == document_id);
+    const foundData = MutualizedMockData.getAllOrCreate().find(
+      (doc) => doc.document_id == document_id,
+    );
     if (!foundData) {
       const httpErrorResponse = new HttpErrorResponse({
         error: 'User not found',
@@ -22,7 +22,7 @@ export class ValidationServiceMock implements ValidationServiceInterface {
       });
       return of(throwError(() => httpErrorResponse));
     }
-    if (foundData.status !== "Pending") {
+    if (foundData.status !== 'Pending') {
       const httpErrorResponse = new HttpErrorResponse({
         error: 'Document already validated',
         status: 410,
@@ -45,11 +45,16 @@ export class ValidationServiceMock implements ValidationServiceInterface {
       return of(throwError(() => httpErrorResponse));
     }
     const paginatedRecaps = recaps.slice(startIndex, endIndex);
-    return of({items: paginatedRecaps, nb_documents: recaps.length});
+    return of({ items: paginatedRecaps, nb_documents: recaps.length });
   }
 
-  sendValidationStatus(status: LicenseStatus, document_id: number): Observable<any> {
-    const foundData = MutualizedMockData.getAllOrCreate().find((doc) => doc.document_id === document_id);
+  sendValidationStatus(
+    status: LicenseStatus,
+    document_id: number,
+  ): Observable<any> {
+    const foundData = MutualizedMockData.getAllOrCreate().find(
+      (doc) => doc.document_id === document_id,
+    );
     if (!foundData) {
       const httpErrorResponse = new HttpErrorResponse({
         error: 'User not found',
@@ -59,10 +64,12 @@ export class ValidationServiceMock implements ValidationServiceInterface {
     }
     foundData.status = status;
 
-    const nextDocument = MutualizedMockData.getAllOrCreate().find((doc) => doc.status === "Pending");
+    const nextDocument = MutualizedMockData.getAllOrCreate().find(
+      (doc) => doc.status === 'Pending',
+    );
     if (nextDocument) {
       return of({
-        next_document_id:nextDocument.document_id
+        next_document_id: nextDocument.document_id,
       });
     }
     return of(null);

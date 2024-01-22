@@ -1,47 +1,75 @@
-<div  class="pb-3 flex justify-between w-full">
+<div class="pb-3 flex justify-between w-full">
+  <div>
     <div>
-        <div>
-            <fa-icon [icon]="faLocationDot" class="mx-3"></fa-icon>
-            <span>{{ carpoolingToDisplay.departure }}</span>
-            <fa-icon [icon]="faArrowRight" class="mx-3"></fa-icon>
-            <span>{{ carpoolingToDisplay.destination }}</span>
-            <button mat-stroked-button color="primary" *ngIf="carpoolingToDisplay.isToday" class="ml-5" (click)="openDialog()">
-                Voir le code
-            </button>
-            <button *ngIf="!carpoolingToDisplay.isToday && !carpoolingToDisplay.isOutdated"
-                mat-button [disabled]="true" [disableRipple]="true" class="ml-5">
-                À venir
-            </button>
-            <button *ngIf="carpoolingToDisplay.isOutdated" mat-button [disabled]="true" [disableRipple]="true" class="ml-5">
-                Passé
-            </button>
-        </div>
-        <div>
-            <fa-icon [icon]="faCalendar" class="mx-3"></fa-icon>
-            <span>{{ carpoolingToDisplay.departureDate | date:'EEEE d MMMM yyyy':'GMT+1':'fr-FR' }}</span>
-        </div>
-        <div>
-            <fa-icon [icon]="faClock" class="mx-3"></fa-icon>
-            <span>{{ carpoolingToDisplay.departureTime }}</span>
-        </div>
-        <div>
-          <fa-icon [icon]="faUser" class="mx-3"></fa-icon>
-          <span>{{ carpoolingToDisplay.seats_takens }}/{{ carpoolingToDisplay.max_passengers }}</span>
-      </div>
+      <fa-icon [icon]="faLocationDot" class="mx-3"></fa-icon>
+      <span>{{ carpoolingToDisplay.departure }}</span>
+      <fa-icon [icon]="faArrowRight" class="mx-3"></fa-icon>
+      <span>{{ carpoolingToDisplay.destination }}</span>
+      <button
+        mat-stroked-button
+        color="primary"
+        *ngIf="carpoolingToDisplay.isToday"
+        class="ml-5"
+        (click)="openDialog()"
+      >
+        Voir le code
+      </button>
+      <button
+        *ngIf="!carpoolingToDisplay.isToday && !carpoolingToDisplay.isOutdated"
+        mat-button
+        [disabled]="true"
+        [disableRipple]="true"
+        class="ml-5"
+      >
+        À venir
+      </button>
+      <button
+        *ngIf="carpoolingToDisplay.isOutdated"
+        mat-button
+        [disabled]="true"
+        [disableRipple]="true"
+        class="ml-5"
+      >
+        Passé
+      </button>
     </div>
     <div>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item disabled>
-            <fa-icon [icon]="faXmark" class="mr-2"></fa-icon>
-            <span>Annuler le trajet</span>
-          </button>
-          <button mat-menu-item disabled>
-            <fa-icon [icon]="faStarHalfStroke" class="mr-2"></fa-icon>
-            <span>Noter</span>
-          </button>
-        </mat-menu>
-      </div>
+      <fa-icon [icon]="faCalendar" class="mx-3"></fa-icon>
+      <span>{{
+        carpoolingToDisplay.departureDate
+          | date: "EEEE d MMMM yyyy" : "GMT+1" : "fr-FR"
+      }}</span>
+    </div>
+    <div>
+      <fa-icon [icon]="faClock" class="mx-3"></fa-icon>
+      <span>{{ carpoolingToDisplay.departureTime }}</span>
+    </div>
+    <div>
+      <fa-icon [icon]="faUser" class="mx-3"></fa-icon>
+      <span
+        >{{ carpoolingToDisplay.seats_takens }}/{{
+          carpoolingToDisplay.max_passengers
+        }}</span
+      >
+    </div>
+  </div>
+  <div>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>
+        <fa-icon [icon]="faXmark" class="mr-2"></fa-icon>
+        <span>Annuler le trajet</span>
+      </button>
+      <button mat-menu-item disabled>
+        <fa-icon [icon]="faStarHalfStroke" class="mr-2"></fa-icon>
+        <span>Noter</span>
+      </button>
+    </mat-menu>
+  </div>
 </div>

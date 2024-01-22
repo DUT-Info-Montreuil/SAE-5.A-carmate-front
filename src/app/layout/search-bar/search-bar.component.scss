@@ -1,13 +1,13 @@
-@import '../../../_variables';
+@import "../../../_variables";
 
 form {
-    max-width: $maxWidth-SearchBar;
-    justify-content: space-between;
+  max-width: $maxWidth-SearchBar;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: $maxWidth-SearchBar) {
   form {
-    width: 100%; 
+    width: 100%;
   }
 }
 

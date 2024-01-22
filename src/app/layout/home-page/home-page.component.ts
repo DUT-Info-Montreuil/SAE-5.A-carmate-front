@@ -4,11 +4,11 @@ import { Search } from 'src/app/interface/carpooling';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent {
   searchParams!: Search;
-  resultDisplayed: boolean = false;
+  resultDisplayed = false;
 
   handleSearchEvent(searchParams: Search) {
     this.searchParams = searchParams;

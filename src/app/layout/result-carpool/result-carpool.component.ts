@@ -1,10 +1,15 @@
 import { Component, Inject, Input, SimpleChanges } from '@angular/core';
-import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface, Search } from 'src/app/interface/carpooling';
+import {
+  CARPOOLING_SERVICE_TOKEN,
+  Carpooling,
+  CarpoolingServiceInterface,
+  Search,
+} from 'src/app/interface/carpooling';
 
 @Component({
   selector: 'app-result-carpool',
   templateUrl: './result-carpool.component.html',
-  styleUrls: ['./result-carpool.component.scss']
+  styleUrls: ['./result-carpool.component.scss'],
 })
 export class ResultCarpoolComponent {
   @Input() _carpoolings: Carpooling[] = [];
@@ -14,8 +19,9 @@ export class ResultCarpoolComponent {
   noResults!: boolean;
 
   constructor(
-    @Inject(CARPOOLING_SERVICE_TOKEN) private carpoolingService: CarpoolingServiceInterface,
-    ) {}
+    @Inject(CARPOOLING_SERVICE_TOKEN)
+    private carpoolingService: CarpoolingServiceInterface,
+  ) {}
 
   ngOnInit() {
     this.carpoolingService.$carpoolings.subscribe((carpoolings) => {
@@ -25,11 +31,17 @@ export class ResultCarpoolComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes['_searchParams'].previousValue ||
-      changes['_searchParams'].currentValue.start_lat !== changes['_searchParams'].previousValue.start_lat ||
-      changes['_searchParams'].currentValue.start_lon !== changes['_searchParams'].previousValue.start_lon)
-    {
-      this.starting_pointUserToDisplay = [this._searchParams.start_lat, this._searchParams.start_lon];
+    if (
+      !changes['_searchParams'].previousValue ||
+      changes['_searchParams'].currentValue.start_lat !==
+        changes['_searchParams'].previousValue.start_lat ||
+      changes['_searchParams'].currentValue.start_lon !==
+        changes['_searchParams'].previousValue.start_lon
+    ) {
+      this.starting_pointUserToDisplay = [
+        this._searchParams.start_lat,
+        this._searchParams.start_lon,
+      ];
     }
   }
 

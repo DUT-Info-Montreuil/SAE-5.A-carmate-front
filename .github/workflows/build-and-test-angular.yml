@@ -2,9 +2,9 @@ name: Build and launch tests angular
 on:
   push:
     paths-ignore:
-      - 'README.md'
-      - '.editorconfig'
-      - '.gitignore'
+      - "README.md"
+      - ".editorconfig"
+      - ".gitignore"
 env:
   NODE_VERSION: 20.x
 jobs:

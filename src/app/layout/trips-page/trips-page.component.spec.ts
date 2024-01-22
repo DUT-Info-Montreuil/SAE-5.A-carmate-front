@@ -1,21 +1,36 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TripsPageComponent } from './trips-page.component';
-import { CarpoolingServiceInterface, CARPOOLING_SERVICE_TOKEN, Subscription, publishedCarpooling } from 'src/app/interface/carpooling';
+import {
+  CarpoolingServiceInterface,
+  CARPOOLING_SERVICE_TOKEN,
+  Subscription,
+  publishedCarpooling,
+} from 'src/app/interface/carpooling';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { of } from 'rxjs';
 import { SubscriptionComponent } from 'src/app/layout/trips-page/subscription/subscription.component';
-import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interface/other';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/other';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatListModule } from '@angular/material/list';
-import {PassengerProfile, PROFILE_SERVICE_TOKEN, ProfilesServiceInterface} from 'src/app/interface/profiles';
+import {
+  PassengerProfile,
+  PROFILE_SERVICE_TOKEN,
+  ProfilesServiceInterface,
+} from 'src/app/interface/profiles';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from 'src/app/interface/user';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from 'src/app/interface/user';
 import { PublishedSubscriptionsComponent } from './published-subscriptions/published-subscriptions.component';
 import { SubscriptionDialogComponent } from './subscription/subscription-dialog/subscription-dialog.component';
 import { MyCarpoolingsComponent } from './my-carpoolings/my-carpoolings.component';
@@ -30,115 +45,135 @@ describe('TripsPageComponent', () => {
   let spyAuthService: jasmine.SpyObj<AuthenticationServiceInterface>;
   beforeEach(() => {
     spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', [
-      'getSubscriptions', 'getPublishedCarpoolings', 'getCarpoolings', 'getPublishedSubscriptions'
+      'getSubscriptions',
+      'getPublishedCarpoolings',
+      'getCarpoolings',
+      'getPublishedSubscriptions',
     ]);
-    spyCarpoolingService.getSubscriptions.and.returnValue(of([
-      {
-        starting_point: [0, 0],
-        destination: [0, 0],
-        start_date: 0,
-        end_date: 0,
-        start_hour: "",
-        days: ["Monday"],
-        label: "",
-        carpools: [
-          {
-            id: 0,
-            starting_point: [0, 0],
-            destination: [0, 0],
-            max_passengers: 0,
-            price: 0,
-            departure_date_time: "2023-01-01T12:00:00",
-            is_canceled: false,
-            driver_id: 0,
-            seats_taken: 0
-          }
-        ]
-      }
-    ]));
-    spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of([{
-      id: 1,
-      starting_point: [48.8558516, 2.3588636],
-      destination: [48.9757551, 2.559337],
-      price: 40,
-      is_canceled: false,
-      departure_date_time: "2024-01-13T08:30:00",
-      driver_id: 1,
-      max_passengers: 2,
-      seats_taken: 2,
-      passengers_profile: [
+    spyCarpoolingService.getSubscriptions.and.returnValue(
+      of([
         {
-          first_name: 'John',
-          last_name: 'Doe'
-        } as PassengerProfile,
-        {
-          first_name: 'Johny',
-          last_name: 'Doey'
-        } as PassengerProfile
-      ]
-    }]));
-    spyCarpoolingService.getCarpoolings.and.returnValue(of([
-      {
-        id: 1,
-        starting_point: [48.8558516, 2.3588636],
-        destination: [48.9757551, 2.559337],
-        price: 40,
-        is_canceled: false,
-        departure_date_time: "2024-01-13T08:30:00",
-        driver_id: 1,
-        max_passengers: 2,
-        seats_taken: 2,
-      },
-    ]));
-    spyCarpoolingService.getPublishedSubscriptions.and.returnValue(of([
-      {
-      starting_point: [0, 0],
-      destination: [0, 0],
-      start_date: 0,
-      end_date: 0,
-      start_hour: "",
-      days: ["Monday"],
-      label: "",
-      carpools: [
-        {
-          id: 0,
           starting_point: [0, 0],
           destination: [0, 0],
-          max_passengers: 0,
-          price: 0,
-          departure_date_time: "2023-01-01T12:00:00",
+          start_date: 0,
+          end_date: 0,
+          start_hour: '',
+          days: ['Monday'],
+          label: '',
+          carpools: [
+            {
+              id: 0,
+              starting_point: [0, 0],
+              destination: [0, 0],
+              max_passengers: 0,
+              price: 0,
+              departure_date_time: '2023-01-01T12:00:00',
+              is_canceled: false,
+              driver_id: 0,
+              seats_taken: 0,
+            },
+          ],
+        },
+      ]),
+    );
+    spyCarpoolingService.getPublishedCarpoolings.and.returnValue(
+      of([
+        {
+          id: 1,
+          starting_point: [48.8558516, 2.3588636],
+          destination: [48.9757551, 2.559337],
+          price: 40,
           is_canceled: false,
-          driver_id: 0,
-          seats_taken: 0,
+          departure_date_time: '2024-01-13T08:30:00',
+          driver_id: 1,
+          max_passengers: 2,
+          seats_taken: 2,
           passengers_profile: [
             {
               first_name: 'John',
-              last_name: 'Doe'
+              last_name: 'Doe',
             } as PassengerProfile,
             {
               first_name: 'Johny',
-              last_name: 'Doey'
-            } as PassengerProfile
-          ]
-
-        }
-      ]
-    }
-  ]));
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getFormattedAddress']);
+              last_name: 'Doey',
+            } as PassengerProfile,
+          ],
+        },
+      ]),
+    );
+    spyCarpoolingService.getCarpoolings.and.returnValue(
+      of([
+        {
+          id: 1,
+          starting_point: [48.8558516, 2.3588636],
+          destination: [48.9757551, 2.559337],
+          price: 40,
+          is_canceled: false,
+          departure_date_time: '2024-01-13T08:30:00',
+          driver_id: 1,
+          max_passengers: 2,
+          seats_taken: 2,
+        },
+      ]),
+    );
+    spyCarpoolingService.getPublishedSubscriptions.and.returnValue(
+      of([
+        {
+          starting_point: [0, 0],
+          destination: [0, 0],
+          start_date: 0,
+          end_date: 0,
+          start_hour: '',
+          days: ['Monday'],
+          label: '',
+          carpools: [
+            {
+              id: 0,
+              starting_point: [0, 0],
+              destination: [0, 0],
+              max_passengers: 0,
+              price: 0,
+              departure_date_time: '2023-01-01T12:00:00',
+              is_canceled: false,
+              driver_id: 0,
+              seats_taken: 0,
+              passengers_profile: [
+                {
+                  first_name: 'John',
+                  last_name: 'Doe',
+                } as PassengerProfile,
+                {
+                  first_name: 'Johny',
+                  last_name: 'Doey',
+                } as PassengerProfile,
+              ],
+            },
+          ],
+        },
+      ]),
+    );
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
+      'getFormattedAddress',
+    ]);
     spyAddressService.getFormattedAddress.and.returnValue(of(''));
-    spyProfileService = jasmine.createSpyObj('ProfilesServiceInterface', ['getDriverProfile']);
-    spyProfileService.getDriverProfile.and.returnValue(of({
-      user_id: 0,
-      first_name: '',
-      last_name: '',
-      driver_id: 0,
-      description: '',
-      createdAt: '',
-      nb_carpools_done: 0,
-      profile_picture: ''
-    }));
-    spyAuthService = jasmine.createSpyObj('AuthenticationServiceInterface', ['isDriver']);
+    spyProfileService = jasmine.createSpyObj('ProfilesServiceInterface', [
+      'getDriverProfile',
+    ]);
+    spyProfileService.getDriverProfile.and.returnValue(
+      of({
+        user_id: 0,
+        first_name: '',
+        last_name: '',
+        driver_id: 0,
+        description: '',
+        createdAt: '',
+        nb_carpools_done: 0,
+        profile_picture: '',
+      }),
+    );
+    spyAuthService = jasmine.createSpyObj('AuthenticationServiceInterface', [
+      'isDriver',
+    ]);
     TestBed.configureTestingModule({
       declarations: [
         TripsPageComponent,
@@ -146,7 +181,7 @@ describe('TripsPageComponent', () => {
         PublishedSubscriptionsComponent,
         SubscriptionDialogComponent,
         MyCarpoolingsComponent,
-        CarpoolingDialogComponent
+        CarpoolingDialogComponent,
       ],
       imports: [
         BrowserAnimationsModule,
@@ -158,14 +193,14 @@ describe('TripsPageComponent', () => {
         MatButtonModule,
         MatMenuModule,
         MatTabsModule,
-        MatDialogModule
+        MatDialogModule,
       ],
       providers: [
-        {provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService},
-        {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService},
-        {provide: PROFILE_SERVICE_TOKEN, useValue: spyProfileService},
-        {provide: AUTHENTICATION_SERVICE_TOKEN, useValue: spyAuthService}
-      ]
+        { provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService },
+        { provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService },
+        { provide: PROFILE_SERVICE_TOKEN, useValue: spyProfileService },
+        { provide: AUTHENTICATION_SERVICE_TOKEN, useValue: spyAuthService },
+      ],
     });
     fixture = TestBed.createComponent(TripsPageComponent);
     component = fixture.componentInstance;
@@ -177,14 +212,16 @@ describe('TripsPageComponent', () => {
   });
 
   it('should call getSubscriptions on ngOnInit', () => {
-    const getSubscriptionsSpy = spyCarpoolingService.getSubscriptions.and.returnValue(of([]));
+    const getSubscriptionsSpy =
+      spyCarpoolingService.getSubscriptions.and.returnValue(of([]));
     component.ngOnInit();
     expect(getSubscriptionsSpy).toHaveBeenCalled();
     expect(component.subscriptions).toBeTruthy;
   });
 
   it('should call getPublishedCarpoolings on ngOnInit', () => {
-    const getPublishedCarpoolingsSpy = spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of([]));
+    const getPublishedCarpoolingsSpy =
+      spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of([]));
     component.ngOnInit();
     expect(getPublishedCarpoolingsSpy).toHaveBeenCalled();
     expect(component.publishedCarpoolings).toBeTruthy;
@@ -197,9 +234,9 @@ describe('TripsPageComponent', () => {
         destination: [0, 0],
         start_date: 0,
         end_date: 0,
-        start_hour: "",
-        days: ["Monday"],
-        label: "",
+        start_hour: '',
+        days: ['Monday'],
+        label: '',
         carpools: [
           {
             id: 0,
@@ -207,15 +244,17 @@ describe('TripsPageComponent', () => {
             destination: [0, 0],
             max_passengers: 0,
             price: 0,
-            departure_date_time: "2023-01-01T12:00:00",
+            departure_date_time: '2023-01-01T12:00:00',
             is_canceled: false,
             driver_id: 0,
-            seats_taken: 0
-          }
-        ]
-      }
+            seats_taken: 0,
+          },
+        ],
+      },
     ];
-    spyCarpoolingService.getSubscriptions.and.returnValue(of(testSubscriptions));
+    spyCarpoolingService.getSubscriptions.and.returnValue(
+      of(testSubscriptions),
+    );
     component.ngOnInit();
     expect(component.subscriptions).toEqual(testSubscriptions);
   });
@@ -228,24 +267,25 @@ describe('TripsPageComponent', () => {
         destination: [48.9757551, 2.559337],
         price: 40,
         is_canceled: false,
-        departure_date_time: "2024-01-15T08:30:00",
+        departure_date_time: '2024-01-15T08:30:00',
         driver_id: 1,
         max_passengers: 2,
         seats_taken: 1,
         passengers_profile: [
           {
             first_name: 'John',
-            last_name: 'Doe'
+            last_name: 'Doe',
           } as PassengerProfile,
           {
             first_name: 'Johny',
-            last_name: 'Doey'
-          } as PassengerProfile
-        ]
-
+            last_name: 'Doey',
+          } as PassengerProfile,
+        ],
       },
     ];
-    spyCarpoolingService.getPublishedCarpoolings.and.returnValue(of(testPublishedCarpoolings));
+    spyCarpoolingService.getPublishedCarpoolings.and.returnValue(
+      of(testPublishedCarpoolings),
+    );
     component.ngOnInit();
     expect(component.publishedCarpoolings).toEqual(testPublishedCarpoolings);
   });

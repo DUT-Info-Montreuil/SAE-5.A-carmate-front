@@ -8,8 +8,17 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CARPOOLING_SERVICE_TOKEN, Carpooling, CarpoolingServiceInterface } from "src/app/interface/carpooling";
-import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface, NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from "../../interface/other";
+import {
+  CARPOOLING_SERVICE_TOKEN,
+  Carpooling,
+  CarpoolingServiceInterface,
+} from 'src/app/interface/carpooling';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from '../../interface/other';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ResultCarpoolComponent } from '../result-carpool/result-carpool.component';
@@ -28,28 +37,46 @@ describe('HomePageComponent', () => {
   let spyNotifierService: jasmine.SpyObj<NotifierServiceInterface>;
 
   beforeEach(() => {
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture']);
-    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['publish', 'search'])
-    spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
+      'getAddressByString',
+      'getAddressByCoords',
+      'matchingSchoolDeparture',
+    ]);
+    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', [
+      'publish',
+      'search',
+    ]);
+    spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', [
+      'error',
+      'success',
+      'warning',
+    ]);
     spyCarpoolingService.$carpoolings = new BehaviorSubject<Carpooling[]>([
       {
-          starting_point: [48.8558516, 2.3588636],
-          destination: [48.9757551, 2.559337],
-          price: 50,
-          departure_date_time: "2023-01-01T12:00:00",
-          driver_id: 1,
-          max_passengers: 1,
-          seats_taken: 0,
-          id: 1,
-          first_name: 'John',
-          last_name: 'Doe'
-    }]);
+        starting_point: [48.8558516, 2.3588636],
+        destination: [48.9757551, 2.559337],
+        price: 50,
+        departure_date_time: '2023-01-01T12:00:00',
+        driver_id: 1,
+        max_passengers: 1,
+        seats_taken: 0,
+        id: 1,
+        first_name: 'John',
+        last_name: 'Doe',
+      },
+    ]);
     spyAddressService.$schoolList = [
-      {lat: 48.9757551, lon: 2.559337, name: 'IUT de Tremblay-en-France'}
+      { lat: 48.9757551, lon: 2.559337, name: 'IUT de Tremblay-en-France' },
     ];
     spyAddressService.getAddressByCoords.and.returnValue(of(''));
     TestBed.configureTestingModule({
-      declarations: [HomePageComponent, SearchBarComponent, ResultCarpoolComponent, MapComponent, CarpoolingComponent],
+      declarations: [
+        HomePageComponent,
+        SearchBarComponent,
+        ResultCarpoolComponent,
+        MapComponent,
+        CarpoolingComponent,
+      ],
       imports: [
         HttpClientTestingModule,
         MatFormFieldModule,
@@ -65,10 +92,10 @@ describe('HomePageComponent', () => {
         MatProgressSpinnerModule,
       ],
       providers: [
-        {provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService},
-        {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService},
-        {provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifierService},
-      ]
+        { provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService },
+        { provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService },
+        { provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifierService },
+      ],
     });
     fixture = TestBed.createComponent(HomePageComponent);
     component = fixture.componentInstance;

@@ -1,26 +1,25 @@
-import {Injectable} from "@angular/core";
-import {NotifierService} from "angular-notifier";
-import {NotifierServiceInterface} from "../../../interface/other";
+import { Injectable } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
+import { NotifierServiceInterface } from '../../../interface/other';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
-export class AngularNotifierService implements NotifierServiceInterface{
+export class AngularNotifierService implements NotifierServiceInterface {
   public readonly notifier: NotifierService;
   constructor(notifierService: NotifierService) {
     this.notifier = notifierService;
   }
 
   error(message: string): void {
-    this.notifier.notify('error', message)
+    this.notifier.notify('error', message);
   }
 
   success(message: string): void {
-    this.notifier.notify('success', message)
+    this.notifier.notify('success', message);
   }
 
   warning(message: string): void {
-    this.notifier.notify('warning', message)
+    this.notifier.notify('warning', message);
   }
 }

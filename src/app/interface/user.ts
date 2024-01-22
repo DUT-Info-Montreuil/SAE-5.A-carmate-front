@@ -1,6 +1,6 @@
-import { Observable } from "rxjs";
-import { InjectionToken } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { Observable } from 'rxjs';
+import { InjectionToken } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 export interface Token {
   token: string;
@@ -15,7 +15,7 @@ export interface User {
 }
 
 export interface AuthenticationServiceInterface {
-  login: (email:string, password:string) => Observable<any>;
+  login: (email: string, password: string) => Observable<any>;
   logOut: () => void;
   isLogged: () => boolean;
   isAdmin: () => boolean;
@@ -27,5 +27,10 @@ export interface UserServiceInterface {
   getUser: () => Observable<any>;
 }
 
-export const AUTHENTICATION_SERVICE_TOKEN = new InjectionToken<AuthenticationServiceInterface>('AuthenticationServiceInterface');
-export const USER_SERVICE_TOKEN = new InjectionToken<UserServiceInterface>('UserServiceInterface');
+export const AUTHENTICATION_SERVICE_TOKEN =
+  new InjectionToken<AuthenticationServiceInterface>(
+    'AuthenticationServiceInterface',
+  );
+export const USER_SERVICE_TOKEN = new InjectionToken<UserServiceInterface>(
+  'UserServiceInterface',
+);

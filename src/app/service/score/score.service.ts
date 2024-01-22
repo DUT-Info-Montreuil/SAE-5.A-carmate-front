@@ -6,26 +6,32 @@ import { environment } from 'src/app/environement/environement';
 import { Observable, catchError, forkJoin, map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
-export class ScoreService extends AbstractService implements ScoreServiceInterface{
-  constructor(
-    http: HttpClient
-    ) {
+export class ScoreService
+  extends AbstractService
+  implements ScoreServiceInterface
+{
+  constructor(http: HttpClient) {
     super(http);
   }
 
-  getScoreUserData(param?: string | number): Observable<ScoreUserData[] | ScoreUserData> {
+  getScoreUserData(
+    param?: string | number,
+  ): Observable<ScoreUserData[] | ScoreUserData> {
     return forkJoin({
       economic: this.getEconomicDriving(param),
       safe: this.getSafeDriving(param),
-      sociability: this.getSociability(param)
+      sociability: this.getSociability(param),
     }).pipe(
       map((responses) => {
-        const {economic, safe, sociability} = responses;
+        const { economic, safe, sociability } = responses;
 
-        if (Array.isArray(economic) && Array.isArray(safe) && Array.isArray(sociability)) {
+        if (
+          Array.isArray(economic) &&
+          Array.isArray(safe) &&
+          Array.isArray(sociability)
+        ) {
           return economic.map((item, index) => {
             return {
               driver_id: item.driver_id,
@@ -36,10 +42,14 @@ export class ScoreService extends AbstractService implements ScoreServiceInterfa
               nb_carpooling_done: item.nb_carpooling_done,
               economic_driving_rating: economic[index].economic_driving_rating,
               safe_driving_rating: safe[index].safe_driving_rating,
-              sociability_rating: sociability[index].sociability_rating
+              sociability_rating: sociability[index].sociability_rating,
             } as ScoreUserData;
           });
-        } else if (!Array.isArray(economic) && !Array.isArray(safe) && !Array.isArray(sociability)) {
+        } else if (
+          !Array.isArray(economic) &&
+          !Array.isArray(safe) &&
+          !Array.isArray(sociability)
+        ) {
           return {
             driver_id: economic.driver_id,
             first_name: economic.first_name,
@@ -49,55 +59,79 @@ export class ScoreService extends AbstractService implements ScoreServiceInterfa
             nb_carpooling_done: economic.nb_carpooling_done,
             economic_driving_rating: economic.economic_driving_rating,
             safe_driving_rating: safe.safe_driving_rating,
-            sociability_rating: sociability.sociability_rating
+            sociability_rating: sociability.sociability_rating,
           } as ScoreUserData;
         } else {
           throw new Error('Inconsistent data types');
         }
       }),
-      catchError(this.passErrorToComponent)
+      catchError(this.passErrorToComponent),
     );
   }
 
-  getEconomicDriving(param?: string | number): Observable<ScoreUserData[] | ScoreUserData> {
-    let options: { headers: { authorization: string; }, params?: { [key: string]: string | number } } = {
+  getEconomicDriving(
+    param?: string | number,
+  ): Observable<ScoreUserData[] | ScoreUserData> {
+    const options: {
+      headers: { authorization: string };
+      params?: { [key: string]: string | number };
+    } = {
       headers: {
-        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
-      }
+        authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+      },
     };
 
     if (param !== undefined) {
-      options.params = {param: param};
+      options.params = { param: param };
     }
 
-    return this.http.get<ScoreUserData[]>(`${environment.path}/scoreboard/economic-driving`, options);
+    return this.http.get<ScoreUserData[]>(
+      `${environment.path}/scoreboard/economic-driving`,
+      options,
+    );
   }
 
-  getSafeDriving(param?: string | number): Observable<ScoreUserData[] | ScoreUserData> {
-    let options: { headers: { authorization: string; }, params?: { [key: string]: string | number } } = {
+  getSafeDriving(
+    param?: string | number,
+  ): Observable<ScoreUserData[] | ScoreUserData> {
+    const options: {
+      headers: { authorization: string };
+      params?: { [key: string]: string | number };
+    } = {
       headers: {
-        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
-      }
+        authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+      },
     };
 
     if (param !== undefined) {
-      options.params = {param: param};
+      options.params = { param: param };
     }
 
-    return this.http.get<ScoreUserData[]>(`${environment.path}/scoreboard/safe-driving`, options);
+    return this.http.get<ScoreUserData[]>(
+      `${environment.path}/scoreboard/safe-driving`,
+      options,
+    );
   }
 
-  getSociability(param?: string | number): Observable<ScoreUserData[] | ScoreUserData> {
-    let options: { headers: { authorization: string; }, params?: { [key: string]: string | number } } = {
+  getSociability(
+    param?: string | number,
+  ): Observable<ScoreUserData[] | ScoreUserData> {
+    const options: {
+      headers: { authorization: string };
+      params?: { [key: string]: string | number };
+    } = {
       headers: {
-        "authorization": `Bearer ${localStorage.getItem("auth_token")}`
-      }
+        authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+      },
     };
 
     if (param !== undefined) {
-      options.params = {param: param};
+      options.params = { param: param };
     }
 
-    return this.http.get<ScoreUserData[]>(`${environment.path}/scoreboard/sociability`, options);
+    return this.http.get<ScoreUserData[]>(
+      `${environment.path}/scoreboard/sociability`,
+      options,
+    );
   }
 }

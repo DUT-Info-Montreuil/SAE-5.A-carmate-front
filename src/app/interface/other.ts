@@ -1,14 +1,15 @@
-import {InjectionToken} from "@angular/core";
-import { Observable } from "rxjs";
+import { InjectionToken } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface NotifierServiceInterface {
   success: (message: string) => void;
   warning: (message: string) => void;
   error: (message: string) => void;
 }
-export const NOTIFIER_SERVICE_TOKEN = new InjectionToken<NotifierServiceInterface>('NotifierServiceInterface');
+export const NOTIFIER_SERVICE_TOKEN =
+  new InjectionToken<NotifierServiceInterface>('NotifierServiceInterface');
 
-export type School = {lat: number; lon: number; name: string;};
+export type School = { lat: number; lon: number; name: string };
 
 export interface AddressServiceInterface {
   $schoolList: School[];
@@ -19,4 +20,5 @@ export interface AddressServiceInterface {
   formatAddress: (addressObject: any) => string;
 }
 
-export const ADDRESS_SERVICE_TOKEN = new InjectionToken<AddressServiceInterface>('AddressServiceInterface');
+export const ADDRESS_SERVICE_TOKEN =
+  new InjectionToken<AddressServiceInterface>('AddressServiceInterface');

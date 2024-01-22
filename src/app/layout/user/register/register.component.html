@@ -1,120 +1,142 @@
 <main class="flex flex-col items-center justify-center w-screen h-screen">
-  <form class="justify-center p-5 rounded-md shadow-md flex flex-col items-center gap-6 w-96"
-        [formGroup]="registerForm"
-        (ngSubmit)="submit()">
-
+  <form
+    class="justify-center p-5 rounded-md shadow-md flex flex-col items-center gap-6 w-96"
+    [formGroup]="registerForm"
+    (ngSubmit)="submit()"
+  >
     <h1 class="text-3xl">Inscription</h1>
-    <mat-form-field class="w-full"
-                    [class.with-error]="firstName && firstName.invalid && firstName.touched"
-                    subscriptSizing="dynamic">
+    <mat-form-field
+      class="w-full"
+      [class.with-error]="firstName && firstName.invalid && firstName.touched"
+      subscriptSizing="dynamic"
+    >
       <mat-label>Prénom</mat-label>
       <mat-error>Veuillez renseigner prénom valide</mat-error>
-      <fa-icon class="pr-2"
-               [icon]="faUser"
-               matSuffix/>
-      <input class="w-full"
-             type="text"
-             placeholder="Entrez votre prénom"
-             formControlName="firstName"
-             matInput
-             required/>
+      <fa-icon class="pr-2" [icon]="faUser" matSuffix />
+      <input
+        class="w-full"
+        type="text"
+        placeholder="Entrez votre prénom"
+        formControlName="firstName"
+        matInput
+        required
+      />
     </mat-form-field>
 
-    <mat-form-field class="w-full"
-                    [class.with-error]="lastName && lastName.invalid && lastName.touched"
-                    subscriptSizing="dynamic">
+    <mat-form-field
+      class="w-full"
+      [class.with-error]="lastName && lastName.invalid && lastName.touched"
+      subscriptSizing="dynamic"
+    >
       <mat-label>Nom</mat-label>
       <mat-error>Le nom est requis</mat-error>
-      <fa-icon class="pr-2"
-               [icon]="faUser"
-               matSuffix/>
-      <input class="w-full"
-             type="text"
-             placeholder="Entrez votre nom"
-             formControlName="lastName"
-             matInput
-             required/>
+      <fa-icon class="pr-2" [icon]="faUser" matSuffix />
+      <input
+        class="w-full"
+        type="text"
+        placeholder="Entrez votre nom"
+        formControlName="lastName"
+        matInput
+        required
+      />
     </mat-form-field>
 
-    <mat-form-field class="w-full"
-                    [class.with-error]="email && email.invalid && email.touched"
-                    subscriptSizing="dynamic">
+    <mat-form-field
+      class="w-full"
+      [class.with-error]="email && email.invalid && email.touched"
+      subscriptSizing="dynamic"
+    >
       <mat-label>Courriel</mat-label>
       <mat-error>L'adresse email est invalide</mat-error>
-      <fa-icon class="pr-2"
-               [icon]="faEnvelope"
-               matSuffix/>
-      <input class="w-full border rounded py-2 px-3"
-             type="text"
-             placeholder="Ecrivez votre courriel"
-             formControlName="email"
-             matInput
-             required/>
+      <fa-icon class="pr-2" [icon]="faEnvelope" matSuffix />
+      <input
+        class="w-full border rounded py-2 px-3"
+        type="text"
+        placeholder="Ecrivez votre courriel"
+        formControlName="email"
+        matInput
+        required
+      />
     </mat-form-field>
 
-    <div *ngIf="registerForm.get('document')"
-         class="w-full"
-         [class.with-error]="registerForm.get('document')?.invalid && registerForm.get('document')?.touched">
+    <div
+      *ngIf="registerForm.get('document')"
+      class="w-full"
+      [class.with-error]="
+        registerForm.get('document')?.invalid &&
+        registerForm.get('document')?.touched
+      "
+    >
       <mat-label>Justificatif</mat-label>
-      <ngx-mat-file-input class="mt-2 px-4 py-2 text-black rounded"
-                          [formControl]="document"
-                          [multiple]="multiple"
-                          [accept]="accept"
-                          [color]="color">
+      <ngx-mat-file-input
+        class="mt-2 px-4 py-2 text-black rounded"
+        [formControl]="document"
+        [multiple]="multiple"
+        [accept]="accept"
+        [color]="color"
+      >
         <mat-icon ngxMatFileInputIcon>folder</mat-icon>
       </ngx-mat-file-input>
-      <mat-error *ngIf="registerForm.get('document')?.invalid
-                        && registerForm.get('document')?.touched">
+      <mat-error
+        *ngIf="
+          registerForm.get('document')?.invalid &&
+          registerForm.get('document')?.touched
+        "
+      >
         Veuillez fournir un justificatif valide.
       </mat-error>
     </div>
 
-    <mat-form-field class="w-full"
-                    [class.with-error]="password
-                                        && password.invalid
-                                        && password.touched">
+    <mat-form-field
+      class="w-full"
+      [class.with-error]="password && password.invalid && password.touched"
+    >
       <mat-label>Mot de passe</mat-label>
-      <fa-icon class="pr-2"
-               [icon]="faLock"
-               matSuffix/>
-      <input class="w-full border rounded py-2 px-3"
-             type="password"
-             placeholder="Entrez votre mot de passe"
-             formControlName="password"
-             matInput
-             required/>
-      <mat-error *ngIf="password
-                        && password.invalid
-                        && password.touched">
+      <fa-icon class="pr-2" [icon]="faLock" matSuffix />
+      <input
+        class="w-full border rounded py-2 px-3"
+        type="password"
+        placeholder="Entrez votre mot de passe"
+        formControlName="password"
+        matInput
+        required
+      />
+      <mat-error *ngIf="password && password.invalid && password.touched">
         Le mot de passe est invalide
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="w-full"
-                    [class.with-error]="confirmPassword
-                                        && confirmPassword.invalid
-                                        && confirmPassword.touched">
+    <mat-form-field
+      class="w-full"
+      [class.with-error]="
+        confirmPassword && confirmPassword.invalid && confirmPassword.touched
+      "
+    >
       <mat-label>Confirmez le mot de passe</mat-label>
-      <fa-icon class="pr-2"
-               [icon]="faLock"
-               matSuffix/>
-      <input class="w-full border rounded py-2 px-3"
-             type="password"
-             placeholder="Répétez votre mot de passe"
-             formControlName="confirmPassword"
-             matInput
-             required/>
-      <mat-error *ngIf="confirmPassword
-                        && confirmPassword.invalid
-                        && confirmPassword.touched">
+      <fa-icon class="pr-2" [icon]="faLock" matSuffix />
+      <input
+        class="w-full border rounded py-2 px-3"
+        type="password"
+        placeholder="Répétez votre mot de passe"
+        formControlName="confirmPassword"
+        matInput
+        required
+      />
+      <mat-error
+        *ngIf="
+          confirmPassword && confirmPassword.invalid && confirmPassword.touched
+        "
+      >
         Les mots de passe ne correspondent pas
       </mat-error>
     </mat-form-field>
 
-    <button class="bg-blue-500 text-white py-2 px-4 rounded"
-            [disabled]="registerForm.invalid"
-            type="submit"
-            mat-raised-button>
+    <button
+      class="bg-blue-500 text-white py-2 px-4 rounded"
+      [disabled]="registerForm.invalid"
+      type="submit"
+      mat-raised-button
+    >
       S'inscrire
     </button>
   </form>

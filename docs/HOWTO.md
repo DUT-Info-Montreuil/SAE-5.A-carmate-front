@@ -1,8 +1,10 @@
 ### Qu'est-ce-que Tailwind ?
+
 Tailwind CSS est un framework CSS utilitaire qui simplifie le processus de stylisation en fournissant une série de classes prédéfinies. Au lieu de définir des styles dans un fichier CSS séparé, vous pouvez appliquer ces classes directement dans votre code HTML.
 <br>
 
 ### Utilisation de Tailwind dans le Code
+
 Application des Classes Tailwind : Ajoutez des classes Tailwind directement dans vos fichiers de composants Angular. Exemple :
 
 ```html
@@ -17,6 +19,7 @@ Application des Classes Tailwind : Ajoutez des classes Tailwind directement dans
 <br>
 
 ### Utilisation des Composants Tailwind
+
 **Utilisation de Composants Prédéfinis** : Tailwind propose des composants prédéfinis pour simplifier le développement. Par exemple, utilisez la classe rounded pour arrondir les coins d'un élément.
 
 ```html

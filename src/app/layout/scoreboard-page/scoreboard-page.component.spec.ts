@@ -7,12 +7,27 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
-import { SCORE_SERVICE_TOKEN, ScoreUserData, ScoreServiceInterface } from 'src/app/interface/score';
+import {
+  SCORE_SERVICE_TOKEN,
+  ScoreUserData,
+  ScoreServiceInterface,
+} from 'src/app/interface/score';
 import { of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
-import { NOTIFIER_SERVICE_TOKEN, NotifierServiceInterface } from 'src/app/interface/other';
-import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from 'src/app/interface/user';
-import { ProfilesServiceInterface, PROFILE_SERVICE_TOKEN, DriverProfile, PassengerProfile } from 'src/app/interface/profiles';
+import {
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from 'src/app/interface/other';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from 'src/app/interface/user';
+import {
+  ProfilesServiceInterface,
+  PROFILE_SERVICE_TOKEN,
+  DriverProfile,
+  PassengerProfile,
+} from 'src/app/interface/profiles';
 
 describe('ScoreboardPageComponent', () => {
   let component: ScoreboardPageComponent;
@@ -23,42 +38,58 @@ describe('ScoreboardPageComponent', () => {
   let spyProfilesService: jasmine.SpyObj<ProfilesServiceInterface>;
 
   beforeEach(() => {
-    spyScoreboardService = jasmine.createSpyObj('ScoreServiceInterface', ['getScoreUserData']);
-    spyScoreboardService.getScoreUserData.and.returnValue(of([
-      {
+    spyScoreboardService = jasmine.createSpyObj('ScoreServiceInterface', [
+      'getScoreUserData',
+    ]);
+    spyScoreboardService.getScoreUserData.and.returnValue(
+      of([
+        {
+          driver_id: 0,
+          first_name: 'John',
+          last_name: 'Doe',
+          profile_picture: 'image',
+          nb_review: 42,
+          nb_carpooling_done: 42,
+          economic_driving_rating: 1,
+          safe_driving_rating: 2,
+          sociability_rating: 3,
+        },
+      ]),
+    );
+    spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', [
+      'error',
+      'success',
+    ]);
+    spyAuthService = jasmine.createSpyObj('AuthenticationServiceInterface', [
+      'isDriver',
+    ]);
+    spyProfilesService = jasmine.createSpyObj('ProfilesServiceInterface', [
+      'getPassengerProfile',
+      'getDriverProfile',
+    ]);
+    spyProfilesService.getPassengerProfile.and.returnValue(
+      of({
+        user_id: 0,
+        first_name: 'John',
+        last_name: 'Doe',
+        description: 'description',
+        createdAt: '09/01/2024',
+        nb_carpools_done: 42,
+        profile_picture: 'profile_picture',
+      }),
+    );
+    spyProfilesService.getDriverProfile.and.returnValue(
+      of({
+        user_id: 0,
         driver_id: 0,
         first_name: 'John',
         last_name: 'Doe',
-        profile_picture: 'image',
-        nb_review: 42,
-        nb_carpooling_done: 42,
-        economic_driving_rating: 1,
-        safe_driving_rating: 2,
-        sociability_rating: 3
-      }
-    ]));
-    spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success']);
-    spyAuthService = jasmine.createSpyObj('AuthenticationServiceInterface', ['isDriver']);
-    spyProfilesService = jasmine.createSpyObj('ProfilesServiceInterface', ['getPassengerProfile', 'getDriverProfile']);
-    spyProfilesService.getPassengerProfile.and.returnValue(of({
-      user_id: 0,
-      first_name: 'John',
-      last_name: 'Doe',
-      description: 'description',
-      createdAt: '09/01/2024',
-      nb_carpools_done: 42,
-      profile_picture: 'profile_picture'
-    }));
-    spyProfilesService.getDriverProfile.and.returnValue(of({
-      user_id: 0,
-      driver_id: 0,
-      first_name: 'John',
-      last_name: 'Doe',
-      description: 'description',
-      createdAt: '09/01/2024',
-      nb_carpools_done: 42,
-      profile_picture: 'profile_picture'
-    }));
+        description: 'description',
+        createdAt: '09/01/2024',
+        nb_carpools_done: 42,
+        profile_picture: 'profile_picture',
+      }),
+    );
     TestBed.configureTestingModule({
       declarations: [ScoreboardPageComponent],
       imports: [
@@ -69,23 +100,23 @@ describe('ScoreboardPageComponent', () => {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatPaginatorModule,
-        MatTableModule
+        MatTableModule,
       ],
       providers: [
-        {provide: SCORE_SERVICE_TOKEN, useValue: spyScoreboardService},
-        {provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifierService},
-        {provide: AUTHENTICATION_SERVICE_TOKEN, useValue: spyAuthService},
-        {provide: PROFILE_SERVICE_TOKEN, useValue: spyProfilesService},
-      ]
+        { provide: SCORE_SERVICE_TOKEN, useValue: spyScoreboardService },
+        { provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifierService },
+        { provide: AUTHENTICATION_SERVICE_TOKEN, useValue: spyAuthService },
+        { provide: PROFILE_SERVICE_TOKEN, useValue: spyProfilesService },
+      ],
     });
-    fixture = TestBed.createComponent(ScoreboardPageComponent);    
+    fixture = TestBed.createComponent(ScoreboardPageComponent);
     component = fixture.componentInstance;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('should initialize dataSource on ngOnInit', () => {
     const scoreUserDataList: ScoreUserData[] = [
       {
@@ -97,23 +128,34 @@ describe('ScoreboardPageComponent', () => {
         nb_carpooling_done: 42,
         economic_driving_rating: 1,
         safe_driving_rating: 2,
-        sociability_rating: 3
-      }
+        sociability_rating: 3,
+      },
     ];
-    spyScoreboardService.getScoreUserData.and.returnValue(of(scoreUserDataList));
-  
+    spyScoreboardService.getScoreUserData.and.returnValue(
+      of(scoreUserDataList),
+    );
+
     component.ngOnInit();
 
-    const userDataListWithAverage = scoreUserDataList.map(user => ({
+    const userDataListWithAverage = scoreUserDataList.map((user) => ({
       ...user,
-      average_rating: Number(((user.economic_driving_rating! + user.safe_driving_rating! + user.sociability_rating!) / 3).toFixed(2))
+      average_rating: Number(
+        (
+          (user.economic_driving_rating! +
+            user.safe_driving_rating! +
+            user.sociability_rating!) /
+          3
+        ).toFixed(2),
+      ),
     }));
-  
-    const expectedUserDataList = userDataListWithAverage.sort((a, b) => b.average_rating - a.average_rating).map((user, index) => ({
-      ...user,
-      ranking: index + 1
-    }));
-  
+
+    const expectedUserDataList = userDataListWithAverage
+      .sort((a, b) => b.average_rating - a.average_rating)
+      .map((user, index) => ({
+        ...user,
+        ranking: index + 1,
+      }));
+
     expect(component.dataSource)
       .withContext('dataSource should be initialized')
       .toBeTruthy();
@@ -147,7 +189,7 @@ describe('ScoreboardPageComponent', () => {
       nb_carpooling_done: 42,
       economic_driving_rating: 1,
       safe_driving_rating: 2,
-      sociability_rating: 3
+      sociability_rating: 3,
     };
     const expectedSelfDriverProfile: DriverProfile = {
       user_id: 0,
@@ -157,13 +199,15 @@ describe('ScoreboardPageComponent', () => {
       description: 'description',
       createdAt: '09/01/2024',
       nb_carpools_done: 42,
-      profile_picture: 'profile_picture'
+      profile_picture: 'profile_picture',
     };
-    spyProfilesService.getDriverProfile.and.returnValue(of(expectedSelfDriverProfile));
+    spyProfilesService.getDriverProfile.and.returnValue(
+      of(expectedSelfDriverProfile),
+    );
     spyScoreboardService.getScoreUserData.and.callFake((arg) => {
-      if (arg !== undefined) {        
+      if (arg !== undefined) {
         return of(expectedSelfDriverScore);
-      } else {        
+      } else {
         return of([expectedSelfDriverScore, expectedSelfDriverScore]);
       }
     });
@@ -190,9 +234,11 @@ describe('ScoreboardPageComponent', () => {
       description: 'description',
       createdAt: '09/01/2024',
       nb_carpools_done: 42,
-      profile_picture: 'profile_picture'
+      profile_picture: 'profile_picture',
     };
-    spyProfilesService.getPassengerProfile.and.returnValue(of(expectedSelfPassengerProfile));
+    spyProfilesService.getPassengerProfile.and.returnValue(
+      of(expectedSelfPassengerProfile),
+    );
     component.ngOnInit();
 
     expect(component.selfPassengerProfile)

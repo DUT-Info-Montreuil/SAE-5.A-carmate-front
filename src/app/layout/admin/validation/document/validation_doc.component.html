@@ -4,9 +4,24 @@
       <p>Prénom : {{ doc.first_name }}</p>
       <p>Nom de famille : {{ doc.last_name }}</p>
       <p>Type de document: {{ doc.license_type }}</p>
-      <img id="document_image" [src]="'data:image/png;base64,'+doc.document">
-      <button id ="validate" class="validated-refused" (click)="send_validation('Approved', doc.document_id)">Valider</button>
-      <button id="refused" class="validated-refused" (click)="send_validation('Rejected',  doc.document_id)">Refuser</button>
+      <img
+        id="document_image"
+        [src]="'data:image/png;base64,' + doc.document"
+      />
+      <button
+        id="validate"
+        class="validated-refused"
+        (click)="send_validation('Approved', doc.document_id)"
+      >
+        Valider
+      </button>
+      <button
+        id="refused"
+        class="validated-refused"
+        (click)="send_validation('Rejected', doc.document_id)"
+      >
+        Refuser
+      </button>
     </div>
     <div *ngIf="!doc">
       <p>Aucun document à afficher.</p>
