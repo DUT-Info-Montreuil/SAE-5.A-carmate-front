@@ -10,8 +10,6 @@ import { FormGroup } from '@angular/forms';
 export class MockAuthenticationService
   implements AuthenticationServiceInterface
 {
-  constructor() {}
-
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private _isAdmin$ = new BehaviorSubject<boolean>(false);
   private _isDriver$ = new BehaviorSubject<boolean>(false);
