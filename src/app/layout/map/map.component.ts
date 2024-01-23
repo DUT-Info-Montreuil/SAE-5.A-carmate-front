@@ -1,4 +1,10 @@
-import { Component, ElementRef, ViewChild, Input, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  Input,
+  SimpleChanges,
+} from '@angular/core';
 import { Map, View, Feature } from 'ol';
 import { OSM } from 'ol/source';
 import { fromLonLat } from 'ol/proj';
@@ -13,11 +19,12 @@ import VectorLayer from 'ol/layer/Vector';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss'],
 })
-
 export class MapComponent {
-  @ViewChild('map', { static: true }) mapElement: ElementRef = new ElementRef(null);
+  @ViewChild('map', { static: true }) mapElement: ElementRef = new ElementRef(
+    null,
+  );
   @Input() _starting_pointDriver: number[] = [0, 0];
   @Input() _starting_pointUser: number[] = [0, 0];
   map!: Map;
@@ -27,8 +34,8 @@ export class MapComponent {
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
       src: 'assets/user-icon.png',
-      scale: 0.1
-    })
+      scale: 0.1,
+    }),
   });
   readonly driverIconStyle = new Style({
     image: new Icon({
@@ -36,8 +43,8 @@ export class MapComponent {
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
       src: 'assets/driver-icon.png',
-      scale: 0.1
-    })
+      scale: 0.1,
+    }),
   });
 
   ngOnInit() {
@@ -46,45 +53,69 @@ export class MapComponent {
       layers: [
         new TileLayer({
           preload: 5,
-          source: new OSM()
-        })
+          source: new OSM(),
+        }),
       ],
       view: new View({
         center: fromLonLat([...this._starting_pointUser].reverse()),
         zoom: 5,
         maxResolution: 80,
-        minResolution: 0.5
+        minResolution: 0.5,
       }),
       controls: defaults({
         attributionOptions: {
-          collapsible: false
-        }
-      })
+          collapsible: false,
+        },
+      }),
     });
-    this.addLayerIcon([...this._starting_pointUser].reverse(), this.userIconStyle);
+    this.addLayerIcon(
+      [...this._starting_pointUser].reverse(),
+      this.userIconStyle,
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes['_starting_pointDriver'] && changes['_starting_pointDriver'].currentValue !== changes['_starting_pointDriver'].previousValue) {
-      const extent = boundingExtent([[...this._starting_pointDriver].reverse(), [...this._starting_pointUser].reverse()]);
+    if (
+      changes['_starting_pointDriver'] &&
+      changes['_starting_pointDriver'].currentValue !==
+        changes['_starting_pointDriver'].previousValue
+    ) {
+      const extent = boundingExtent([
+        [...this._starting_pointDriver].reverse(),
+        [...this._starting_pointUser].reverse(),
+      ]);
       this.updateMap(extent);
 
       this.map.getAllLayers().forEach((layer) => {
-        if(layer.getProperties()['name'] === 'driver') {
+        if (layer.getProperties()['name'] === 'driver') {
           this.map.removeLayer(layer);
         }
-        this.addLayerIcon([...this._starting_pointDriver].reverse(), this.driverIconStyle);
+        this.addLayerIcon(
+          [...this._starting_pointDriver].reverse(),
+          this.driverIconStyle,
+        );
       });
     }
 
-    if(changes['_starting_pointUser'] && this._starting_pointDriver && changes['_starting_pointUser'].currentValue !== changes['_starting_pointUser'].previousValue) {
-      const extent = boundingExtent([[...this._starting_pointDriver].reverse(), [...this._starting_pointUser].reverse()]);
+    if (
+      changes['_starting_pointUser'] &&
+      this._starting_pointDriver &&
+      changes['_starting_pointUser'].currentValue !==
+        changes['_starting_pointUser'].previousValue
+    ) {
+      const extent = boundingExtent([
+        [...this._starting_pointDriver].reverse(),
+        [...this._starting_pointUser].reverse(),
+      ]);
       this.updateMap(extent);
 
       this.map.getAllLayers().forEach((layer) => {
-        if(layer.getProperties()['name'] === 'user') {
+        if (layer.getProperties()['name'] === 'user') {
           this.map.removeLayer(layer);
-          this.addLayerIcon([...this._starting_pointUser].reverse(), this.userIconStyle);
+          this.addLayerIcon(
+            [...this._starting_pointUser].reverse(),
+            this.userIconStyle,
+          );
         }
       });
     }
@@ -93,30 +124,31 @@ export class MapComponent {
   private addLayerIcon(coordinates: number[], styleIcon: Style) {
     const iconFeature = new Feature({
       geometry: new Point(fromLonLat(coordinates)),
-      name: 'Votre Icône'
+      name: 'Votre Icône',
     });
 
     iconFeature.setStyle(styleIcon);
 
     const vectorLayer = new VectorLayer({
       source: new VectorSource({
-        features: [iconFeature]
-      })
+        features: [iconFeature],
+      }),
     });
 
-    vectorLayer.setProperties({name: styleIcon === this.userIconStyle ? 'user' : 'driver'});
+    vectorLayer.setProperties({
+      name: styleIcon === this.userIconStyle ? 'user' : 'driver',
+    });
 
     this.map.addLayer(vectorLayer);
   }
 
   private updateMap(extent: Extent) {
-    const sw = fromLonLat([ extent[0], extent[1] ]);
-    const ne = fromLonLat([ extent[2], extent[3] ]);
+    const sw = fromLonLat([extent[0], extent[1]]);
+    const ne = fromLonLat([extent[2], extent[3]]);
 
-    this.map.getView().fit([ sw[0], sw[1], ne[0], ne[1] ],{
+    this.map.getView().fit([sw[0], sw[1], ne[0], ne[1]], {
       duration: 1000,
       padding: [100, 100, 50, 100],
     });
   }
-
 }

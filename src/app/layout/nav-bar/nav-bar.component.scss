@@ -1,10 +1,9 @@
-@import '../../../variables';
+@import "../../../variables";
 #nav-bar {
-    background-color: $primary-color;
+  background-color: $primary-color;
 }
 
 #buttonProfile:hover,
 #buttonProfile:focus {
   color: $secondary-color;
 }
-

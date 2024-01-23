@@ -5,9 +5,9 @@ on:
     branches:
       - "*"
     paths-ignore:
-      - 'README.md'
-      - '.editorconfig'
-      - '.gitignore'
+      - "README.md"
+      - ".editorconfig"
+      - ".gitignore"
   pull_request:
     branches:
       - "*"

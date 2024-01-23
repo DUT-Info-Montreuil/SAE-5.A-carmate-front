@@ -2,31 +2,37 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './layout/user/login/login.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from "@angular/common/http";
-import {NotifierModule, NotifierOptions} from "angular-notifier";
-import {ADDRESS_SERVICE_TOKEN, NOTIFIER_SERVICE_TOKEN} from "./interface/other";
-import {AngularNotifierService} from "./service/other/notifier/AngularNotifierService";
-import {AUTHENTICATION_SERVICE_TOKEN, USER_SERVICE_TOKEN} from "./interface/user";
-import {MockAuthenticationService} from "./service/user/authentication/authentication.service.mock";
-import {RootComponent} from "./layout/root/root.component";
+import { HttpClientModule } from '@angular/common/http';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  NOTIFIER_SERVICE_TOKEN,
+} from './interface/other';
+import { AngularNotifierService } from './service/other/notifier/AngularNotifierService';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  USER_SERVICE_TOKEN,
+} from './interface/user';
+import { MockAuthenticationService } from './service/user/authentication/authentication.service.mock';
+import { RootComponent } from './layout/root/root.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from './layout/user/register/register.component';
-import {environment} from "./environement/environement";
-import {AuthenticationService} from "./service/user/authentication/authentication.service";
+import { environment } from './environement/environement';
+import { AuthenticationService } from './service/user/authentication/authentication.service';
 import { HomePageComponent } from './layout/home-page/home-page.component';
 import { PublishCarpoolComponent } from './layout/publish-carpool/publish-carpool.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PassengerProfilesComponent } from './layout/user/passenger-profile/passenger-profiles.component';
 import { PROFILE_SERVICE_TOKEN } from './interface/profiles';
 import { ProfilesService } from './service/user/profiles/profiles.service';
@@ -50,15 +56,18 @@ import { CreateSubscriptionComponent } from './layout/create-subscription/create
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ScoreboardPageComponent } from './layout/scoreboard-page/scoreboard-page.component';
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { frPaginatorIntl } from './utils/french-paginator-intl';
 import { SCORE_SERVICE_TOKEN } from './interface/score';
 import { ScoreService } from './service/score/score.service';
 import { MockScoreService } from './service/score/score.service.mock';
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SubscriptionComponent } from './layout/trips-page/subscription/subscription.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
@@ -70,32 +79,30 @@ import { PublishedCarpoolingsComponent } from './layout/trips-page/published-car
 import { PublishedCarpoolingDialogComponent } from './layout/trips-page/published-carpoolings/published-carpooling-dialog/published-carpooling-dialog.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-import {BecomeDriverComponent} from "./layout/become-driver/become-driver.component";
+import { BecomeDriverComponent } from './layout/become-driver/become-driver.component';
 import { ValidationComponent } from './layout/admin/validation/list/validation_list.component';
 import { VALIDATION_SERVICE_TOKEN } from './interface/admin';
 import { ValidationDocComponent } from './layout/admin/validation/document/validation_doc.component';
 import { ValidationServiceMock } from './service/admin/validation/validation.service.mock';
 import { ValidationService } from './service/admin/validation/validation.service';
 import { SideBarComponent } from './layout/admin/side-bar/side-bar.component';
-import { CarpoolingDialogComponent as BaseCarpoolingDiag } from './layout/carpooling-dialog/carpooling-dialog.component' ;
+import { CarpoolingDialogComponent as BaseCarpoolingDiag } from './layout/carpooling-dialog/carpooling-dialog.component';
 import { MyCarpoolingsComponent } from './layout/trips-page/my-carpoolings/my-carpoolings.component';
 import { PublishedSubscriptionsComponent } from './layout/trips-page/published-subscriptions/published-subscriptions.component';
-import {
-  CarpoolingDialogComponent
-} from "./layout/trips-page/my-carpoolings/carpooling-dialog/carpooling-dialog.component";
+import { CarpoolingDialogComponent } from './layout/trips-page/my-carpoolings/carpooling-dialog/carpooling-dialog.component';
 
 registerLocaleData(localeFr);
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
       position: 'right',
-      distance: 12
+      distance: 12,
     },
     vertical: {
       position: 'bottom',
       distance: 12,
-      gap: 10
-    }
+      gap: 10,
+    },
   },
   theme: 'material',
   behaviour: {
@@ -103,27 +110,27 @@ const customNotifierOptions: NotifierOptions = {
     onClick: 'hide',
     onMouseover: 'pauseAutoHide',
     showDismissButton: true,
-    stacking: 4
+    stacking: 4,
   },
   animations: {
     enabled: true,
     show: {
       preset: 'slide',
       speed: 300,
-      easing: 'ease'
+      easing: 'ease',
     },
     hide: {
       preset: 'fade',
       speed: 300,
       easing: 'ease',
-      offset: 50
+      offset: 50,
     },
     shift: {
       speed: 300,
-      easing: 'ease'
+      easing: 'ease',
     },
-    overlap: 150
-  }
+    overlap: 150,
+  },
 };
 
 @NgModule({
@@ -155,7 +162,7 @@ const customNotifierOptions: NotifierOptions = {
     MyCarpoolingsComponent,
     BaseCarpoolingDiag,
     PublishedSubscriptionsComponent,
-    CarpoolingDialogComponent
+    CarpoolingDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -188,7 +195,7 @@ const customNotifierOptions: NotifierOptions = {
     MatDialogModule,
     MatButtonToggleModule,
     MatCheckboxModule,
-    NgxMatFileInputModule
+    NgxMatFileInputModule,
   ],
   providers: [
     {
@@ -197,7 +204,9 @@ const customNotifierOptions: NotifierOptions = {
     },
     {
       provide: AUTHENTICATION_SERVICE_TOKEN,
-      useClass: environment.production ? AuthenticationService : MockAuthenticationService,
+      useClass: environment.production
+        ? AuthenticationService
+        : MockAuthenticationService,
     },
     {
       provide: PROFILE_SERVICE_TOKEN,
@@ -208,15 +217,20 @@ const customNotifierOptions: NotifierOptions = {
       useClass: environment.production ? UserService : MockUserService,
     },
     {
-    provide: VALIDATION_SERVICE_TOKEN,
-    useClass:  environment.production ? ValidationService : ValidationServiceMock,
+      provide: VALIDATION_SERVICE_TOKEN,
+      useClass: environment.production
+        ? ValidationService
+        : ValidationServiceMock,
     },
     {
-      provide: MAT_DATE_LOCALE, useValue: 'fr-FR'
+      provide: MAT_DATE_LOCALE,
+      useValue: 'fr-FR',
     },
     {
       provide: CARPOOLING_SERVICE_TOKEN,
-      useClass: environment.production ? CarpoolingService : MockCarpoolingService,
+      useClass: environment.production
+        ? CarpoolingService
+        : MockCarpoolingService,
     },
     {
       provide: ADDRESS_SERVICE_TOKEN,
@@ -228,10 +242,10 @@ const customNotifierOptions: NotifierOptions = {
     },
     {
       provide: MatPaginatorIntl,
-      useClass: frPaginatorIntl
+      useClass: frPaginatorIntl,
     },
-    { provide: LOCALE_ID, useValue: 'fr-FR' }
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
   ],
-  bootstrap: [RootComponent]
+  bootstrap: [RootComponent],
 })
-export class AppModule { }
+export class AppModule {}

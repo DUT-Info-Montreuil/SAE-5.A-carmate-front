@@ -65,14 +65,15 @@
           font-size: 24px;
         }
 
-        input, select {
+        input,
+        select {
           font-size: 18px;
           width: 500px;
-          
-        &:placeholder-shown + .ng-fa-icon,
-        &:placeholder-shown + .text-error {
-          display: none;
-        }
+
+          &:placeholder-shown + .ng-fa-icon,
+          &:placeholder-shown + .text-error {
+            display: none;
+          }
         }
       }
 
@@ -96,7 +97,7 @@
               font-weight: 400;
               margin-bottom: 10px;
             }
-            
+
             input {
               font-size: 18px;
               width: 500px;

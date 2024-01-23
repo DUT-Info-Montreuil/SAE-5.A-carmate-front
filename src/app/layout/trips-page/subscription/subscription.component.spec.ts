@@ -2,12 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubscriptionComponent } from './subscription.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { WeekDay } from 'src/app/interface/carpooling';
-import { ADDRESS_SERVICE_TOKEN, AddressServiceInterface } from 'src/app/interface/other';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/other';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
-import { PROFILE_SERVICE_TOKEN, ProfilesServiceInterface } from 'src/app/interface/profiles';
+import {
+  PROFILE_SERVICE_TOKEN,
+  ProfilesServiceInterface,
+} from 'src/app/interface/profiles';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -19,19 +25,25 @@ describe('SubscriptionComponent', () => {
   let spyAddressService: jasmine.SpyObj<AddressServiceInterface>;
   let spyProfileService: jasmine.SpyObj<ProfilesServiceInterface>;
   beforeEach(() => {
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', ['getFormattedAddress']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
+      'getFormattedAddress',
+    ]);
     spyAddressService.getFormattedAddress.and.returnValue(of(''));
-    spyProfileService = jasmine.createSpyObj('ProfilesServiceInterface', ['getDriverProfile']);
-    spyProfileService.getDriverProfile.and.returnValue(of({
-      user_id: 2,
-      driver_id: 1,
-      first_name: "John",
-      last_name: "Doe",
-      description: "driver description",
-      createdAt: "",
-      nb_carpools_done: 5,
-      profile_picture: ''
-  }));
+    spyProfileService = jasmine.createSpyObj('ProfilesServiceInterface', [
+      'getDriverProfile',
+    ]);
+    spyProfileService.getDriverProfile.and.returnValue(
+      of({
+        user_id: 2,
+        driver_id: 1,
+        first_name: 'John',
+        last_name: 'Doe',
+        description: 'driver description',
+        createdAt: '',
+        nb_carpools_done: 5,
+        profile_picture: '',
+      }),
+    );
     TestBed.configureTestingModule({
       declarations: [SubscriptionComponent],
       imports: [
@@ -42,36 +54,37 @@ describe('SubscriptionComponent', () => {
         MatIconModule,
         MatButtonModule,
         MatMenuModule,
-        MatDialogModule
+        MatDialogModule,
       ],
       providers: [
-        {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService},
-        {provide: PROFILE_SERVICE_TOKEN, useValue: spyProfileService}
-      ]
+        { provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService },
+        { provide: PROFILE_SERVICE_TOKEN, useValue: spyProfileService },
+      ],
     });
     fixture = TestBed.createComponent(SubscriptionComponent);
     component = fixture.componentInstance;
-    component.subscription =
-    {
+    component.subscription = {
       starting_point: [48.8558516, 2.3588636],
       destination: [48.9757551, 2.559337],
       start_date: 1704067200,
       end_date: 1706745600,
-      start_hour: "08:30",
-      days: ["Monday", "Wednesday", "Friday"],
-      label: "Tous les lundi mercredi et vendredi de janvier",
-      carpools: [{
-        id: 1,
-        starting_point: [48.8558516, 2.3588636],
-        destination: [48.9757551, 2.559337],
-        price: 40,
-        is_canceled: false,
-        departure_date_time: "2024-01-03T08:30:00",
-        driver_id: 1,
-        max_passengers: 2,
-        seats_taken: 1,
-      }]
-      };
+      start_hour: '08:30',
+      days: ['Monday', 'Wednesday', 'Friday'],
+      label: 'Tous les lundi mercredi et vendredi de janvier',
+      carpools: [
+        {
+          id: 1,
+          starting_point: [48.8558516, 2.3588636],
+          destination: [48.9757551, 2.559337],
+          price: 40,
+          is_canceled: false,
+          departure_date_time: '2024-01-03T08:30:00',
+          driver_id: 1,
+          max_passengers: 2,
+          seats_taken: 1,
+        },
+      ],
+    };
     fixture.detectChanges();
   });
 

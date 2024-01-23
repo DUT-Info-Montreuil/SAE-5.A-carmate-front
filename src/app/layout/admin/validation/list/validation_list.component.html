@@ -2,7 +2,7 @@
   <div class="list_">
     <div class="verif-document-main">
       <h1 class="text-center">Document A Verifier</h1>
-      <table style="width: 100%; margin-top: 5%;">
+      <table style="width: 100%; margin-top: 5%">
         <tr>
           <td>type de compte</td>
           <td>nom</td>
@@ -16,7 +16,9 @@
           <td>{{ item.last_name }}</td>
           <td>{{ item.published_at.toLocaleString() }}</td>
           <td>
-            <button class="verify" (click)="showDocument(item.document_id)">Verifier</button>
+            <button class="verify" (click)="showDocument(item.document_id)">
+              Verifier
+            </button>
           </td>
         </tr>
       </table>

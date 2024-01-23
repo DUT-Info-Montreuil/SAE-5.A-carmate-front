@@ -14,33 +14,33 @@ h2 {
 }
 
 p {
-  padding:2% 0 2% 0;
+  padding: 2% 0 2% 0;
 }
 
-#verif-document-text{
+#verif-document-text {
   margin-left: 50%;
   font-size: 18px;
   display: inline-block;
   text-align: right;
 }
 
-#fa-id-card-icon{
+#fa-id-card-icon {
   margin-left: 10px;
   font-size: 30px;
 }
 
-.fa-id-arrow-icon{
+.fa-id-arrow-icon {
   margin-left: 10px;
-  font-size: 30px
+  font-size: 30px;
 }
 
-#document-image{
+#document-image {
   max-width: 40%;
   max-height: 40%;
 }
 
 .validated-refused {
-  margin:20% 10% 0 10%;
+  margin: 20% 10% 0 10%;
   color: black;
   padding: 10px;
   text-align: center;
@@ -50,28 +50,30 @@ p {
   cursor: pointer;
   border-radius: 4px;
   width: 30%;
-  transition: background-color 0.5s, color 0.5s;
+  transition:
+    background-color 0.5s,
+    color 0.5s;
 }
 
-#validate{
-  border: 5px solid #4CAF50;
+#validate {
+  border: 5px solid #4caf50;
 }
 
-#refused{
-  border: 5px solid #E74C3C;
+#refused {
+  border: 5px solid #e74c3c;
 }
 
-#validate:hover{
+#validate:hover {
   border: 5px solid #008000;
   color: #008000;
 }
 
-#refused:hover{
+#refused:hover {
   border: 5px solid #960019;
   color: #960019;
 }
 
-.see-doc{
+.see-doc {
   padding-top: 5%;
   height: fit-content;
   margin: auto;
@@ -81,7 +83,7 @@ p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   border-radius: 8px;
-  display:inline-block;
+  display: inline-block;
 }
 
 #document_image {

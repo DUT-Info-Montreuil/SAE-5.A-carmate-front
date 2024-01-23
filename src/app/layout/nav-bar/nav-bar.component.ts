@@ -1,20 +1,33 @@
 import { Component, HostListener, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
-import { faCar, faCog, faMessage, faPencil, faPlus, faScrewdriverWrench, faSignOut, faUser as faUserSolid, faCaretRight, faRepeat, faRankingStar } from '@fortawesome/free-solid-svg-icons';
-import { AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface } from "../../interface/user";
-
+import {
+  faCar,
+  faCog,
+  faMessage,
+  faPencil,
+  faPlus,
+  faScrewdriverWrench,
+  faSignOut,
+  faUser as faUserSolid,
+  faCaretRight,
+  faRepeat,
+  faRankingStar,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from '../../interface/user';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  styleUrls: ['./nav-bar.component.scss'],
 })
-
 export class NavBarComponent {
   menuProfileVisibility = false;
-  userConnected: boolean = false;
-  isLogged: boolean = false;
+  userConnected = false;
+  isLogged = false;
   protected readonly faUserSolid = faUserSolid;
   protected readonly faCog = faCog;
   protected readonly faSignOut = faSignOut;
@@ -27,10 +40,11 @@ export class NavBarComponent {
   protected readonly faCaretRight = faCaretRight;
   protected readonly faRankingStar = faRankingStar;
   protected readonly faRepeat = faRepeat;
-  
+
   constructor(
     private router: Router,
-    @Inject(AUTHENTICATION_SERVICE_TOKEN) public authService: AuthenticationServiceInterface,
+    @Inject(AUTHENTICATION_SERVICE_TOKEN)
+    public authService: AuthenticationServiceInterface,
   ) {}
 
   menuProfileSwitchVisibility(): void {
@@ -54,18 +68,18 @@ export class NavBarComponent {
 
   logOut() {
     this.authService.logOut();
-    this.router.navigate(["/home"]);
+    this.router.navigate(['/home']);
   }
 
-  IsLogged(){
+  IsLogged() {
     return this.authService.isLogged();
   }
 
-  IsAdmin(){
+  IsAdmin() {
     return this.authService.isAdmin();
   }
 
-  IsDriver(){
+  IsDriver() {
     return this.authService.isDriver();
   }
 }

@@ -1,7 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateSubscriptionComponent } from './create-subscription.component';
-import { CARPOOLING_SERVICE_TOKEN, CarpoolingServiceInterface } from 'src/app/interface/carpooling';
-import { NotifierServiceInterface, AddressServiceInterface, ADDRESS_SERVICE_TOKEN, NOTIFIER_SERVICE_TOKEN } from 'src/app/interface/other';
+import {
+  CARPOOLING_SERVICE_TOKEN,
+  CarpoolingServiceInterface,
+} from 'src/app/interface/carpooling';
+import {
+  NotifierServiceInterface,
+  AddressServiceInterface,
+  ADDRESS_SERVICE_TOKEN,
+  NOTIFIER_SERVICE_TOKEN,
+} from 'src/app/interface/other';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -15,9 +23,12 @@ import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { of } from "rxjs/internal/observable/of";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {AUTHENTICATION_SERVICE_TOKEN, AuthenticationServiceInterface} from "../../interface/user";
+import { of } from 'rxjs/internal/observable/of';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  AUTHENTICATION_SERVICE_TOKEN,
+  AuthenticationServiceInterface,
+} from '../../interface/user';
 
 describe('CreateSubscriptionComponent', () => {
   let component: CreateSubscriptionComponent;
@@ -28,13 +39,15 @@ describe('CreateSubscriptionComponent', () => {
   let spyAuthenticationService: jasmine.SpyObj<AuthenticationServiceInterface>;
 
   const selectLabel = async (inputUser: string) => {
-    component["subForm"].controls.label.setValue(inputUser);
+    component['subForm'].controls.label.setValue(inputUser);
     await fixture.whenStable();
     fixture.detectChanges();
-  }
+  };
 
   const selectDepartureFirstSuggestion = async (inputUser: string) => {
-    const inputDebugElement = fixture.debugElement.query(By.css('#starting_point_id'));
+    const inputDebugElement = fixture.debugElement.query(
+      By.css('#starting_point_id'),
+    );
 
     inputDebugElement.nativeElement.dispatchEvent(new Event('focusin'));
     inputDebugElement.nativeElement.value = inputUser;
@@ -47,16 +60,18 @@ describe('CreateSubscriptionComponent', () => {
 
     const matOption = document.querySelector('mat-option') as HTMLElement;
 
-    if (!matOption ||matOption === undefined) {
+    if (!matOption || matOption === undefined) {
       fail('No mat-option elements found');
     }
     matOption.click();
 
     component.departureTrigger!.closePanel();
-  }
+  };
 
   const selectDestinationFirstSuggestion = async (inputUser: string) => {
-    const inputDebugElement = fixture.debugElement.query(By.css('#destination_id'));
+    const inputDebugElement = fixture.debugElement.query(
+      By.css('#destination_id'),
+    );
 
     inputDebugElement.nativeElement.dispatchEvent(new Event('focusin'));
     inputDebugElement.nativeElement.value = inputUser;
@@ -69,23 +84,26 @@ describe('CreateSubscriptionComponent', () => {
 
     const matOption = document.querySelector('mat-option') as HTMLElement;
 
-    if (!matOption ||matOption === undefined) {
+    if (!matOption || matOption === undefined) {
       fail('No mat-option elements found');
     }
     matOption.click();
 
     component.destinationTrigger!.closePanel();
-  }
+  };
 
   const selectDateRange = async (inputUser: string[]) => {
-    component["subForm"].controls.date_start.setValue(inputUser[0]);
-    component["subForm"].controls.date_end.setValue(inputUser[1]);
+    component['subForm'].controls.date_start.setValue(inputUser[0]);
+    component['subForm'].controls.date_end.setValue(inputUser[1]);
     await fixture.whenStable();
     fixture.detectChanges();
-  }
+  };
 
   const selectDays = async (inputUser: string[]) => {
-    fixture.debugElement.query(By.css('mat-select')).injector.get(MatSelect).open();
+    fixture.debugElement
+      .query(By.css('mat-select'))
+      .injector.get(MatSelect)
+      .open();
     await fixture.whenStable();
     fixture.detectChanges();
 
@@ -103,33 +121,51 @@ describe('CreateSubscriptionComponent', () => {
         }
       }
     });
-  }
+  };
 
   const selectTime = async (inputUser: string) => {
-    component["subForm"].controls.start_hour.setValue(inputUser);
+    component['subForm'].controls.start_hour.setValue(inputUser);
     await fixture.whenStable();
     fixture.detectChanges();
-  }
+  };
 
   const fillForm = async () => {
     const button = fixture.debugElement.query(By.css('#sub_id')).nativeElement;
     await selectLabel('test');
     await selectDepartureFirstSuggestion('1 rue');
     await selectDestinationFirstSuggestion('1 rue');
-    await selectDateRange(["2024-03-05T12:00:00.000Z", "2024-04-11T23:00:00.000Z"]);
-    await selectDays(['Lundi', 'Mardi'])
+    await selectDateRange([
+      '2024-03-05T12:00:00.000Z',
+      '2024-04-11T23:00:00.000Z',
+    ]);
+    await selectDays(['Lundi', 'Mardi']);
     await selectTime('12:00');
     button.click();
-  }
+  };
 
   beforeEach(() => {
-    spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', ['error', 'success', 'warning']);
-    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
-      'getAddressByString', 'getAddressByCoords', 'matchingSchoolDeparture', 'formatAddress'
+    spyNotifierService = jasmine.createSpyObj('NotifierServiceInterface', [
+      'error',
+      'success',
+      'warning',
     ]);
-    spyAddressService.formatAddress.and.returnValue('1 rue de la République, 13001 Marseille');
-    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', ['createSubscription', 'createSubscription']);
-    spyAuthenticationService = jasmine.createSpyObj('AuthenticationServiceInterface', ['isDriver']);
+    spyAddressService = jasmine.createSpyObj('AddressServiceInterface', [
+      'getAddressByString',
+      'getAddressByCoords',
+      'matchingSchoolDeparture',
+      'formatAddress',
+    ]);
+    spyAddressService.formatAddress.and.returnValue(
+      '1 rue de la République, 13001 Marseille',
+    );
+    spyCarpoolingService = jasmine.createSpyObj('CarpoolingServiceInterface', [
+      'createSubscription',
+      'createSubscription',
+    ]);
+    spyAuthenticationService = jasmine.createSpyObj(
+      'AuthenticationServiceInterface',
+      ['isDriver'],
+    );
     TestBed.configureTestingModule({
       declarations: [CreateSubscriptionComponent],
       imports: [
@@ -143,14 +179,17 @@ describe('CreateSubscriptionComponent', () => {
         FontAwesomeModule,
         BrowserAnimationsModule,
         MatSelectModule,
-        MatSnackBarModule
+        MatSnackBarModule,
       ],
       providers: [
-        {provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifierService},
-        {provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService},
-        {provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService},
-        {provide: AUTHENTICATION_SERVICE_TOKEN, useValue: spyAuthenticationService}
-      ]
+        { provide: NOTIFIER_SERVICE_TOKEN, useValue: spyNotifierService },
+        { provide: CARPOOLING_SERVICE_TOKEN, useValue: spyCarpoolingService },
+        { provide: ADDRESS_SERVICE_TOKEN, useValue: spyAddressService },
+        {
+          provide: AUTHENTICATION_SERVICE_TOKEN,
+          useValue: spyAuthenticationService,
+        },
+      ],
     });
     fixture = TestBed.createComponent(CreateSubscriptionComponent);
     component = fixture.componentInstance;
@@ -168,153 +207,194 @@ describe('CreateSubscriptionComponent', () => {
       .toBeTruthy();
   });
 
-  it('should enable the submit button when fill in correctly', (async () => {
+  it('should enable the submit button when fill in correctly', async () => {
     const button = fixture.debugElement.query(By.css('#sub_id')).nativeElement;
 
-    spyAddressService.getAddressByString.and.returnValue(of([{
-      address: {
-        house_number: '1',
-        city: 'Marseille',
-        road: 'Rue de la République',
-        postcode: '13001',
-      },
-    }]));
+    spyAddressService.getAddressByString.and.returnValue(
+      of([
+        {
+          address: {
+            house_number: '1',
+            city: 'Marseille',
+            road: 'Rue de la République',
+            postcode: '13001',
+          },
+        },
+      ]),
+    );
 
     spyCarpoolingService.createSubscription.and.returnValue(of(''));
 
     await fillForm();
 
-    expect(component["subForm"].controls.label.invalid)
+    expect(component['subForm'].controls.label.invalid)
       .withContext('label must be filled')
       .toBeFalsy();
 
-    expect(component["subForm"].controls.starting_point.invalid)
+    expect(component['subForm'].controls.starting_point.invalid)
       .withContext('departure must be filled')
       .toBeFalsy();
 
-    expect(component["subForm"].controls.destination.invalid)
+    expect(component['subForm'].controls.destination.invalid)
       .withContext('destination must be filled')
       .toBeFalsy();
 
-    expect(component["subForm"].controls.date_start.invalid)
+    expect(component['subForm'].controls.date_start.invalid)
       .withContext('date_start must be filled')
       .toBeFalsy();
 
-    expect(component["subForm"].controls.date_end.invalid)
+    expect(component['subForm'].controls.date_end.invalid)
       .withContext('date_end must be filled')
       .toBeFalsy();
 
-    expect(component["subForm"].controls.days.invalid)
+    expect(component['subForm'].controls.days.invalid)
       .withContext('days must be filled')
       .toBeFalsy();
 
     expect(button.disabled)
-      .withContext('All required filled must be filled, at least one is missing to enable the button')
+      .withContext(
+        'All required filled must be filled, at least one is missing to enable the button',
+      )
       .toBeFalsy();
 
     expect(spyCarpoolingService.createSubscription.calls.count())
       .withContext('search must be called once')
       .toEqual(1);
-  }));
+  });
 
-  it('should invalidate input when the departure autosuggestion is not selected', (async () => {
-    const inputDebugElement = fixture.debugElement.query(By.css('#starting_point_id'));
-
-    await inputDebugElement.nativeElement.dispatchEvent(new Event('focusin'));
-    inputDebugElement.nativeElement.value = '1 rue ';
-    await inputDebugElement.nativeElement.dispatchEvent(new Event('input'));
-
-    expect(component["subForm"].controls.starting_point.invalid)
-      .withContext('departure should be invalid when not selecting the autosuggestion')
-      .toBeTruthy();
-  }));
-
-  it('should invalidate input when the destination autosuggestion is not selected', (async () => {
-    const inputDebugElement = fixture.debugElement.query(By.css('#destination_id'));
+  it('should invalidate input when the departure autosuggestion is not selected', async () => {
+    const inputDebugElement = fixture.debugElement.query(
+      By.css('#starting_point_id'),
+    );
 
     await inputDebugElement.nativeElement.dispatchEvent(new Event('focusin'));
     inputDebugElement.nativeElement.value = '1 rue ';
     await inputDebugElement.nativeElement.dispatchEvent(new Event('input'));
 
-    expect(component["subForm"].controls.destination.invalid)
-      .withContext('destination should be invalid when not selecting the autosuggestion')
+    expect(component['subForm'].controls.starting_point.invalid)
+      .withContext(
+        'departure should be invalid when not selecting the autosuggestion',
+      )
       .toBeTruthy();
-  }));
+  });
 
-  it('should invalidate input when start date is in past and end date correct', (async () => {
-    await selectDateRange(["2014-12-11T23:00:00.000Z", "2024-04-11T23:00:00.000Z"]);
+  it('should invalidate input when the destination autosuggestion is not selected', async () => {
+    const inputDebugElement = fixture.debugElement.query(
+      By.css('#destination_id'),
+    );
 
-    expect(component["subForm"].controls.date_start.invalid)
+    await inputDebugElement.nativeElement.dispatchEvent(new Event('focusin'));
+    inputDebugElement.nativeElement.value = '1 rue ';
+    await inputDebugElement.nativeElement.dispatchEvent(new Event('input'));
+
+    expect(component['subForm'].controls.destination.invalid)
+      .withContext(
+        'destination should be invalid when not selecting the autosuggestion',
+      )
+      .toBeTruthy();
+  });
+
+  it('should invalidate input when start date is in past and end date correct', async () => {
+    await selectDateRange([
+      '2014-12-11T23:00:00.000Z',
+      '2024-04-11T23:00:00.000Z',
+    ]);
+
+    expect(component['subForm'].controls.date_start.invalid)
       .withContext('start date should be invalid when select date in the past')
       .toBeTruthy();
 
-    expect(component["subForm"].controls.date_end.invalid)
+    expect(component['subForm'].controls.date_end.invalid)
       .withContext('end date should be valid when select correct date')
       .toBeFalsy();
-  }));
+  });
 
-  it('should invalidate input when start date is a Saturday or Sunday and end date correct', (async () => {
-    await selectDateRange(["2024-01-06T23:00:00.000Z", "2024-04-11T23:00:00.000Z"]);
+  it('should invalidate input when start date is a Saturday or Sunday and end date correct', async () => {
+    await selectDateRange([
+      '2024-01-06T23:00:00.000Z',
+      '2024-04-11T23:00:00.000Z',
+    ]);
 
-    expect(component["subForm"].controls.date_start.invalid)
+    expect(component['subForm'].controls.date_start.invalid)
       .withContext('start date should be invalid when start date is a Saturday')
       .toBeTruthy();
 
-    expect(component["subForm"].controls.date_end.invalid)
+    expect(component['subForm'].controls.date_end.invalid)
       .withContext('end date should be valid when select correct date')
       .toBeFalsy();
-  }));
+  });
 
-  it('should invalidate input when end date is before start date', (async () => {
-    await selectDateRange(["2024-12-11T23:00:00.000Z", "2024-04-11T23:00:00.000Z"]);
+  it('should invalidate input when end date is before start date', async () => {
+    await selectDateRange([
+      '2024-12-11T23:00:00.000Z',
+      '2024-04-11T23:00:00.000Z',
+    ]);
 
-    expect(component["subForm"].controls.date_start.invalid)
-      .withContext('departure date should be invalid when select start date after end date')
+    expect(component['subForm'].controls.date_start.invalid)
+      .withContext(
+        'departure date should be invalid when select start date after end date',
+      )
       .toBeTruthy();
 
-    expect(component["subForm"].controls.date_end.invalid)
-      .withContext('destination date should be invalid when select end date before start date')
+    expect(component['subForm'].controls.date_end.invalid)
+      .withContext(
+        'destination date should be invalid when select end date before start date',
+      )
       .toBeTruthy();
-  }));
+  });
 
   it('should notify the user when he successfullly created a subscription', async () => {
     const button = fixture.debugElement.query(By.css('#sub_id')).nativeElement;
 
-    spyCarpoolingService.createSubscription.and.returnValue(of({ status: 200 }));
+    spyCarpoolingService.createSubscription.and.returnValue(
+      of({ status: 200 }),
+    );
 
-    spyAddressService.getAddressByString.and.returnValue(of([{
-      address: {
-        house_number: '1',
-        city: 'Marseille',
-        road: 'Rue de la République',
-        postcode: '13001',
-      },
-    }]));
+    spyAddressService.getAddressByString.and.returnValue(
+      of([
+        {
+          address: {
+            house_number: '1',
+            city: 'Marseille',
+            road: 'Rue de la République',
+            postcode: '13001',
+          },
+        },
+      ]),
+    );
 
     await fillForm();
 
     expect(spyNotifierService.success)
       .withContext('should notify the user')
-      .toHaveBeenCalled()
+      .toHaveBeenCalled();
     expect(button.disabled).toBeFalsy();
   });
 
   it('should notify the user once when API return HTTP error', async () => {
-    spyAddressService.getAddressByString.and.returnValue(of([{
-      address: {
-        house_number: '1',
-        city: 'Marseille',
-        road: 'Rue de la République',
-        postcode: '13001',
-      },
-    }]));
+    spyAddressService.getAddressByString.and.returnValue(
+      of([
+        {
+          address: {
+            house_number: '1',
+            city: 'Marseille',
+            road: 'Rue de la République',
+            postcode: '13001',
+          },
+        },
+      ]),
+    );
     const button = fixture.debugElement.query(By.css('#sub_id')).nativeElement;
 
-
-    spyCarpoolingService.createSubscription.and.returnValue(throwError(() => new HttpErrorResponse({
-      error: 'Field missing',
-      status: 400
-    })));
+    spyCarpoolingService.createSubscription.and.returnValue(
+      throwError(
+        () =>
+          new HttpErrorResponse({
+            error: 'Field missing',
+            status: 400,
+          }),
+      ),
+    );
 
     await fillForm();
 
@@ -327,15 +407,22 @@ describe('CreateSubscriptionComponent', () => {
 
     spyNotifierService.error.calls.reset();
 
-    spyCarpoolingService.createSubscription.and.returnValue(throwError(() => new HttpErrorResponse({
-      error: 'Token expired',
-      status: 401
-    })));
+    spyCarpoolingService.createSubscription.and.returnValue(
+      throwError(
+        () =>
+          new HttpErrorResponse({
+            error: 'Token expired',
+            status: 401,
+          }),
+      ),
+    );
 
     button.click();
 
     expect(spyNotifierService.error)
-      .withContext('should notify the user he is not authorized to createSubscription a carpool')
+      .withContext(
+        'should notify the user he is not authorized to createSubscription a carpool',
+      )
       .toHaveBeenCalled();
     expect(spyNotifierService.error.calls.count())
       .withContext('notify must be called once')
@@ -343,15 +430,22 @@ describe('CreateSubscriptionComponent', () => {
 
     spyNotifierService.error.calls.reset();
 
-    spyCarpoolingService.createSubscription.and.returnValue(throwError(() => new HttpErrorResponse({
-      error: 'You do not have access to this content',
-      status: 403
-    })));
+    spyCarpoolingService.createSubscription.and.returnValue(
+      throwError(
+        () =>
+          new HttpErrorResponse({
+            error: 'You do not have access to this content',
+            status: 403,
+          }),
+      ),
+    );
 
     button.click();
 
     expect(spyNotifierService.error)
-      .withContext('should notify the user he is not yet authorized to createSubscription a carpool')
+      .withContext(
+        'should notify the user he is not yet authorized to createSubscription a carpool',
+      )
       .toHaveBeenCalled();
     expect(spyNotifierService.error.calls.count())
       .withContext('notify must be called once')
@@ -359,11 +453,17 @@ describe('CreateSubscriptionComponent', () => {
 
     spyNotifierService.error.calls.reset();
 
-    spyCarpoolingService.createSubscription.and.returnValue(throwError(() => new HttpErrorResponse({
-      error: 'Unable to create: \
+    spyCarpoolingService.createSubscription.and.returnValue(
+      throwError(
+        () =>
+          new HttpErrorResponse({
+            error:
+              'Unable to create: \
       This subscription conflicts with a reservation or another subscription',
-      status: 409
-    })));
+            status: 409,
+          }),
+      ),
+    );
 
     button.click();
 
@@ -376,10 +476,15 @@ describe('CreateSubscriptionComponent', () => {
 
     spyNotifierService.error.calls.reset();
 
-    spyCarpoolingService.createSubscription.and.returnValue(throwError(() => new HttpErrorResponse({
-      error: 'Unknown error',
-      status: 500
-    })));
+    spyCarpoolingService.createSubscription.and.returnValue(
+      throwError(
+        () =>
+          new HttpErrorResponse({
+            error: 'Unknown error',
+            status: 500,
+          }),
+      ),
+    );
 
     button.click();
 
@@ -392,15 +497,22 @@ describe('CreateSubscriptionComponent', () => {
 
     spyNotifierService.error.calls.reset();
 
-    spyCarpoolingService.createSubscription.and.returnValue(throwError(() => new HttpErrorResponse({
-      error: 'Service temporarily unavailable.',
-      status: 503
-    })));
+    spyCarpoolingService.createSubscription.and.returnValue(
+      throwError(
+        () =>
+          new HttpErrorResponse({
+            error: 'Service temporarily unavailable.',
+            status: 503,
+          }),
+      ),
+    );
 
     button.click();
 
     expect(spyNotifierService.error)
-      .withContext('should notify the user ths Service is temporarily unavailable.')
+      .withContext(
+        'should notify the user ths Service is temporarily unavailable.',
+      )
       .toHaveBeenCalled();
     expect(spyNotifierService.error.calls.count())
       .withContext('notify must be called once')
@@ -408,9 +520,14 @@ describe('CreateSubscriptionComponent', () => {
 
     spyNotifierService.error.calls.reset();
 
-    spyCarpoolingService.createSubscription.and.returnValue(throwError(() => new HttpErrorResponse({
-      error: 'Internal server error'
-    })));
+    spyCarpoolingService.createSubscription.and.returnValue(
+      throwError(
+        () =>
+          new HttpErrorResponse({
+            error: 'Internal server error',
+          }),
+      ),
+    );
 
     button.click();
 
