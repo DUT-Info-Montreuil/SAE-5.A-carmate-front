@@ -1,6 +1,6 @@
 import { Observable, of, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { UserServiceInterface } from 'src/app/interface/user';
+import { UserServiceInterface } from 'src/app/interface/user.interface';
 import { formatDate } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 

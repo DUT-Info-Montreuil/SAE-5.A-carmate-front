@@ -1,13 +1,10 @@
-import {
-  DriverProfile,
-  PassengerProfile,
-  ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
 import { AbstractService } from '../../abstractService';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/app/environement/environement';
 import { Injectable } from '@angular/core';
+import { ProfilesServiceInterface } from 'src/app/interface/profiles.interface';
+import { PassengerProfile, DriverProfile } from 'src/app/model/profile.model';
 
 @Injectable({
   providedIn: 'root',

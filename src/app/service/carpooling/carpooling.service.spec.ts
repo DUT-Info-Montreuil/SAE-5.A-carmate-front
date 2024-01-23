@@ -1,14 +1,8 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { CarpoolingService } from './carpooling.service';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from 'src/app/interface/other';
-import {
-  CarpoolingServiceInterface,
-  CreateCarpoolPayload,
-} from 'src/app/interface/carpooling';
+import { NotifierServiceInterface } from 'src/app/interface/notifier.interface';
+import { CarpoolingServiceInterface } from 'src/app/interface/carpooling.interface';
 
 describe('CarpoolingService', () => {
   let spyNotifierService: jasmine.SpyObj<NotifierServiceInterface>;

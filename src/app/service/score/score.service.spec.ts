@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
-import { ScoreServiceInterface, ScoreUserData } from 'src/app/interface/score';
 import { ScoreService } from './score.service';
+import { ScoreServiceInterface } from 'src/app/interface/score.interface';
+import { ScoreUserData } from 'src/app/model/score.model';
 
 describe('ScoreboardService', () => {
   let spyHttpClient: jasmine.SpyObj<HttpClient>;

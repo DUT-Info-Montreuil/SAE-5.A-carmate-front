@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarpoolingComponent } from './carpooling.component';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-} from 'src/app/interface/other';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CarpoolingDialogComponent } from '../carpooling-dialog/carpooling-dialog.component';
+import {
+  AddressServiceInterface,
+  ADDRESS_SERVICE_TOKEN,
+} from 'src/app/interface/address.interface';
 
 describe('CarpoolingComponent', () => {
   let component: CarpoolingComponent;

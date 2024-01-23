@@ -2,20 +2,19 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
-  Carpooling,
   CARPOOLING_SERVICE_TOKEN,
   CarpoolingServiceInterface,
-  Search,
-} from 'src/app/interface/carpooling';
+} from 'src/app/interface/carpooling.interface';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
+} from 'src/app/interface/notifier.interface';
 import {
   SCORE_SERVICE_TOKEN,
   ScoreServiceInterface,
-  ScoreUserData,
-} from 'src/app/interface/score';
+} from 'src/app/interface/score.interface';
+import { Carpooling, Search } from 'src/app/model/carpooling.model';
+import { ScoreUserData } from 'src/app/model/score.model';
 
 @Component({
   selector: 'app-carpooling-dialog',

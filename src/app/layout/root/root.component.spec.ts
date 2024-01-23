@@ -6,7 +6,7 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-} from '../../interface/user';
+} from '../../interface/user.interface';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('RootComponent', () => {

@@ -8,11 +8,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from '../../../../interface/other';
+} from '../../../../interface/notifier.interface';
 import {
-  VALIDATION_SERVICE_TOKEN,
   ValidationServiceInterface,
-} from 'src/app/interface/admin';
+  VALIDATION_SERVICE_TOKEN,
+} from 'src/app/interface/admin.interface';
 
 describe('validationComponent', () => {
   let component: ValidationComponent;

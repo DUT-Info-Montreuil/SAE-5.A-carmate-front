@@ -17,12 +17,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from '../../../interface/other';
+} from '../../../interface/notifier.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-} from '../../../interface/user';
+} from '../../../interface/user.interface';
 import { MaxSizeValidator } from '@angular-material-components/file-input';
 import { ThemePalette } from '@angular/material/core';
 

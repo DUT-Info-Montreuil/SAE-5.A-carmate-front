@@ -1,5 +1,4 @@
 import { Component, Inject, Input } from '@angular/core';
-import { Carpooling } from 'src/app/interface/carpooling';
 import {
   faCar,
   faLocationDot,
@@ -10,13 +9,14 @@ import {
   faXmark,
   faStarHalfStroke,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-} from 'src/app/interface/other';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { CarpoolingDialogComponent } from './carpooling-dialog/carpooling-dialog.component';
+import { Carpooling } from 'src/app/model/carpooling.model';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/address.interface';
 
 @Component({
   selector: 'app-my-carpoolings',

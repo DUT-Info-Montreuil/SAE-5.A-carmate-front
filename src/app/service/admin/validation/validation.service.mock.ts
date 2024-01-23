@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  LicenseStatus,
-  ValidationServiceInterface,
-} from '../../../interface/admin';
 import { Observable, of, throwError } from 'rxjs';
 import { MutualizedMockData } from './MutualizedMockData';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ValidationServiceInterface } from 'src/app/interface/admin.interface';
+import { LicenseStatus } from 'src/app/model/admin.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AddressService } from './address.service';
 import { CarpoolingService } from '../carpooling/carpooling.service';
-import { NotifierServiceInterface } from '../../interface/other';
+import { NotifierServiceInterface } from '../../interface/notifier.interface';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 describe('AddressService', () => {

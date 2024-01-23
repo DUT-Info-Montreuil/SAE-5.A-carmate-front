@@ -6,15 +6,15 @@ import { Router } from '@angular/router';
 import {
   USER_SERVICE_TOKEN,
   UserServiceInterface,
-} from '../../../interface/user';
+} from '../../../interface/user.interface';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from '../../../interface/other';
+} from '../../../interface/notifier.interface';
 import {
   PROFILE_SERVICE_TOKEN,
   ProfilesServiceInterface,
-} from '../../../interface/profiles';
+} from '../../../interface/profiles.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 

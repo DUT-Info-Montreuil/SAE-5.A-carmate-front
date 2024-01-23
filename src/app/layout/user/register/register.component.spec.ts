@@ -4,12 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from '../../../interface/other';
+} from '../../../interface/notifier.interface';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-  Token,
-} from '../../../interface/user';
+} from '../../../interface/user.interface';
 import { BehaviorSubject, of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';

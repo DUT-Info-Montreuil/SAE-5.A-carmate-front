@@ -6,23 +6,21 @@ import { MatTableDataSource } from '@angular/material/table';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
+} from 'src/app/interface/notifier.interface';
 import {
-  DriverProfile,
   PROFILE_SERVICE_TOKEN,
-  PassengerProfile,
   ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
+} from 'src/app/interface/profiles.interface';
 import {
   SCORE_SERVICE_TOKEN,
-  ScoreUserData,
   ScoreServiceInterface,
-} from 'src/app/interface/score';
+} from 'src/app/interface/score.interface';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-  User,
-} from 'src/app/interface/user';
+} from 'src/app/interface/user.interface';
+import { DriverProfile, PassengerProfile } from 'src/app/model/profile.model';
+import { ScoreUserData } from 'src/app/model/score.model';
 
 @Component({
   selector: 'app-scoreboard-page',

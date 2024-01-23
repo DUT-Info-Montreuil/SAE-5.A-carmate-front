@@ -1,16 +1,18 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import {
   CARPOOLING_SERVICE_TOKEN,
-  Carpooling,
   CarpoolingServiceInterface,
-  PublishedSubscription,
-  Subscription,
-  publishedCarpooling,
-} from 'src/app/interface/carpooling';
+} from 'src/app/interface/carpooling.interface';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-} from 'src/app/interface/user';
+} from 'src/app/interface/user.interface';
+import {
+  PublishedSubscription,
+  publishedCarpooling,
+  Carpooling,
+  Subscription,
+} from 'src/app/model/carpooling.model';
 
 @Component({
   selector: 'app-trips-page',

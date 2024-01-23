@@ -1,10 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MyCarpoolingsComponent } from './my-carpoolings.component';
 import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-} from 'src/app/interface/other';
-import {
   MAT_DIALOG_DATA,
   MatDialog,
   MatDialogModule,
@@ -14,6 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { of } from 'rxjs';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/address.interface';
 
 describe('MyCarpoolingsComponent', () => {
   let component: MyCarpoolingsComponent;

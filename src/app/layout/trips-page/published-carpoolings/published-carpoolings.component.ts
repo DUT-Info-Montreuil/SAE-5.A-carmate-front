@@ -1,5 +1,4 @@
 import { Component, Inject, Input } from '@angular/core';
-import { publishedCarpooling } from 'src/app/interface/carpooling';
 import {
   faCar,
   faLocationDot,
@@ -9,18 +8,18 @@ import {
   faUser,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-} from 'src/app/interface/other';
-import {
-  PassengerProfile,
-  PROFILE_SERVICE_TOKEN,
-  ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { PublishedCarpoolingDialogComponent } from './published-carpooling-dialog/published-carpooling-dialog.component';
+import { publishedCarpooling } from 'src/app/model/carpooling.model';
+import {
+  ADDRESS_SERVICE_TOKEN,
+  AddressServiceInterface,
+} from 'src/app/interface/address.interface';
+import {
+  PROFILE_SERVICE_TOKEN,
+  ProfilesServiceInterface,
+} from 'src/app/interface/profiles.interface';
 @Component({
   selector: 'app-published-carpoolings',
   templateUrl: './published-carpoolings.component.html',

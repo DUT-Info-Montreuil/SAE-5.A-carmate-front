@@ -2,9 +2,10 @@ import { Injectable, OnInit } from '@angular/core';
 import { environment } from '../../../environement/environement';
 import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { AbstractService } from '../../abstractService';
-import { AuthenticationServiceInterface, Token } from '../../../interface/user';
+import { AuthenticationServiceInterface } from '../../../interface/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { Token } from 'src/app/model/user.model';
 
 @Injectable({
   providedIn: 'root',

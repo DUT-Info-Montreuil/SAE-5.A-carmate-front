@@ -17,7 +17,7 @@ import {
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-} from '../../interface/user';
+} from '../../interface/user.interface';
 
 @Component({
   selector: 'app-nav-bar',

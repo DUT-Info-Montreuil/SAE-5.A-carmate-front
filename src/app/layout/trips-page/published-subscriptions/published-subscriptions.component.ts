@@ -1,5 +1,4 @@
 import { Component, Inject, Input } from '@angular/core';
-import { PublishedSubscription, WeekDay } from 'src/app/interface/carpooling';
 import {
   faCalendar,
   faCar,
@@ -15,18 +14,19 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import * as moment from 'moment';
+import { take } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { PublishedCarpoolingDialogComponent } from '../published-carpoolings/published-carpooling-dialog/published-carpooling-dialog.component';
+import { PublishedSubscription, WeekDay } from 'src/app/model/carpooling.model';
 import {
   ADDRESS_SERVICE_TOKEN,
   AddressServiceInterface,
-} from 'src/app/interface/other';
-import * as moment from 'moment';
-import { take } from 'rxjs';
+} from 'src/app/interface/address.interface';
 import {
   PROFILE_SERVICE_TOKEN,
   ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
-import { MatDialog } from '@angular/material/dialog';
-import { PublishedCarpoolingDialogComponent } from '../published-carpoolings/published-carpooling-dialog/published-carpooling-dialog.component';
+} from 'src/app/interface/profiles.interface';
 
 registerLocaleData(localeFr, 'fr');
 

@@ -1,21 +1,20 @@
 import { Inject, Injectable } from '@angular/core';
-import {
-  Carpooling,
-  CarpoolingServiceInterface,
-  CreateCarpoolPayload,
-  PublishedSubscription,
-  Search,
-  Subscription,
-  publishedCarpooling,
-} from 'src/app/interface/carpooling';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CarpoolingServiceInterface } from 'src/app/interface/carpooling.interface';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
-import { PassengerProfile } from '../../interface/profiles';
-
+} from 'src/app/interface/notifier.interface';
+import {
+  Carpooling,
+  PublishedSubscription,
+  publishedCarpooling,
+  CreateCarpoolPayload,
+  Search,
+} from 'src/app/model/carpooling.model';
+import { PassengerProfile } from 'src/app/model/profile.model';
+import { Subscription } from 'src/app/model/carpooling.model';
 @Injectable({
   providedIn: 'root',
 })

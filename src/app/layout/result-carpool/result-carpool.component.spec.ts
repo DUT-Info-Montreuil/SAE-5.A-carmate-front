@@ -1,16 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResultCarpoolComponent } from './result-carpool.component';
-import {
-  CARPOOLING_SERVICE_TOKEN,
-  Carpooling,
-  CarpoolingServiceInterface,
-} from 'src/app/interface/carpooling';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatCardModule } from '@angular/material/card';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-} from 'src/app/interface/other';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { MapComponent } from '../map/map.component';
@@ -19,6 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarpoolingComponent } from '../carpooling/carpooling.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import {
+  AddressServiceInterface,
+  ADDRESS_SERVICE_TOKEN,
+} from 'src/app/interface/address.interface';
+import {
+  CarpoolingServiceInterface,
+  CARPOOLING_SERVICE_TOKEN,
+} from 'src/app/interface/carpooling.interface';
+import { Carpooling } from 'src/app/model/carpooling.model';
 
 describe('ResultCarpoolComponent', () => {
   let component: ResultCarpoolComponent;

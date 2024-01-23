@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ScoreUserData, ScoreServiceInterface } from 'src/app/interface/score';
 import { AbstractService } from '../abstractService';
 import { environment } from 'src/app/environement/environement';
 import { Observable, catchError, forkJoin, map } from 'rxjs';
+import { ScoreServiceInterface } from 'src/app/interface/score.interface';
+import { ScoreUserData } from 'src/app/model/score.model';
 
 @Injectable({
   providedIn: 'root',

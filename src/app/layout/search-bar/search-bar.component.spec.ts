@@ -8,19 +8,21 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  CARPOOLING_SERVICE_TOKEN,
-  CarpoolingServiceInterface,
-} from 'src/app/interface/carpooling';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-  NotifierServiceInterface,
-} from '../../interface/other';
 import { SearchBarComponent } from './search-bar.component';
-import { NOTIFIER_SERVICE_TOKEN } from '../../interface/other';
+import {
+  NOTIFIER_SERVICE_TOKEN,
+  NotifierServiceInterface,
+} from '../../interface/notifier.interface';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
+import {
+  AddressServiceInterface,
+  ADDRESS_SERVICE_TOKEN,
+} from 'src/app/interface/address.interface';
+import {
+  CarpoolingServiceInterface,
+  CARPOOLING_SERVICE_TOKEN,
+} from 'src/app/interface/carpooling.interface';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;

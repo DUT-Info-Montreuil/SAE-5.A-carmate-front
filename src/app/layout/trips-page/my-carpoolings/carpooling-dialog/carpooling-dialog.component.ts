@@ -4,11 +4,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   CARPOOLING_SERVICE_TOKEN,
   CarpoolingServiceInterface,
-} from 'src/app/interface/carpooling';
+} from 'src/app/interface/carpooling.interface';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from 'src/app/interface/other';
+} from 'src/app/interface/notifier.interface';
 
 @Component({
   selector: 'app-carpooling-dialog',

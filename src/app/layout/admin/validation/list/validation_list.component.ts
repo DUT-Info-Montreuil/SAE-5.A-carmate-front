@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import {
-  DocumentMetaDatas,
   VALIDATION_SERVICE_TOKEN,
   ValidationServiceInterface,
-} from '../../../../interface/admin';
+} from '../../../../interface/admin.interface';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from '../../../../interface/other';
+} from '../../../../interface/notifier.interface';
+import { DocumentMetaDatas } from 'src/app/model/admin.model';
 
 @Component({
   selector: 'app-validation-list',

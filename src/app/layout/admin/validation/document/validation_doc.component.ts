@@ -1,17 +1,16 @@
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  Document,
-  LicenseStatus,
-  NextDocument,
   VALIDATION_SERVICE_TOKEN,
   ValidationServiceInterface,
-} from '../../../../interface/admin';
+} from '../../../../interface/admin.interface';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from '../../../../interface/other';
+} from '../../../../interface/notifier.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LicenseStatus, NextDocument } from 'src/app/model/admin.model';
+import { Document } from 'src/app/model/admin.model';
 
 @Component({
   selector: 'app-validation-doc',

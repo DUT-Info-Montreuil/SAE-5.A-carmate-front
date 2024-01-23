@@ -8,17 +8,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  CARPOOLING_SERVICE_TOKEN,
-  Carpooling,
-  CarpoolingServiceInterface,
-} from 'src/app/interface/carpooling';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  AddressServiceInterface,
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from '../../interface/other';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ResultCarpoolComponent } from '../result-carpool/result-carpool.component';
@@ -28,6 +17,19 @@ import { MapComponent } from '../map/map.component';
 import { BehaviorSubject, of } from 'rxjs';
 import { CarpoolingComponent } from '../carpooling/carpooling.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {
+  AddressServiceInterface,
+  ADDRESS_SERVICE_TOKEN,
+} from 'src/app/interface/address.interface';
+import {
+  CarpoolingServiceInterface,
+  CARPOOLING_SERVICE_TOKEN,
+} from 'src/app/interface/carpooling.interface';
+import {
+  NotifierServiceInterface,
+  NOTIFIER_SERVICE_TOKEN,
+} from 'src/app/interface/notifier.interface';
+import { Carpooling } from 'src/app/model/carpooling.model';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;

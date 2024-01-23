@@ -5,12 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from '../../../interface/other';
+} from '../../../interface/notifier.interface';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-  Token,
-} from '../../../interface/user';
+} from '../../../interface/user.interface';
 import { BehaviorSubject, of, throwError } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -20,6 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Token } from 'src/app/model/user.model';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

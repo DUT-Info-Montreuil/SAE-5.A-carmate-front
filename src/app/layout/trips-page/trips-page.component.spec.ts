@@ -3,9 +3,7 @@ import { TripsPageComponent } from './trips-page.component';
 import {
   CarpoolingServiceInterface,
   CARPOOLING_SERVICE_TOKEN,
-  Subscription,
-  publishedCarpooling,
-} from 'src/app/interface/carpooling';
+} from 'src/app/interface/carpooling.interface';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { of } from 'rxjs';
@@ -13,15 +11,14 @@ import { SubscriptionComponent } from 'src/app/layout/trips-page/subscription/su
 import {
   ADDRESS_SERVICE_TOKEN,
   AddressServiceInterface,
-} from 'src/app/interface/other';
+} from 'src/app/interface/address.interface';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatListModule } from '@angular/material/list';
 import {
-  PassengerProfile,
   PROFILE_SERVICE_TOKEN,
   ProfilesServiceInterface,
-} from 'src/app/interface/profiles';
+} from 'src/app/interface/profiles.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -30,11 +27,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-} from 'src/app/interface/user';
+} from 'src/app/interface/user.interface';
 import { PublishedSubscriptionsComponent } from './published-subscriptions/published-subscriptions.component';
 import { SubscriptionDialogComponent } from './subscription/subscription-dialog/subscription-dialog.component';
 import { MyCarpoolingsComponent } from './my-carpoolings/my-carpoolings.component';
 import { CarpoolingDialogComponent } from './my-carpoolings/carpooling-dialog/carpooling-dialog.component';
+import {
+  Subscription,
+  publishedCarpooling,
+} from 'src/app/model/carpooling.model';
+import { PassengerProfile } from 'src/app/model/profile.model';
 
 describe('TripsPageComponent', () => {
   let component: TripsPageComponent;
@@ -51,7 +53,7 @@ describe('TripsPageComponent', () => {
       'getPublishedSubscriptions',
     ]);
     spyCarpoolingService.getSubscriptions.and.returnValue(
-      of([
+      of<Subscription[]>([
         {
           starting_point: [0, 0],
           destination: [0, 0],
@@ -75,6 +77,41 @@ describe('TripsPageComponent', () => {
           ],
         },
       ]),
+    );
+    spyCarpoolingService.getPublishedCarpoolings.and.returnValue(
+      of([
+        {
+          id: 1,
+          starting_point: [48.8558516, 2.3588636],
+          destination: [48.9757551, 2.559337],
+          price: 40,
+          is_canceled: false,
+          departure_date_time: '2024-01-17T08:30:00',
+          driver_id: 1,
+          max_passengers: 2,
+          seats_taken: 1,
+          passengers_profile: [
+            {
+              user_id: 1,
+              first_name: 'John',
+              last_name: 'Doe',
+              description: '',
+              createdAt: '',
+              nb_carpools_done: 0,
+              profile_picture: '',
+            } as PassengerProfile,
+            {
+              user_id: 2,
+              first_name: 'Johny',
+              last_name: 'Doey',
+              description: '',
+              createdAt: '',
+              nb_carpools_done: 0,
+              profile_picture: '',
+            } as PassengerProfile,
+          ],
+        },
+      ] as publishedCarpooling[]),
     );
     spyCarpoolingService.getPublishedCarpoolings.and.returnValue(
       of([

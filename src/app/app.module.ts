@@ -4,19 +4,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './layout/user/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MockAuthenticationService } from './service/user/authentication/authentication.service.mock';
+import { RootComponent } from './layout/root/root.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
-import {
-  ADDRESS_SERVICE_TOKEN,
-  NOTIFIER_SERVICE_TOKEN,
-} from './interface/other';
+import { NOTIFIER_SERVICE_TOKEN } from './interface/notifier.interface';
+import { ADDRESS_SERVICE_TOKEN } from './interface/address.interface';
 import { AngularNotifierService } from './service/other/notifier/AngularNotifierService';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   USER_SERVICE_TOKEN,
-} from './interface/user';
-import { MockAuthenticationService } from './service/user/authentication/authentication.service.mock';
-import { RootComponent } from './layout/root/root.component';
+} from './interface/user.interface';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -34,13 +32,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PassengerProfilesComponent } from './layout/user/passenger-profile/passenger-profiles.component';
-import { PROFILE_SERVICE_TOKEN } from './interface/profiles';
+import { PROFILE_SERVICE_TOKEN } from './interface/profiles.interface';
 import { ProfilesService } from './service/user/profiles/profiles.service';
 import { MockProfilesService } from './service/user/profiles/profiles.service.mock';
 import { DriverProfileComponent } from './layout/user/driver-profile/driver-profile.component';
 import { UserService } from './service/user/user.service';
 import { MockUserService } from './service/user/user.service.mock';
-import { CARPOOLING_SERVICE_TOKEN } from './interface/carpooling';
+import { CARPOOLING_SERVICE_TOKEN } from './interface/carpooling.interface';
 import { CarpoolingService } from './service/carpooling/carpooling.service';
 import { AddressService } from './service/address/address.service';
 import { MockAddressService } from './service/address/address.service.mock';
@@ -63,7 +61,7 @@ import {
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { frPaginatorIntl } from './utils/french-paginator-intl';
-import { SCORE_SERVICE_TOKEN } from './interface/score';
+import { SCORE_SERVICE_TOKEN } from './interface/score.interface';
 import { ScoreService } from './service/score/score.service';
 import { MockScoreService } from './service/score/score.service.mock';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -81,7 +79,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { BecomeDriverComponent } from './layout/become-driver/become-driver.component';
 import { ValidationComponent } from './layout/admin/validation/list/validation_list.component';
-import { VALIDATION_SERVICE_TOKEN } from './interface/admin';
+import { VALIDATION_SERVICE_TOKEN } from './interface/admin.interface';
 import { ValidationDocComponent } from './layout/admin/validation/document/validation_doc.component';
 import { ValidationServiceMock } from './service/admin/validation/validation.service.mock';
 import { ValidationService } from './service/admin/validation/validation.service';

@@ -1,6 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs';
-import { InjectionToken } from '@angular/core';
-import { PassengerProfile } from './profiles';
+import { PassengerProfile } from './profile.model';
 
 export type Carpooling = {
   id: number;
@@ -54,14 +52,6 @@ export type Subscription = {
   carpools: Carpooling[];
 };
 
-export type Search = {
-  start_lat: number;
-  start_lon: number;
-  end_lat: number;
-  end_lon: number;
-  departure_date_time: string;
-};
-
 export type publishedCarpooling = {
   id: number;
   starting_point: number[];
@@ -86,21 +76,10 @@ export type PublishedSubscription = {
   carpools: publishedCarpooling[];
 };
 
-export interface CarpoolingServiceInterface {
-  $carpoolings: BehaviorSubject<Carpooling[]>;
-  publish: (carpool: CreateCarpoolPayload) => Observable<any>;
-  search: (search: Search) => void;
-  createSubscription: (
-    subscription: CreateSubscriptionPayload,
-  ) => Observable<any>;
-  getSubscriptions: () => Observable<Subscription[]>;
-  getCode: (carpooling_id: number) => Observable<number>;
-  getPublishedSubscriptions: () => Observable<PublishedSubscription[]>;
-  getPublishedCarpoolings: () => Observable<publishedCarpooling[]>;
-  postCode: (passengerCode: number, carpoolingId: number) => Observable<any>;
-  book: (id: number, is_scheduled?: boolean, date?: number) => Observable<any>;
-  getCarpoolings: () => Observable<Carpooling[]>;
-}
-
-export const CARPOOLING_SERVICE_TOKEN =
-  new InjectionToken<CarpoolingServiceInterface>('CarpoolingServiceInterface');
+export type Search = {
+  start_lat: number;
+  start_lon: number;
+  end_lat: number;
+  end_lon: number;
+  departure_date_time: string;
+};

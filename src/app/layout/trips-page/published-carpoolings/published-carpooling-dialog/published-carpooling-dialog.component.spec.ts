@@ -6,14 +6,6 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import {
-  NOTIFIER_SERVICE_TOKEN,
-  NotifierServiceInterface,
-} from 'src/app/interface/other';
-import {
-  CARPOOLING_SERVICE_TOKEN,
-  CarpoolingServiceInterface,
-} from 'src/app/interface/carpooling';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +14,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
+import {
+  CarpoolingServiceInterface,
+  CARPOOLING_SERVICE_TOKEN,
+} from 'src/app/interface/carpooling.interface';
+import {
+  NotifierServiceInterface,
+  NOTIFIER_SERVICE_TOKEN,
+} from 'src/app/interface/notifier.interface';
 
 describe('PublishedCarpoolingDialogComponent', () => {
   let component: PublishedCarpoolingDialogComponent;

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { ProfilesServiceInterface } from 'src/app/interface/profiles';
 import { ProfilesService } from './profiles.service';
+import { ProfilesServiceInterface } from 'src/app/interface/profiles.interface';
 
 describe('ProfileService', () => {
   let profilesService: ProfilesServiceInterface;

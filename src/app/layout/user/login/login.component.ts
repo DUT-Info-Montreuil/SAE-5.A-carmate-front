@@ -5,12 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   NOTIFIER_SERVICE_TOKEN,
   NotifierServiceInterface,
-} from '../../../interface/other';
+} from '../../../interface/notifier.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   AUTHENTICATION_SERVICE_TOKEN,
   AuthenticationServiceInterface,
-} from '../../../interface/user';
+} from '../../../interface/user.interface';
 
 @Component({
   selector: 'app-login',
