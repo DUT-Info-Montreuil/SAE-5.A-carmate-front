@@ -38,3 +38,20 @@ Personnalisation des Composants : Vous pouvez personnaliser les composants en ut
 
 [Documentation Officielle des Composants Tailwind](https://tailwindui.com/components)
 <br>
+
+### Utilisation de ESLint
+
+Pour demander à ESLint de chercher du code non conforme :
+`ng lint --fix`
+
+[Documentation Officielle de ESLint](https://eslint.org/docs/latest/)
+
+### Utilisation de Prettier
+
+Pour demander à Prettier de formater le code sur le projet pour match avec le codestyle :
+
+Sur l'ensemble du projet (depuis **/src**) : `npx prettier --write .`
+Sur un fichier : `npx prettier --write my-file`
+Sur un dossier : `npx prettier --write my-folder`
+
+[Documentation Officielle de Prettier](https://prettier.io/docs/en/index.html)
