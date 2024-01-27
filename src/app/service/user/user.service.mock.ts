@@ -45,8 +45,6 @@ export class MockUserService implements UserServiceInterface {
     },
   ];
 
-  constructor() {}
-
   private getUserIdFromToken() {
     const tokenLocalStorage: string | null = localStorage.getItem('auth_token');
 
